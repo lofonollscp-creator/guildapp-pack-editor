@@ -1,0 +1,13 @@
+{
+  "openrouter": {
+    "label": "OpenRouter local",
+    "apiKey": "sk-or-v1-..."
+  },
+  "ollama": {
+    "label": "Ollama Cloud local",
+    "endpoint": "https://ollama.com",
+    "model": "deepseek-v4-flash:cloud",
+    "apiFormat": "openai",
+    "apiKey": "ollama-..."
+  }
+}
