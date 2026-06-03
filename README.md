@@ -6,22 +6,39 @@ Web publicada:
 
 - [https://lofonollscp-creator.github.io/guildapp-pack-editor/](https://lofonollscp-creator.github.io/guildapp-pack-editor/)
 
-## Què és
+## Resum ràpid
 
-Aquest editor serveix per:
+Amb aquest editor pots:
 
 - crear paquets nous d'`Escape Room` o `Visita Guiada`;
 - editar paquets existents;
 - importar i exportar el JSON complet del paquet;
-- preparar paquets perquè surtin al selector `Selecciona Aventura`;
+- preparar paquets per al selector `Selecciona Aventura`;
 - publicar paquets remots a `guildapp-content`;
-- definir textos, etapes, narracions, blocs, validacions IA i metadades;
-- generar o traduir contingut amb IA;
-- preparar QRs i material auxiliar.
+- definir etapes, narracions, blocs, coneixement i metadades;
+- generar, traduir o revisar contingut amb IA;
+- generar QRs i material auxiliar.
 
-## Diferència entre mode web i mode localhost
+## Índex
 
-La web publicada funciona bé per a:
+- [Resum ràpid](#resum-ràpid)
+- [Mode web i mode localhost](#mode-web-i-mode-localhost)
+- [Mapa de la interfície](#mapa-de-la-interfície)
+- [Barra superior](#barra-superior)
+- [Sidebar esquerra](#sidebar-esquerra)
+- [Editor central](#editor-central)
+- [Vista prèvia JSON](#vista-prèvia-json)
+- [Finestres i menús](#finestres-i-menús)
+- [Compatibilitat funcional](#compatibilitat-funcional)
+- [Fluxos recomanats](#fluxos-recomanats)
+- [Dreceres](#dreceres)
+- [Persistència local](#persistència-local)
+- [Publicació a GitHub](#publicació-a-github)
+- [Manteniment del lloc web](#manteniment-del-lloc-web)
+
+## Mode web i mode localhost
+
+### Què funciona bé a la web publicada
 
 - edició completa del paquet;
 - càrrega del catàleg remot;
@@ -31,36 +48,46 @@ La web publicada funciona bé per a:
 - configuració d'OpenRouter i perfils Ollama;
 - ús de GuildAI.
 
-Limitacions del mode web:
+### Limitacions del mode web
 
 - no existeix el proxy local `/__ollama_proxy`;
 - no existeix l'endpoint `/__validate_pack`;
 - no llegeix `local_ai_config.json` local;
-- les proves d'Ollama Cloud poden dependre de CORS si el navegador bloqueja la crida directa.
+- les proves d'Ollama Cloud poden fallar per CORS si el navegador bloqueja la crida directa.
 
-Per al mode complet local:
+### Quan convé obrir-lo en localhost
+
+Usa el mode local si vols:
+
+- auditoria amb suport del servidor local;
+- configuració automàtica de claus locals;
+- treballar amb el proxy local per a Ollama Cloud.
+
+Ordre habitual:
 
 ```bash
 python3 editor/guildapp_editor_server.py
 ```
 
-## Estructura general de la interfície
+## Mapa de la interfície
 
-La pantalla té 4 zones principals:
+La pantalla es divideix en 4 zones:
 
-1. Barra superior.
-2. Sidebar esquerra amb el contingut del paquet.
-3. Panell central d'edició.
-4. Columna dreta amb la previsualització JSON.
+1. barra superior;
+2. sidebar esquerra amb el contingut del paquet;
+3. panell central d'edició;
+4. columna dreta amb la previsualització JSON.
 
 ## Barra superior
 
-### Bloc de marca
+### Marca i capçalera
 
 - `GuildApp Pack Editor`
 - versió visible del fitxer
 
 ### Bloc IA
+
+Inclou:
 
 - selector de proveïdor:
   - `OpenRouter`
@@ -72,47 +99,51 @@ La pantalla té 4 zones principals:
 
 ### Accions principals
 
-- `↻ Repo`: obre el catàleg remot de paquets.
-- `✓ Validar`: valida el paquet en navegador.
-- `🛡 Auditar`:
-  - en `localhost`, fa validació web + auditoria addicional del servidor local;
-  - en la web pública, es converteix en validació web pura.
-- `↑ Publicar`: prepara la publicació del paquet a GitHub.
-- `💬 GuildAI`: obre el xat d'ajuda per dissenyar o modificar el pack amb IA.
-- `🎲 Encontres`: editor d'encontres aleatoris d'autoría.
-- `📚 Coneixement`: base de coneixement per a La Padrina.
-- `🖨 QRs`: genera i imprimeix els codis QR de les etapes.
-- `📂 Importar`: importa un paquet enganxant JSON.
-- `⬇ Exportar`: exporta el paquet complet.
+| Botó | Funció |
+|---|---|
+| `↻ Repo` | Obre el catàleg remot de paquets |
+| `✓ Validar` | Fa la validació estructural en navegador |
+| `🛡 Auditar` | En web fa validació web; en `localhost` afegeix comprovacions del servidor local |
+| `↑ Publicar` | Prepara i executa la publicació a GitHub |
+| `💬 GuildAI` | Obre el xat d’ajuda per crear o modificar el pack |
+| `🎲 Encontres` | Obre l’editor d’encontres aleatoris |
+| `📚 Coneixement` | Obre la base de coneixement per a La Padrina |
+| `🖨 QRs` | Genera i imprimeix els codis QR de les etapes |
+| `📂 Importar` | Importa un paquet enganxant JSON |
+| `⬇ Exportar` | Exporta el paquet complet |
 
 ## Sidebar esquerra
 
 La sidebar mostra `Contingut del paquet`.
 
-Botons:
+Botons principals:
 
-- `＋ Etapa`: crea una nova etapa.
-- `📖 Narrador`: crea una nova narració.
+- `＋ Etapa`: crea una etapa nova;
+- `📖 Narrador`: crea una narració nova.
 
-La llista central de la sidebar mostra:
+La llista de la sidebar mostra:
 
 - etapes;
 - narracions;
 - sub-etapes associades;
 - ordre actual del contingut.
 
-## Panell central: Metadades del paquet
+## Editor central
+
+El panell central canvia segons l’element seleccionat.
+
+### 1. Metadades del paquet
 
 Aquest bloc sempre és visible i defineix la capçalera funcional del paquet.
 
-### Tipus d'experiència
+#### Tipus d’experiència
 
 - `🏰 Escape Room`
 - `🗺 Visita Guiada`
 
-El tipus activa o amaga parts de l'editor.
+El tipus de paquet activa o amaga parts de l’editor.
 
-### Camps bàsics
+#### Camps bàsics
 
 - `ID del paquet`
 - `Versió`
@@ -123,9 +154,9 @@ El tipus activa o amaga parts de l'editor.
   - `Sí — inclòs a l'APK`
   - `No — fitxer extern`
 
-### Publicació i selector de l'app
+#### Publicació i selector de l’app
 
-Serveix per controlar com apareix el paquet a la pantalla `Selecciona Aventura`.
+Serveix per controlar com apareix el paquet a `Selecciona Aventura`.
 
 Camps:
 
@@ -139,9 +170,9 @@ Camps:
 Ús habitual:
 
 - si el paquet és descarregable, `Disponible al selector = Sí`;
-- si encara no està llest, `Disponible al selector = No` i s'omple l'etiqueta `Pròximament`.
+- si encara no està llest, `Disponible al selector = No` i s’omple `Pròximament`.
 
-### Puntuació
+#### Puntuació
 
 Només per `Escape Room`.
 
@@ -152,11 +183,11 @@ Camps:
 - `Penalització per pista avançada`
 - `Penalització per resposta incorrecta`
 
-### Blocs del paquet
+#### Blocs del paquet
 
 Només per `Escape Room`.
 
-Els blocs agrupen etapes per al hub d'activitats.
+Els blocs agrupen etapes per al hub d’activitats.
 
 Funcions:
 
@@ -173,16 +204,16 @@ Cada bloc té:
 - `Descripció` multilingüe
 - `Pista per trobar el QR del següent bloc`
 
-## Panell d'etapa
+### 2. Panell d’etapa
 
-S'obre quan selecciones una etapa.
+S’obre quan selecciones una etapa.
 
 Botons del capçal:
 
-- `✨ Generar`: genera contingut amb IA.
-- `🌐 Traduir`: tradueix el contingut de l'etapa.
+- `✨ Generar`
+- `🌐 Traduir`
 
-### Identificació
+#### Identificació
 
 - `ID`
 - `Codi QR`
@@ -199,32 +230,30 @@ Botons del capçal:
 - `GPS (lat, lon)`
 - `Pertany al bloc` en mode `Escape Room`
 
-### Contingut multilingüe
+#### Contingut multilingüe
 
 Per idiomes `CA / ES / EN / FR`:
 
 - `Títol del punt`
 - `On anar / instruccions`
 - `Descripció del lloc`
-- `Nota educativa` en els camps on toca
+- `Nota educativa` on toca
 
-### Respostes correctes
-
-Només en etapes que no són purament de visita.
+#### Respostes correctes
 
 Permet:
 
 - afegir múltiples respostes;
 - definir alternatives vàlides.
 
-### Pistes
+#### Pistes
 
 - llista ordenada de pistes;
-- una mateixa etapa pot tenir diverses pistes escalades.
+- diverses pistes escalades per etapa.
 
-### Verificació IA La Padrina / El Meco
+#### Verificació IA La Padrina / El Meco
 
-Defineix com s'ha de validar la prova quan la resposta és oberta o necessita criteri semàntic.
+Per a respostes obertes o validacions semàntiques.
 
 Camps:
 
@@ -233,9 +262,7 @@ Camps:
 - `Longitud mínima`;
 - `Requereix número`.
 
-### Regles IA anti-spoiler
-
-Serveixen per limitar què pot dir la IA a l'usuari.
+#### Regles IA anti-spoiler
 
 Botons:
 
@@ -254,9 +281,7 @@ Camps:
 - `Frases spoiler`
 - `Ubicacions sensibles`
 
-### Funcions avançades de la app
-
-Camps:
+#### Funcions avançades de la app
 
 - `Pista de camp anti-bloqueig`
 - `Prompt de foto`
@@ -266,16 +291,14 @@ Camps:
 - `Items requerits`
 - `Frase AR / aparició`
 
-### Imatges de contingut
+#### Imatges de contingut
 
-Permet afegir imatges visuals a l'etapa.
-
-Funcions:
+Permet:
 
 - pujar una o diverses imatges;
-- mantenir-les associades a l'etapa.
+- mantenir-les associades a l’etapa.
 
-### Sub-etapes d'aquest punt
+#### Sub-etapes d’aquest punt
 
 Les sub-etapes es guarden com a autoría i edició futura.
 
@@ -283,21 +306,21 @@ Botó:
 
 - `＋ Nova sub-etapa`
 
-### Accions d'etapa
+#### Accions d’etapa
 
 - `🗑 Eliminar`
 - `📋 Duplicar`
 - `↑ Pujar`
 - `↓ Baixar`
 
-## Panell de sub-etapa
+### 3. Panell de sub-etapa
 
-S'obre quan selecciones una sub-etapa.
+S’obre quan selecciones una sub-etapa.
 
 Compatibilitat actual:
 
 - es conserva al paquet exportat/publicat;
-- la app actual no l'executa com a flux nadiu independent.
+- la app actual no l’executa com a flux nadiu independent.
 
 Inclou:
 
@@ -317,14 +340,14 @@ Accions:
 - `↓`
 - `← Tornar a l'etapa`
 
-## Panell de narració
+### 4. Panell de narració
 
-S'obre quan selecciones una narració.
+S’obre quan selecciones una narració.
 
 Compatibilitat actual:
 
-- `before_stage` i `after_stage` sí que encaixen amb la lògica de la app;
-- `standalone` es conserva sobretot com a material d'autoría.
+- `before_stage` i `after_stage` encaixen amb la lògica de la app;
+- `standalone` es conserva sobretot com a material d’autoría.
 
 Botons del capçal:
 
@@ -349,22 +372,24 @@ Accions:
 - `↑ Pujar`
 - `↓ Baixar`
 
-## Columna dreta: Vista prèvia JSON
+## Vista prèvia JSON
 
-Mostra en temps real:
+La columna dreta mostra en temps real:
 
-- recompte d'etapes;
+- recompte d’etapes;
 - recompte de narracions;
 - recompte de sub-etapes;
-- JSON complet del paquet tal com s'exportarà.
+- JSON complet del paquet tal com s’exportarà.
 
 Serveix per:
 
-- entendre l'estructura final;
+- entendre l’estructura final;
 - detectar errors de dades;
 - copiar o inspeccionar el resultat abans de publicar.
 
-## Finestra `Repo`
+## Finestres i menús
+
+### `Repo`
 
 Mostra els paquets del catàleg remot.
 
@@ -376,15 +401,15 @@ Funcions:
 - llistar paquets publicats;
 - carregar un paquet remot existent per editar-lo.
 
-Cada targeta acostuma a mostrar:
+Cada targeta pot mostrar:
 
 - títol;
 - descripció;
 - `id`;
 - tipus;
-- estat (`Bundle`, `Descarregable`, `Pròximament`).
+- estat: `Bundle`, `Descarregable`, `Pròximament`.
 
-## Finestra `Validar`
+### `Validar`
 
 Fa la validació estructural del paquet.
 
@@ -392,27 +417,25 @@ Comprova, entre altres coses:
 
 - camps obligatoris;
 - localitzacions mínimes;
-- coherència d'etapes i narracions;
+- coherència d’etapes i narracions;
 - fitxers de coneixement;
-- paquets remots i etiquetes d'estat;
+- paquets remots i etiquetes d’estat;
 - fitxers necessaris per a publicació.
 
 Sortida:
 
-- nombre d'errors;
-- nombre d'avisos;
+- nombre d’errors;
+- nombre d’avisos;
 - detall per incidència.
 
-## Finestra `Auditar`
+### `Auditar`
 
 Comportament segons entorn:
 
 - en web pública: fa validació web;
 - en `localhost`: afegeix auditoria del servidor local.
 
-És útil per detectar problemes abans d'exportar o publicar.
-
-## Finestra `Exportar`
+### `Exportar`
 
 Opcions:
 
@@ -423,19 +446,17 @@ Opcions:
 Serveix per obtenir:
 
 - el bundle complet;
-- l'entrada de catàleg/manifest.
+- l’entrada de catàleg/manifest.
 
-## Finestra `Importar JSON`
-
-Permet enganxar un paquet complet en text JSON i carregar-lo a l'editor.
+### `Importar JSON`
 
 Flux:
 
-1. Obres `📂 Importar`.
-2. Enganxes el JSON.
-3. Prems `Importar`.
+1. obres `📂 Importar`;
+2. enganxes el JSON;
+3. prems `Importar`.
 
-## Finestra `Publicar`
+### `Publicar`
 
 Flux de publicació:
 
@@ -449,22 +470,22 @@ Requisits:
 
 - token GitHub amb permís `Contents: Read and write`;
 - paquet remot ben format;
-- si surt al selector, metadades coherents.
+- metadades coherents si ha de sortir al selector.
 
-## Finestra `Configuració IA`
+### `Configuració IA`
 
-Té dues pestanyes:
+Té dues pestanyes.
 
-### `OpenRouter`
+#### `OpenRouter`
 
 Funcions:
 
 - afegir una o més claus;
 - marcar clau activa;
 - tenir claus de respaldo;
-- guardar-ho en `localStorage`.
+- guardar-ho a `localStorage`.
 
-### `Ollama`
+#### `Ollama`
 
 Funcions:
 
@@ -482,17 +503,17 @@ Formats suportats:
 - `OpenAI Compatible (/v1/chat/completions)`
 - `Ollama Natiu (/api/chat)`
 
-## Finestra `GuildAI`
+### `GuildAI`
 
-És el xat d'assistència per construir el paquet amb IA.
+És el xat d’assistència per construir el paquet amb IA.
 
 Funcions:
 
 - conversa lliure sobre el pack;
 - suggeriments de noves etapes, textos o modificacions;
-- `📦 Estat` per injectar l'estat actual del paquet al prompt;
-- generació d'accions proposades;
-- aplicació d'accions:
+- `📦 Estat` per injectar l’estat actual del paquet al prompt;
+- generació d’accions proposades;
+- aplicació d’accions:
   - individualment;
   - `Aplicar totes`.
 
@@ -503,13 +524,9 @@ Botons:
 - `Envia`
 - `Aplicar totes` quan hi ha canvis pendents
 
-Drecera:
+### `Encontres`
 
-- `Cmd+Enter` o `Ctrl+Enter` envia el missatge.
-
-## Finestra `Encontres`
-
-Editor d'encontres aleatoris d'autoría.
+Editor d’encontres aleatoris d’autoría.
 
 Compatibilitat actual:
 
@@ -527,7 +544,7 @@ Funcions:
 - `🌐 Traduir amb IA`;
 - `⬇ Exportar Dart`;
 - `📂 Importar JSON`;
-- eliminar l'encontre seleccionat.
+- eliminar l’encontre seleccionat.
 
 Subfinestres:
 
@@ -537,7 +554,7 @@ Subfinestres:
   - copiar JSON
 - `Importar encontres (JSON)`
 
-## Finestra `QRs`
+### `QRs`
 
 Genera els codis QR físics de les etapes.
 
@@ -549,33 +566,33 @@ Funcions:
 
 Cada targeta pot incloure:
 
-- número d'etapa;
+- número d’etapa;
 - títol;
 - QR;
 - pista de localització;
-- instruccions d'escaneig.
+- instruccions d’escaneig.
 
-## Finestra `Coneixement`
+### `Coneixement`
 
 És la base de coneixement usada per La Padrina.
 
-Té dues parts:
+Té dues parts.
 
-### Fitxers Markdown
+#### Fitxers Markdown
 
 Funcions:
 
 - `＋ Nou fitxer`
-- renombrar fitxer
-- editar contingut per idiomes
-- eliminar fitxer
+- renombrar fitxer;
+- editar contingut per idiomes;
+- eliminar fitxer.
 
 Cada fitxer:
 
 - es guarda per nom lògic;
 - pot tenir contingut `CA / ES / EN / FR`.
 
-### Glossari
+#### Glossari
 
 Funcions:
 
@@ -583,7 +600,7 @@ Funcions:
 - donar traduccions per idiomes;
 - reforçar el context de la IA.
 
-## Finestra `Editar Bloc`
+### `Editar Bloc`
 
 Permet editar un bloc del paquet.
 
@@ -601,21 +618,7 @@ Accions:
 - `💾 Desar`
 - `Cancel·lar`
 
-## Funcions IA dins dels panells
-
-Segons el panell seleccionat, apareixen:
-
-- `✨ Generar`
-- `🌐 Traduir`
-
-Actualment es poden usar sobre:
-
-- etapes;
-- sub-etapes;
-- narracions;
-- encontres.
-
-## Compatibilitat funcional important
+## Compatibilitat funcional
 
 ### Natiu o gairebé natiu
 
@@ -638,26 +641,26 @@ Actualment es poden usar sobre:
 
 ### Crear un paquet nou
 
-1. Defineix tipus de paquet.
-2. Omple metadades.
-3. Crea etapes.
-4. Afegeix validacions, pistes i guardrails.
-5. Passa `Validar`.
-6. Exporta o publica.
+1. defineix tipus de paquet;
+2. omple metadades;
+3. crea etapes;
+4. afegeix validacions, pistes i guardrails;
+5. passa `Validar`;
+6. exporta o publica.
 
 ### Publicar un paquet descarregable
 
-1. Marca `Bundled a l'app = No`.
-2. Omple `Disponible al selector = Sí`.
-3. Revisa `URL base de descàrrega`.
-4. Valida.
-5. Publica a GitHub.
+1. marca `Bundled a l'app = No`;
+2. posa `Disponible al selector = Sí`;
+3. revisa `URL base de descàrrega`;
+4. valida;
+5. publica a GitHub.
 
 ### Publicar un paquet com `Pròximament`
 
-1. `Disponible al selector = No`.
-2. Omple `Etiqueta d'estat` en idiomes.
-3. Desa o publica el catàleg corresponent.
+1. posa `Disponible al selector = No`;
+2. omple `Etiqueta d'estat` en idiomes;
+3. desa o publica el catàleg corresponent.
 
 ## Dreceres
 
@@ -666,19 +669,19 @@ Actualment es poden usar sobre:
 
 ## Persistència local
 
-L'editor guarda estat local de:
+L’editor guarda estat local de:
 
 - configuració IA;
 - esborranys;
-- part del material d'autoría.
+- part del material d’autoría.
 
-## Requisits per publicar a GitHub
+## Publicació a GitHub
 
 Necessites un token amb:
 
 - `Contents: Read and write`
 
-S'usa per:
+S’usa per:
 
 - pujar paquets nous;
 - actualitzar paquets existents;
@@ -688,11 +691,11 @@ S'usa per:
 
 Aquest repo es publica amb GitHub Pages.
 
-Qualsevol canvi a:
+Canvis habituals que afecten la web:
 
 - `index.html`
 - `README.md`
 - `local_ai_config.example.json`
 - `.github/workflows/deploy-pages.yml`
 
-pot tornar-se a desplegar amb el workflow del repo.
+Qualsevol d’aquests canvis es pot tornar a desplegar amb el workflow del repo.
