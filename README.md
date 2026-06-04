@@ -19,9 +19,32 @@ Amb aquest editor pots:
 - generar, traduir o revisar contingut amb IA;
 - generar QRs i material auxiliar.
 
+## Captures
+
+### Vista general
+
+![Vista general del GuildApp Pack Editor](assets/screenshots/editor-overview.png)
+
+### Edició d'una etapa
+
+![Panell d'edició d'etapa](assets/screenshots/stage-editor.png)
+
+### Configuració d'IA
+
+![Configuració d'OpenRouter i Ollama](assets/screenshots/ia-config.png)
+
+### Catàleg remot i repositori
+
+![Finestra del repositori remot](assets/screenshots/repo-browser.png)
+
+### Base de coneixement
+
+![Finestra de base de coneixement](assets/screenshots/knowledge-base.png)
+
 ## Índex
 
 - [Resum ràpid](#resum-ràpid)
+- [Captures](#captures)
 - [Mode web i mode localhost](#mode-web-i-mode-localhost)
 - [Mapa de la interfície](#mapa-de-la-interfície)
 - [Barra superior](#barra-superior)
