@@ -19,32 +19,9 @@ Amb aquest editor pots:
 - generar, traduir o revisar contingut amb IA;
 - generar QRs i material auxiliar.
 
-## Captures
-
-### Vista general
-
-![Vista general del GuildApp Pack Editor](assets/screenshots/editor-overview.png)
-
-### Edició d'una etapa
-
-![Panell d'edició d'etapa](assets/screenshots/stage-editor.png)
-
-### Configuració d'IA
-
-![Configuració d'OpenRouter i Ollama](assets/screenshots/ia-config.png)
-
-### Catàleg remot i repositori
-
-![Finestra del repositori remot](assets/screenshots/repo-browser.png)
-
-### Base de coneixement
-
-![Finestra de base de coneixement](assets/screenshots/knowledge-base.png)
-
 ## Índex
 
 - [Resum ràpid](#resum-ràpid)
-- [Captures](#captures)
 - [Mode web i mode localhost](#mode-web-i-mode-localhost)
 - [Mapa de la interfície](#mapa-de-la-interfície)
 - [Barra superior](#barra-superior)
@@ -102,6 +79,8 @@ La pantalla es divideix en 4 zones:
 3. panell central d'edició;
 4. columna dreta amb la previsualització JSON.
 
+![Vista general del GuildApp Pack Editor](assets/screenshots/editor-overview.png)
+
 ## Barra superior
 
 ### Marca i capçalera
@@ -120,6 +99,8 @@ Inclou:
 - indicador d'estat IA;
 - botó `⚙ Configuració IA`;
 - botó de canvi de tema dia/nit.
+
+![Configuració d'OpenRouter i Ollama](assets/screenshots/ia-config.png)
 
 ### Accions principals
 
@@ -236,6 +217,8 @@ Botons del capçal:
 
 - `✨ Generar`
 - `🌐 Traduir`
+
+![Panell d'edició d'etapa](assets/screenshots/stage-editor.png)
 
 #### Identificació
 
@@ -433,6 +416,8 @@ Cada targeta pot mostrar:
 - tipus;
 - estat: `Bundle`, `Descarregable`, `Pròximament`.
 
+![Finestra del repositori remot](assets/screenshots/repo-browser.png)
+
 ### `Validar`
 
 Fa la validació estructural del paquet.
@@ -623,6 +608,8 @@ Funcions:
 - definir termes clau;
 - donar traduccions per idiomes;
 - reforçar el context de la IA.
+
+![Finestra de base de coneixement](assets/screenshots/knowledge-base.png)
 
 ### `Editar Bloc`
 
