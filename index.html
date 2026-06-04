@@ -1396,8 +1396,9 @@ select:focus {
       <!-- ─ Blocs ─ (només Escape Room) -->
       <div class="sec sf-er-only" id="pack-blocks-sec" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
         <div class="sec-label">Blocs del paquet
-          <span style="color:var(--text-mute);font-weight:normal">— agrupen etapes pel hub d'activitats</span>
+          <span style="color:var(--text-mute);font-weight:normal">— agrupen etapes per al flux QR-only</span>
         </div>
+        <div style="font-size:11px;color:var(--text-mute);margin-bottom:10px">A la app, els blocs es mostren com a estat del recorregut. L'entrada real a l'aventura es fa escanejant QR físics, no tocant el menú.</div>
         <div id="blocks-list"></div>
         <button class="arr-add" onclick="addBlock()" style="margin-top:6px">＋ Afegir bloc</button>
       </div>
@@ -3295,6 +3296,8 @@ function buildPack(){
   const escapeRoom = {
     id:packId,
     type: packType,
+    entry_mode:'qr_only',
+    character_mode:'auto',
     title:{ca:gv('pt-ca'),es:gv('pt-es'),en:gv('pt-en'),fr:gv('pt-fr')},
     default_language:'ca',
     languages:['ca','es','en','fr'],
@@ -3412,6 +3415,8 @@ function manifestEntry(){
     id:gv('pack-id')||'hortoneda_pack',
     version:gv('pack-version')||'1.0.0',
     type:packType,
+    entry_mode:'qr_only',
+    character_mode:'auto',
     title:{ca:gv('pt-ca'),es:gv('pt-es'),en:gv('pt-en'),fr:gv('pt-fr')},
     description:{ca:gv('pd-ca'),es:gv('pd-es'),en:gv('pd-en'),fr:gv('pd-fr')},
     author:gv('pack-author')||'Guilda Assessors Històrics',
@@ -3616,6 +3621,9 @@ function validatePack({ forPublish = false } = {}) {
   const stages = items.filter(i => i.type === 'stage');
   const narrations = items.filter(i => i.type === 'narration');
   if (!stages.length) error('El paquete no tiene ninguna etapa/punto.', 'Contingut del paquet');
+  if (!blocks.length) {
+    error('La aventura necesita bloques definidos para el flujo QR-only.', 'Blocs');
+  }
   if (!kbFiles.some(f => localizedHasAny(f.content))) {
     warn('El paquete no tiene base de conocimiento .md con contenido. El RAG local de El Meco tendrá poca precisión.', 'Knowledge');
   }
@@ -3713,9 +3721,12 @@ function validatePack({ forPublish = false } = {}) {
     if (!localizedHasAny(b.title)) warn('El bloque no tiene título.', ref);
     const assigned = stages.filter(s => s.blockId === b.id).length;
     if (!assigned) warn('El bloque no tiene ninguna etapa asignada.', ref);
+    if (!localizedHasAnyValue(b.nextBlockHint)) {
+      warn('El bloque no tiene pista para encontrar el siguiente QR.', ref);
+    }
   });
   if (blocks.length && stages.some(s => !s.blockId)) {
-    warn('Hay etapas sin bloque asignado. Se exportarán, pero no aparecerán dentro de ningún bloque.', 'Blocs');
+    error('Hay etapas sin bloque asignado. En flujo QR-only todas las etapas deben pertenecer a un bloque.', 'Blocs');
   }
 
   seen(narrations.map((n, i) => ({ value: n.id, ref: `narración ${i + 1}` })), 'ID de narración');
