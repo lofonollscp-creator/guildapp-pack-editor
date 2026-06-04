@@ -288,10 +288,10 @@ html.day .ltab.active { color: #FDFAF2; }
 .lpanels > div.active { display: block; }
 
 /* ─ AI buttons ─ */
-.ai-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: 700; border: 1px solid; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all .15s; }
-.ai-tr { background: var(--narr-d); color: var(--narr); border-color: var(--narr); }
+.ai-btn { display: inline-flex; align-items: center; gap: 5px; padding: 7px 12px; border-radius: 10px; font-size: 11px; font-weight: 800; border: 1px solid; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all .15s; box-shadow: 0 10px 18px rgba(0,0,0,.10); }
+.ai-tr { background: linear-gradient(180deg, color-mix(in srgb, var(--narr-d) 84%, white 16%), var(--narr-d)); color: var(--narr); border-color: var(--narr); }
 .ai-tr:hover { background: var(--narr-d); filter: brightness(1.2); }
-.ai-ge { background: var(--gold-glow); color: var(--gold); border-color: var(--gold-dim); }
+.ai-ge { background: linear-gradient(180deg, color-mix(in srgb, var(--gold-glow) 84%, white 16%), var(--gold-glow)); color: var(--gold); border-color: var(--gold-dim); }
 .ai-ge:hover { filter: brightness(1.2); }
 .ai-btn:disabled { opacity: .35; cursor: not-allowed; }
 
@@ -299,16 +299,16 @@ html.day .ltab.active { color: #FDFAF2; }
 .arr { display: flex; flex-direction: column; gap: 4px; }
 .arr-row { display: flex; gap: 5px; align-items: center; }
 .arr-row input { flex: 1; }
-.arr-rm  { width: 26px; height: 26px; border-radius: 4px; border: none; cursor: pointer; background: var(--err-d); color: var(--err); font-size: 13px; flex-shrink: 0; }
+.arr-rm  { width: 30px; height: 30px; border-radius: 10px; border: 1px solid rgba(208,80,80,.25); cursor: pointer; background: linear-gradient(180deg, color-mix(in srgb, var(--err-d) 88%, white 12%), var(--err-d)); color: var(--err); font-size: 13px; flex-shrink: 0; box-shadow: 0 8px 14px rgba(0,0,0,.08); }
 .arr-add { margin-top: 4px; padding: 3px 10px; border-radius: 4px; border: 1px dashed var(--gold-dim); background: none; color: var(--gold); font-size: 10px; font-weight: 700; cursor: pointer; font-family: inherit; }
 .arr-add:hover { background: var(--gold-glow); }
 
 /* ─ Action bar ─ */
 .acts { display: flex; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); flex-wrap: wrap; }
-.act { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: var(--rsm); font-size: 11px; font-weight: 700; border: 1px solid; cursor: pointer; font-family: inherit; transition: all .15s; }
-.act-ghost { background: var(--bg3); color: var(--stone); border-color: var(--border); }
+.act { display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; border-radius: 11px; font-size: 11px; font-weight: 800; border: 1px solid; cursor: pointer; font-family: inherit; transition: all .15s; box-shadow: 0 10px 18px rgba(0,0,0,.10); }
+.act-ghost { background: linear-gradient(180deg, color-mix(in srgb, var(--bg3) 86%, white 14%), var(--bg3)); color: var(--stone); border-color: var(--border); }
 .act-ghost:hover { border-color: var(--stone); }
-.act-del { background: var(--err-d); color: var(--err); border-color: rgba(208,80,80,.3); }
+.act-del { background: linear-gradient(180deg, color-mix(in srgb, var(--err-d) 88%, white 12%), var(--err-d)); color: var(--err); border-color: rgba(208,80,80,.3); }
 .act-del:hover { filter: brightness(1.15); }
 
 /* ─ Sub-stages inline ─ */
@@ -434,9 +434,9 @@ html.day #toast.ok { color: #FDFAF2; }
 /* ════════════════════════════════════════════════════════
    IA CONFIG — provider toggle + key-rows
 ════════════════════════════════════════════════════════ */
-.prov-toggle { display:flex; background:var(--bg3); border:1px solid var(--border2); border-radius:6px; padding:2px; gap:1px; }
-.prov-btn { padding:3px 9px; border:none; border-radius:4px; font-size:10px; font-weight:700; cursor:pointer; font-family:inherit; background:none; color:var(--text-mute); transition:all .15s; white-space:nowrap; }
-.prov-btn.active { background:var(--gold); color:var(--bg); }
+.prov-toggle { display:flex; background:linear-gradient(180deg, color-mix(in srgb, var(--bg3) 88%, white 12%), var(--bg3)); border:1px solid var(--border2); border-radius:10px; padding:3px; gap:2px; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+.prov-btn { padding:6px 11px; border:none; border-radius:8px; font-size:10px; font-weight:800; cursor:pointer; font-family:inherit; background:none; color:var(--text-mute); transition:all .15s; white-space:nowrap; }
+.prov-btn.active { background:linear-gradient(180deg, var(--gold-hi), var(--gold)); color:var(--bg); box-shadow:0 8px 16px rgba(211,179,93,.18); }
 .prov-btn:hover:not(.active) { color:var(--text); }
 
 #ia-cfg-btn { width:26px; height:26px; border-radius:6px; border:1px solid var(--border2); background:var(--bg3); cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; color:var(--stone); flex-shrink:0; transition:all .2s; }
@@ -751,68 +751,171 @@ body {
 }
 
 .tbtn {
-  min-height: 32px;
-  padding: 7px 11px;
+  min-height: 36px;
+  padding: 8px 12px;
   border: 1px solid var(--border);
+  box-shadow: 0 8px 18px rgba(0,0,0,.10);
+  position: relative;
+  overflow: hidden;
 }
 .tbtn-ghost {
-  background: var(--bg3);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg3) 82%, white 18%), var(--bg3));
   color: var(--text-dim);
 }
 .tbtn-gold {
   color: #15120A;
-  box-shadow: 0 8px 18px rgba(211,179,93,.12);
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
+  box-shadow: 0 12px 24px rgba(211,179,93,.22);
 }
 html.day .tbtn-gold { color: #fff; }
+.tbtn:hover,
+.sba-btn:hover,
+.act:hover,
+.ai-btn:hover,
+.arr-add:hover,
+.prov-btn:hover {
+  transform: translateY(-1px);
+}
+.tbtn:active,
+.sba-btn:active,
+.act:active,
+.ai-btn:active,
+.arr-add:active,
+.prov-btn:active {
+  transform: translateY(0);
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  flex-wrap: wrap;
+}
+
+.action-group-main {
+  background: color-mix(in srgb, var(--gold-glow) 52%, var(--bg) 48%);
+  border-color: color-mix(in srgb, var(--gold-dim) 60%, var(--border) 40%);
+}
 
 #workspace {
   background: var(--bg);
   min-height: 0;
+  grid-template-columns: minmax(292px, 320px) minmax(0, 1fr) minmax(340px, 400px);
+  gap: 16px;
+  padding: 16px;
 }
 
 #sidebar,
 #preview-col {
   background: color-mix(in srgb, var(--bg2) 86%, var(--bg) 14%);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  min-height: 0;
 }
 
 .sb-title,
 .pv-hd {
-  min-height: 44px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   color: var(--text-dim);
   letter-spacing: .8px;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  backdrop-filter: blur(14px);
 }
 .sb-actions {
   padding: 10px;
   background: var(--bg);
+  border-top: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  position: sticky;
+  top: 49px;
+  z-index: 3;
 }
 .sba {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .sba-btn {
-  min-height: 34px;
-  background: var(--bg2);
+  min-height: 38px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg2) 88%, white 12%), var(--bg2));
+  color: var(--text);
+  box-shadow: 0 10px 18px rgba(0,0,0,.08);
+}
+.sb-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold-glow) 48%, transparent), transparent);
+  position: sticky;
+  top: 48px;
+  z-index: 3;
+}
+.sb-summary-card {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, var(--bg2) 22%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.sb-summary-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.sb-summary-card strong {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.2;
+}
+.sb-note {
+  margin-top: 8px;
+  padding: 10px 11px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--gold-glow) 38%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold-dim) 52%, var(--border) 48%);
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.45;
 }
 #item-list {
-  padding: 10px;
+  padding: 12px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 .si {
-  min-height: 42px;
-  padding: 8px 9px;
+  min-height: 48px;
+  padding: 10px 11px;
   margin-bottom: 5px;
-  border-radius: 8px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
 }
 .si:hover {
-  background: var(--bg3);
-  border-color: var(--border);
+  background: color-mix(in srgb, var(--bg3) 88%, transparent);
+  border-color: color-mix(in srgb, var(--border2) 78%, transparent);
+  transform: translateY(-1px);
 }
 .si.active {
-  box-shadow: inset 3px 0 0 var(--gold);
+  box-shadow: inset 3px 0 0 var(--gold), 0 10px 22px rgba(0,0,0,.14);
+  border-color: color-mix(in srgb, var(--gold-dim) 55%, var(--border) 45%);
 }
 .si-title {
   font-size: 12px;
+  color: var(--text);
 }
 .si-meta {
   margin-top: 2px;
@@ -826,10 +929,11 @@ html.day .tbtn-gold { color: #fff; }
 .sub-add {
   margin: 2px 6px 8px 36px;
   min-height: 26px;
+  border-radius: 999px;
 }
 
 #editor {
-  max-width: 1120px;
+  max-width: 1180px;
   width: 100%;
   height: 100%;
   max-height: 100%;
@@ -841,7 +945,99 @@ html.day .tbtn-gold { color: #fff; }
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   min-height: 0;
-  padding-bottom: 96px;
+  padding: 2px 6px 110px;
+  scrollbar-gutter: stable;
+}
+.editor-workflow {
+  position: sticky;
+  top: 2px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg2) 88%, transparent);
+  box-shadow: 0 18px 32px rgba(0,0,0,.14);
+  backdrop-filter: blur(16px);
+}
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.workflow-step {
+  min-height: 42px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 68%, white 8%), var(--bg));
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.workflow-step:hover {
+  border-color: color-mix(in srgb, var(--gold-dim) 65%, var(--border) 35%);
+  color: var(--text);
+}
+.workflow-step.active {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold-glow) 80%, var(--bg) 20%), color-mix(in srgb, var(--gold-glow) 40%, var(--bg) 60%));
+  border-color: color-mix(in srgb, var(--gold-dim) 75%, var(--border) 25%);
+  box-shadow: 0 12px 24px rgba(211,179,93,.14);
+  color: var(--text);
+}
+.workflow-step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  background: color-mix(in srgb, var(--bg3) 70%, transparent);
+  color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold-dim) 55%, transparent);
+  flex-shrink: 0;
+}
+.workflow-step-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+.workflow-step-copy strong {
+  font-size: 12px;
+  line-height: 1.15;
+}
+.workflow-step-copy span {
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--text-mute);
+}
+.workflow-rail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.workflow-cue {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.3;
+}
+.workflow-cue strong {
+  color: var(--text);
 }
 #card-meta { order: 1; }
 #stage-panel,
@@ -857,25 +1053,29 @@ html.day .tbtn-gold { color: #fff; }
   flex: 0 0 auto;
   padding: 0;
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 14px 32px var(--shadow);
+  border-radius: 16px;
+  box-shadow: 0 20px 42px var(--shadow);
+  border-color: color-mix(in srgb, var(--border) 82%, transparent);
 }
 #no-sel {
   flex: 0 0 auto;
 }
 .card-hd {
   margin: 0;
-  padding: 14px 16px;
-  background: color-mix(in srgb, var(--bg2) 76%, var(--card) 24%);
+  padding: 16px 18px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--gold-glow) 34%, transparent), transparent),
+    color-mix(in srgb, var(--bg2) 76%, var(--card) 24%);
 }
 .card-hd h2 {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0;
 }
 .card-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 .card > .sec,
 .card > .g2,
@@ -888,12 +1088,12 @@ html.day .tbtn-gold { color: #fff; }
 .card > .compat-note,
 .card > .narr-info-chip,
 .card > .tour-info-chip {
-  margin-left: 16px;
-  margin-right: 16px;
+  margin-left: 18px;
+  margin-right: 18px;
 }
 .card > .g2,
 .card > .g3 {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 .card > .acts {
   margin-bottom: 16px;
@@ -902,26 +1102,28 @@ html.day .tbtn-gold { color: #fff; }
   margin-bottom: 16px;
 }
 .sec {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 18px;
+  margin-bottom: 18px;
 }
 .sec-label {
   border-bottom: none;
   margin-bottom: 10px;
   padding-bottom: 0;
-  color: var(--text-dim);
+  color: var(--text);
   letter-spacing: .75px;
+  font-size: 11px;
 }
 .g2,
 .g3 {
-  gap: 12px;
+  gap: 14px;
 }
 .f {
   margin-bottom: 12px;
 }
 .f label {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   color: var(--text-dim);
+  font-size: 11px;
 }
 input[type=text],
 input[type=number],
@@ -929,13 +1131,16 @@ input[type=password],
 textarea,
 select,
 select.field-sel {
-  min-height: 36px;
-  padding: 8px 10px;
+  min-height: 42px;
+  padding: 10px 12px;
   background: var(--bg);
   border-color: var(--border);
+  border-radius: 10px;
+  font-size: 13px;
 }
 textarea {
-  min-height: 86px;
+  min-height: 108px;
+  line-height: 1.6;
 }
 input:focus,
 textarea:focus,
@@ -947,51 +1152,180 @@ select:focus {
   margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 .pt-btn {
-  min-height: 42px;
+  min-height: 76px;
   border-width: 1px;
+  align-items: center;
+  font-size: 13px;
+  padding-inline: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 22px rgba(0,0,0,.08);
 }
 .ltab {
-  min-height: 28px;
-  padding: 6px 11px;
-  border-radius: 6px;
+  min-height: 34px;
+  padding: 8px 13px;
+  border-radius: 10px;
 }
 .lang-row {
   margin-top: 12px;
+}
+.lpanels > div {
+  padding-top: 4px;
 }
 .arr-row {
   gap: 8px;
 }
 .arr-add {
-  min-height: 30px;
-  padding: 6px 11px;
+  min-height: 34px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold-glow) 26%, transparent), transparent);
 }
 .acts {
   background: var(--bg);
-  padding: 12px 16px;
+  padding: 14px 18px 18px;
   margin-top: 18px;
+  border-top-color: color-mix(in srgb, var(--border) 72%, transparent);
 }
 .compat-note,
 .tour-info-chip,
 .narr-info-chip {
   margin-top: 14px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
 }
 
 .pv-pack-hd {
-  padding: 12px 14px;
-  background: var(--bg);
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 48px;
+  z-index: 3;
 }
 .pv-stat {
-  gap: 7px;
+  gap: 8px;
+  margin-top: 10px;
+}
+.pv-pack-copy h3 {
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.pv-pack-copy p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-dim);
 }
 .pv-chip,
 .val-pill {
   border-radius: 999px;
 }
 #preview-json {
+  font-size: 11.5px;
+  padding: 18px;
+  line-height: 1.6;
+}
+
+.empty {
+  margin-top: 24px;
+  padding: 32px 28px;
+  border: 1px dashed color-mix(in srgb, var(--border2) 74%, transparent);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--gold-glow) 48%, transparent), transparent 56%),
+    color-mix(in srgb, var(--card) 82%, transparent);
+  color: var(--text-dim);
+}
+.empty-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.empty .ico {
+  width: 74px;
+  height: 74px;
+  margin-bottom: 0;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  background: color-mix(in srgb, var(--gold-glow) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold-dim) 52%, var(--border) 48%);
+}
+.empty-copy {
+  max-width: 420px;
+  text-align: left;
+}
+.empty-copy h3 {
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.empty-copy p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.empty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  text-align: left;
+}
+.empty-step {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+}
+.empty-step strong {
+  display: block;
+  color: var(--text);
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.empty-step span {
+  display: block;
   font-size: 11px;
-  padding: 16px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+.empty-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: var(--gold);
+  background: var(--gold-glow);
+  border: 1px solid var(--gold-dim);
+  flex-shrink: 0;
+}
+
+* {
+  scrollbar-color: color-mix(in srgb, var(--border2) 72%, transparent) transparent;
+}
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--border2) 78%, transparent);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .mbox {
@@ -1025,11 +1359,21 @@ select:focus {
     overflow-x: auto;
     scrollbar-width: thin;
   }
+  .action-group {
+    flex-wrap: nowrap;
+  }
+  .editor-workflow {
+    flex-direction: column;
+    align-items: stretch;
+  }
   #workspace {
-    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-columns: minmax(260px, 292px) minmax(0, 1fr);
   }
   #preview-col {
     display: none;
+  }
+  .empty-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1048,12 +1392,13 @@ select:focus {
     min-height: 220px;
     border-right: none;
     border-bottom: 1px solid var(--border);
+    border-radius: 16px;
   }
   #item-list {
     max-height: 320px;
   }
   #editor {
-    padding: 14px;
+    padding: 14px 0 90px;
     max-width: none;
   }
   .g2,
@@ -1082,6 +1427,26 @@ select:focus {
   .key-add-row input {
     flex-basis: auto !important;
     width: 100%;
+  }
+  .top-actions,
+  .action-group {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .workflow-steps,
+  .workflow-rail {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .sb-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .empty-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .empty-copy {
+    text-align: center;
   }
   .mbox {
     width: calc(100vw - 20px) !important;
@@ -1241,21 +1606,30 @@ select:focus {
   <div class="top-brand">
     <div class="top-crest">🏰</div>
     <div>
-      <div class="top-name">GuildApp Pack Editor</div>
-      <div style="font-size:10px;color:var(--text-mute);margin-top:2px">Paquets, narracions, coneixement i publicació</div>
+      <div class="top-name" id="editor-brand-name">GuildApp Pack Editor</div>
+      <div id="editor-brand-subtitle" style="font-size:10px;color:var(--text-mute);margin-top:2px">Paquets, narracions, coneixement i publicació</div>
     </div>
     <div class="top-ver">v2.3</div>
   </div>
   <div class="top-ai">
     <div class="top-model" style="gap:6px">
-      <label>IA</label>
+      <label id="ui-lang-label">UI</label>
+      <select id="ui-lang-sel" onchange="setEditorLocale(this.value)" style="width:110px">
+        <option value="ca">Català</option>
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+    </div>
+    <div class="top-model" style="gap:6px">
+      <label id="ui-ai-label">IA</label>
       <div class="prov-toggle">
         <button class="prov-btn active" id="prov-or" onclick="setProvider('openrouter')">OpenRouter</button>
         <button class="prov-btn"        id="prov-ol" onclick="setProvider('ollama')">Ollama</button>
       </div>
     </div>
     <div class="top-model" id="or-model-wrap">
-      <label>Model</label>
+      <label id="ui-model-label">Model</label>
       <select id="model-sel">
         <option value="deepseek/deepseek-v4-flash:free" selected>DeepSeek V4 Flash — ràpid ✓</option>
         <option value="google/gemma-4-31b-it:free">Gemma 4 31B — equilibrat ✓</option>
@@ -1269,16 +1643,20 @@ select:focus {
     <button id="theme-btn" onclick="toggleTheme()" title="Canviar mode dia/nit">🌙</button>
   </div>
   <div class="top-actions">
-    <button class="tbtn tbtn-ghost" onclick="openRepoModal()">↻ Repo</button>
-    <button class="tbtn tbtn-ghost" onclick="openValidationModal()">✓ Validar</button>
-    <button class="tbtn tbtn-ghost" id="audit-btn" onclick="runPackAudit()">🛡 Auditar</button>
-    <button class="tbtn tbtn-ghost" onclick="publishToRepo()">↑ Publicar</button>
-    <button class="tbtn tbtn-ghost" onclick="openVibeModal()" style="background:var(--narr-d);color:var(--narr);border-color:var(--narr)">💬 GuildAI</button>
-    <button class="tbtn tbtn-ghost" onclick="openEncModal()" title="Material de autoría; se conserva en editor_state.json">🎲 Encontres</button>
-    <button class="tbtn tbtn-ghost" onclick="openKbModal()">📚 Coneixement</button>
-    <button class="tbtn tbtn-ghost" onclick="openQrPrintModal()">🖨 QRs</button>
-    <button class="tbtn tbtn-ghost" onclick="importJSON()">📂 Importar</button>
-    <button class="tbtn tbtn-gold"  onclick="openExportModal()">⬇ Exportar</button>
+    <div class="action-group action-group-main">
+      <button class="tbtn tbtn-ghost" id="repo-btn" onclick="openRepoModal()">↻ Repo</button>
+      <button class="tbtn tbtn-ghost" id="validate-btn" onclick="openValidationModal()">✓ Validar</button>
+      <button class="tbtn tbtn-ghost" id="audit-btn" onclick="runPackAudit()">🛡 Auditar</button>
+      <button class="tbtn tbtn-ghost" id="publish-btn" onclick="publishToRepo()">↑ Publicar</button>
+      <button class="tbtn tbtn-gold" id="export-btn" onclick="openExportModal()">⬇ Exportar</button>
+    </div>
+    <div class="action-group">
+      <button class="tbtn tbtn-ghost" id="guildai-btn" onclick="openVibeModal()" style="background:var(--narr-d);color:var(--narr);border-color:var(--narr)">💬 GuildAI</button>
+      <button class="tbtn tbtn-ghost" id="enc-btn" onclick="openEncModal()" title="Material de autoría; se conserva en editor_state.json">🎲 Encontres</button>
+      <button class="tbtn tbtn-ghost" id="kb-btn" onclick="openKbModal()">📚 Coneixement</button>
+      <button class="tbtn tbtn-ghost" id="qr-btn" onclick="openQrPrintModal()">🖨 QRs</button>
+      <button class="tbtn tbtn-ghost" id="import-btn" onclick="importJSON()">📂 Importar</button>
+    </div>
   </div>
 </div>
 
@@ -1287,34 +1665,91 @@ select:focus {
 
   <!-- ─ SIDEBAR ─ -->
   <div id="sidebar">
-    <div class="sb-title">Contingut del paquet</div>
+    <div class="sb-title" id="sidebar-title">Contingut del paquet</div>
+    <div class="sb-summary">
+      <div class="sb-summary-card">
+        <span class="sb-summary-label">Flux</span>
+        <strong id="sb-flow">QR-only</strong>
+      </div>
+      <div class="sb-summary-card">
+        <span class="sb-summary-label" id="sb-mode-label">Mode</span>
+        <strong id="sb-mode">Escape Room</strong>
+      </div>
+      <div class="sb-summary-card">
+        <span class="sb-summary-label" id="sb-blocks-label">Blocs</span>
+        <strong id="sb-blocks">0</strong>
+      </div>
+      <div class="sb-summary-card">
+        <span class="sb-summary-label" id="sb-status-label">Estat</span>
+        <strong id="sb-availability">Esborrany</strong>
+      </div>
+    </div>
     <div class="sb-actions">
       <div class="sba">
         <button class="sba-btn" id="btn-add-stage" onclick="addStage()">＋ Etapa</button>
-        <button class="sba-btn narr" onclick="addNarration()" title="Material de autoría; la app todavía no lo ejecuta como flujo nativo">📖 Narrador</button>
+        <button class="sba-btn narr" id="btn-add-narration" onclick="addNarration()" title="Material de autoría; la app todavía no lo ejecuta como flujo nativo">📖 Narrador</button>
       </div>
+      <div class="sb-note" id="sb-note">Els equips entren a cada bloc escanejant el QR correcte. Aquest panell és per autoria i revisió.</div>
     </div>
     <div id="item-list"></div>
   </div>
 
   <!-- ─ EDITOR ─ -->
   <div id="editor">
+    <div class="editor-workflow">
+      <div class="workflow-steps">
+        <button class="workflow-step active" id="wf-meta" onclick="jumpToEditorSection('card-meta')">
+          <span class="workflow-step-num">1</span>
+          <span class="workflow-step-copy">
+            <strong id="wf-meta-title">Metadades</strong>
+            <span id="wf-meta-subtitle">Nom, tipus, publicació</span>
+          </span>
+        </button>
+        <button class="workflow-step" id="wf-blocks" onclick="jumpToEditorSection('pack-blocks-sec')">
+          <span class="workflow-step-num">2</span>
+          <span class="workflow-step-copy">
+            <strong id="wf-blocks-title">Blocs</strong>
+            <span id="wf-blocks-subtitle">Ordre físic i pista següent</span>
+          </span>
+        </button>
+        <button class="workflow-step" id="wf-edit" onclick="focusActiveEditorSection()">
+          <span class="workflow-step-num">3</span>
+          <span class="workflow-step-copy">
+            <strong id="wf-edit-title">Edició</strong>
+            <span id="wf-edit-subtitle">Etapa, narració o sub-etapa activa</span>
+          </span>
+        </button>
+        <button class="workflow-step" id="wf-review" onclick="openValidationModal()">
+          <span class="workflow-step-num">4</span>
+          <span class="workflow-step-copy">
+            <strong id="wf-review-title">Revisió</strong>
+            <span id="wf-review-subtitle">Validar, auditar i exportar</span>
+          </span>
+        </button>
+      </div>
+      <div class="workflow-rail">
+        <div class="workflow-cue" id="workspace-cue"><strong>Treball actual:</strong> definint el paquet</div>
+        <button class="tbtn tbtn-ghost" id="wf-add-stage-btn" onclick="addStage()">＋ Etapa</button>
+        <button class="tbtn tbtn-ghost" id="wf-add-narration-btn" onclick="addNarration()">📖 Narrador</button>
+        <button class="tbtn tbtn-gold" id="wf-review-btn" onclick="openValidationModal()">✓ Revisar</button>
+      </div>
+    </div>
 
     <!-- Pack meta -->
     <div class="card" id="card-meta">
       <div class="card-hd">
         <div class="card-icon ci-stone">🗂</div>
-        <h2 class="gold">Metadades del paquet</h2>
+        <h2 class="gold" id="card-meta-title">Metadades del paquet</h2>
       </div>
 
       <!-- Pack-type selector -->
-      <div class="f" style="margin-bottom:6px"><label>Tipus d'experiència <span class="req">*</span></label></div>
+      <div class="f" style="margin-bottom:6px"><label id="pack-type-label">Tipus d'experiència <span class="req">*</span></label></div>
       <div class="pt-toggle">
         <button class="pt-btn er active" id="pt-er" onclick="setPackType('escape_room')">
-          🏰 Escape Room
+          <span id="pt-er-label">🏰 Escape Room</span>
         </button>
         <button class="pt-btn gt" id="pt-gt" onclick="setPackType('guided_tour')">
-          🗺 Visita Guiada
+          <span id="pt-gt-label">🗺 Visita Guiada</span>
         </button>
       </div>
 
@@ -1724,16 +2159,50 @@ select:focus {
     </div>
 
     <div class="empty" id="no-sel">
-      <div class="ico">🗺</div>
-      <p>Selecciona un element del panell esquerre<br>o afegeix una nova <strong>etapa</strong> o <strong>narració</strong></p>
+      <div class="empty-hero">
+        <div class="ico">🗺</div>
+        <div class="empty-copy">
+          <h3 id="empty-title">Editor llest per construir el paquet</h3>
+          <p id="empty-text">Comença per les metadades del paquet o selecciona una etapa del panell esquerre.</p>
+        </div>
+      </div>
+      <div class="empty-grid">
+        <div class="empty-step">
+          <span class="empty-step-num">1</span>
+          <div>
+            <strong id="empty-step1-title">Defineix el paquet</strong>
+            <span id="empty-step1-text">Títol, descripció, publicació i mode d'experiència.</span>
+          </div>
+        </div>
+        <div class="empty-step">
+          <span class="empty-step-num">2</span>
+          <div>
+            <strong id="empty-step2-title">Organitza els blocs</strong>
+            <span id="empty-step2-text">Planifica el recorregut QR-only abans de detallar cada prova.</span>
+          </div>
+        </div>
+        <div class="empty-step">
+          <span class="empty-step-num">3</span>
+          <div>
+            <strong id="empty-step3-title">Valida i exporta</strong>
+            <span id="empty-step3-text">Revisa JSON, auditoria i publicació des de la barra superior.</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ─ PREVIEW COLUMN ─ -->
   <div id="preview-col">
-    <div class="pv-hd">Vista prèvia JSON <span id="pv-label">— cap selecció</span></div>
+    <div class="pv-hd">
+      <span id="pv-title">Vista prèvia JSON</span>
+      <span id="pv-label">— cap selecció</span>
+    </div>
     <div class="pv-pack-hd">
-      <h3>Paquet</h3>
+      <div class="pv-pack-copy">
+        <h3 id="pv-snapshot-title">Snapshot exportable</h3>
+        <p id="pv-snapshot-subtitle">Previsualització estructural del que sortirà cap a la app o al repositori.</p>
+      </div>
       <div class="pv-stat">
         <div class="pv-chip gold" id="pv-stages">0 etapes</div>
         <div class="pv-chip" id="pv-narrs">0 narracions</div>
@@ -2426,6 +2895,387 @@ function toggleTheme() {
 })();
 
 // ════════════════════════════════════════════════════════
+// UI LOCALE
+// ════════════════════════════════════════════════════════
+const UI_LOCALE_KEY = 'guildapp_editor_ui_locale';
+let editorLocale = localStorage.getItem(UI_LOCALE_KEY) || 'ca';
+const UI_I18N = {
+  ca: {
+    title: 'GuildApp Pack Editor',
+    subtitle: 'Paquets, narracions, coneixement i publicació',
+    ui: 'UI',
+    ai: 'IA',
+    model: 'Model',
+    repo: '↻ Repo',
+    validate: '✓ Validar',
+    audit: '🛡 Auditar',
+    publish: '↑ Publicar',
+    export: '⬇ Exportar',
+    guildai: '💬 GuildAI',
+    encounters: '🎲 Encontres',
+    knowledge: '📚 Coneixement',
+    qrs: '🖨 QRs',
+    import: '📂 Importar',
+    sidebarTitle: 'Contingut del paquet',
+    mode: 'Mode',
+    blocks: 'Blocs',
+    status: 'Estat',
+    addStage: '＋ Etapa',
+    addPoint: '＋ Punt',
+    addNarration: '📖 Narrador',
+    sidebarNote: 'Els equips entren a cada bloc escanejant el QR correcte. Aquest panell és per autoria i revisió.',
+    wfMeta: 'Metadades',
+    wfMetaSub: 'Nom, tipus, publicació',
+    wfBlocks: 'Blocs',
+    wfBlocksSub: 'Ordre físic i pista següent',
+    wfEdit: 'Edició',
+    wfEditSub: 'Etapa, narració o sub-etapa activa',
+    wfReview: 'Revisió',
+    wfReviewSub: 'Validar, auditar i exportar',
+    reviewNow: '✓ Revisar',
+    cardMeta: 'Metadades del paquet',
+    packType: 'Tipus d\'experiència <span class="req">*</span>',
+    escapeRoom: '🏰 Escape Room',
+    guidedTour: '🗺 Visita Guiada',
+    previewTitle: 'Vista prèvia JSON',
+    previewNone: '— cap selecció',
+    previewSnapshot: 'Snapshot exportable',
+    previewSnapshotSub: 'Previsualització estructural del que sortirà cap a la app o al repositori.',
+    emptyTitle: 'Editor llest per construir el paquet',
+    emptyText: 'Comença per les metadades del paquet o selecciona una etapa del panell esquerre.',
+    empty1Title: 'Defineix el paquet',
+    empty1Text: 'Títol, descripció, publicació i mode d\'experiència.',
+    empty2Title: 'Organitza els blocs',
+    empty2Text: 'Planifica el recorregut QR-only abans de detallar cada prova.',
+    empty3Title: 'Valida i exporta',
+    empty3Text: 'Revisa JSON, auditoria i publicació des de la barra superior.',
+    availabilityDraft: 'Esborrany',
+    availabilityBundled: 'Inclòs a l’app',
+    availabilityRemote: 'Publicable',
+    availabilitySoon: 'Pròximament',
+    workflowCurrent: 'Treball actual:',
+    workflowMetaCue: 'definint el paquet',
+    workflowStartCue: 'defineix les metadades i crea la primera etapa',
+    workflowBlocksCue: 'organitza els blocs del recorregut QR-only',
+    workflowSelectCue: 'selecciona una peça del recorregut o passa a validació',
+    workflowReviewCue: 'revisa el paquet abans d’exportar',
+    stageWord: 'Etapa',
+    pointWord: 'Punt',
+    subStageWord: 'Sub-etapa',
+    narrationWord: 'Narrador',
+    firstStageHint: 'Afegeix la primera etapa ↑',
+    subStageButton: '＋ Sub-etapa a {ref}',
+    stageMeta: 'QR: {qr}{subs}',
+    subsMeta: ' · {count} sub-etapes',
+    subStageMeta: 'Sub-etapa {ref}',
+    blockMeta: '{count} etapes · {id}',
+    editStageCue: 'editant l\'etapa <em>{name}</em>',
+    editSubStageCue: 'editant la sub-etapa <em>{name}</em>',
+    editNarrationCue: 'editant la narració <em>{name}</em>',
+  },
+  es: {
+    title: 'GuildApp Pack Editor',
+    subtitle: 'Paquetes, narraciones, conocimiento y publicación',
+    ui: 'UI',
+    ai: 'IA',
+    model: 'Modelo',
+    repo: '↻ Repo',
+    validate: '✓ Validar',
+    audit: '🛡 Auditar',
+    publish: '↑ Publicar',
+    export: '⬇ Exportar',
+    guildai: '💬 GuildAI',
+    encounters: '🎲 Encuentros',
+    knowledge: '📚 Conocimiento',
+    qrs: '🖨 QRs',
+    import: '📂 Importar',
+    sidebarTitle: 'Contenido del paquete',
+    mode: 'Modo',
+    blocks: 'Bloques',
+    status: 'Estado',
+    addStage: '＋ Etapa',
+    addPoint: '＋ Punto',
+    addNarration: '📖 Narrador',
+    sidebarNote: 'Los equipos entran en cada bloque escaneando el QR correcto. Este panel es para autoría y revisión.',
+    wfMeta: 'Metadatos',
+    wfMetaSub: 'Nombre, tipo, publicación',
+    wfBlocks: 'Bloques',
+    wfBlocksSub: 'Orden físico y pista siguiente',
+    wfEdit: 'Edición',
+    wfEditSub: 'Etapa, narración o subetapa activa',
+    wfReview: 'Revisión',
+    wfReviewSub: 'Validar, auditar y exportar',
+    reviewNow: '✓ Revisar',
+    cardMeta: 'Metadatos del paquete',
+    packType: 'Tipo de experiencia <span class="req">*</span>',
+    escapeRoom: '🏰 Escape Room',
+    guidedTour: '🗺 Visita guiada',
+    previewTitle: 'Vista previa JSON',
+    previewNone: '— sin selección',
+    previewSnapshot: 'Snapshot exportable',
+    previewSnapshotSub: 'Previsualización estructural de lo que saldrá hacia la app o al repositorio.',
+    emptyTitle: 'Editor listo para construir el paquete',
+    emptyText: 'Empieza por los metadatos del paquete o selecciona una etapa del panel izquierdo.',
+    empty1Title: 'Define el paquete',
+    empty1Text: 'Título, descripción, publicación y modo de experiencia.',
+    empty2Title: 'Organiza los bloques',
+    empty2Text: 'Planifica el recorrido QR-only antes de detallar cada prueba.',
+    empty3Title: 'Valida y exporta',
+    empty3Text: 'Revisa JSON, auditoría y publicación desde la barra superior.',
+    availabilityDraft: 'Borrador',
+    availabilityBundled: 'Incluido en la app',
+    availabilityRemote: 'Publicable',
+    availabilitySoon: 'Próximamente',
+    workflowCurrent: 'Trabajo actual:',
+    workflowMetaCue: 'definiendo el paquete',
+    workflowStartCue: 'define los metadatos y crea la primera etapa',
+    workflowBlocksCue: 'organiza los bloques del recorrido QR-only',
+    workflowSelectCue: 'selecciona una pieza del recorrido o pasa a validación',
+    workflowReviewCue: 'revisa el paquete antes de exportar',
+    stageWord: 'Etapa',
+    pointWord: 'Punto',
+    subStageWord: 'Subetapa',
+    narrationWord: 'Narrador',
+    firstStageHint: 'Añade la primera etapa ↑',
+    subStageButton: '＋ Subetapa a {ref}',
+    stageMeta: 'QR: {qr}{subs}',
+    subsMeta: ' · {count} subetapas',
+    subStageMeta: 'Subetapa {ref}',
+    blockMeta: '{count} etapas · {id}',
+    editStageCue: 'editando la etapa <em>{name}</em>',
+    editSubStageCue: 'editando la subetapa <em>{name}</em>',
+    editNarrationCue: 'editando la narración <em>{name}</em>',
+  },
+  en: {
+    title: 'GuildApp Pack Editor',
+    subtitle: 'Packs, narrations, knowledge, and publishing',
+    ui: 'UI',
+    ai: 'AI',
+    model: 'Model',
+    repo: '↻ Repo',
+    validate: '✓ Validate',
+    audit: '🛡 Audit',
+    publish: '↑ Publish',
+    export: '⬇ Export',
+    guildai: '💬 GuildAI',
+    encounters: '🎲 Encounters',
+    knowledge: '📚 Knowledge',
+    qrs: '🖨 QRs',
+    import: '📂 Import',
+    sidebarTitle: 'Pack content',
+    mode: 'Mode',
+    blocks: 'Blocks',
+    status: 'Status',
+    addStage: '＋ Stage',
+    addPoint: '＋ Point',
+    addNarration: '📖 Narrator',
+    sidebarNote: 'Teams enter each block by scanning the correct QR. This panel is for authoring and review.',
+    wfMeta: 'Metadata',
+    wfMetaSub: 'Name, type, publishing',
+    wfBlocks: 'Blocks',
+    wfBlocksSub: 'Physical order and next clue',
+    wfEdit: 'Editing',
+    wfEditSub: 'Active stage, narration, or sub-stage',
+    wfReview: 'Review',
+    wfReviewSub: 'Validate, audit, and export',
+    reviewNow: '✓ Review',
+    cardMeta: 'Pack metadata',
+    packType: 'Experience type <span class="req">*</span>',
+    escapeRoom: '🏰 Escape Room',
+    guidedTour: '🗺 Guided Tour',
+    previewTitle: 'JSON preview',
+    previewNone: '— no selection',
+    previewSnapshot: 'Exportable snapshot',
+    previewSnapshotSub: 'Structural preview of what will go to the app or repository.',
+    emptyTitle: 'Editor ready to build the pack',
+    emptyText: 'Start with pack metadata or select a stage from the left panel.',
+    empty1Title: 'Define the pack',
+    empty1Text: 'Title, description, publishing, and experience mode.',
+    empty2Title: 'Organize blocks',
+    empty2Text: 'Plan the QR-only route before detailing each challenge.',
+    empty3Title: 'Validate and export',
+    empty3Text: 'Review JSON, audit, and publishing from the top bar.',
+    availabilityDraft: 'Draft',
+    availabilityBundled: 'Bundled in app',
+    availabilityRemote: 'Publishable',
+    availabilitySoon: 'Coming soon',
+    workflowCurrent: 'Current work:',
+    workflowMetaCue: 'defining the pack',
+    workflowStartCue: 'define metadata and create the first stage',
+    workflowBlocksCue: 'organize the QR-only route blocks',
+    workflowSelectCue: 'select a route item or move to validation',
+    workflowReviewCue: 'review the pack before exporting',
+    stageWord: 'Stage',
+    pointWord: 'Point',
+    subStageWord: 'Sub-stage',
+    narrationWord: 'Narrator',
+    firstStageHint: 'Add the first stage ↑',
+    subStageButton: '＋ Sub-stage to {ref}',
+    stageMeta: 'QR: {qr}{subs}',
+    subsMeta: ' · {count} sub-stages',
+    subStageMeta: 'Sub-stage {ref}',
+    blockMeta: '{count} stages · {id}',
+    editStageCue: 'editing stage <em>{name}</em>',
+    editSubStageCue: 'editing sub-stage <em>{name}</em>',
+    editNarrationCue: 'editing narration <em>{name}</em>',
+  },
+  fr: {
+    title: 'GuildApp Pack Editor',
+    subtitle: 'Packs, narrations, connaissances et publication',
+    ui: 'UI',
+    ai: 'IA',
+    model: 'Modèle',
+    repo: '↻ Repo',
+    validate: '✓ Valider',
+    audit: '🛡 Auditer',
+    publish: '↑ Publier',
+    export: '⬇ Exporter',
+    guildai: '💬 GuildAI',
+    encounters: '🎲 Rencontres',
+    knowledge: '📚 Connaissance',
+    qrs: '🖨 QRs',
+    import: '📂 Importer',
+    sidebarTitle: 'Contenu du pack',
+    mode: 'Mode',
+    blocks: 'Blocs',
+    status: 'Statut',
+    addStage: '＋ Étape',
+    addPoint: '＋ Point',
+    addNarration: '📖 Narrateur',
+    sidebarNote: 'Les équipes entrent dans chaque bloc en scannant le bon QR. Ce panneau sert à l’édition et à la révision.',
+    wfMeta: 'Métadonnées',
+    wfMetaSub: 'Nom, type, publication',
+    wfBlocks: 'Blocs',
+    wfBlocksSub: 'Ordre physique et indice suivant',
+    wfEdit: 'Édition',
+    wfEditSub: 'Étape, narration ou sous-étape active',
+    wfReview: 'Révision',
+    wfReviewSub: 'Valider, auditer et exporter',
+    reviewNow: '✓ Réviser',
+    cardMeta: 'Métadonnées du pack',
+    packType: 'Type d’expérience <span class="req">*</span>',
+    escapeRoom: '🏰 Escape Room',
+    guidedTour: '🗺 Visite guidée',
+    previewTitle: 'Aperçu JSON',
+    previewNone: '— aucune sélection',
+    previewSnapshot: 'Snapshot exportable',
+    previewSnapshotSub: 'Prévisualisation structurelle de ce qui partira vers l’app ou le dépôt.',
+    emptyTitle: 'Éditeur prêt à construire le pack',
+    emptyText: 'Commence par les métadonnées du pack ou sélectionne une étape dans le panneau de gauche.',
+    empty1Title: 'Définis le pack',
+    empty1Text: 'Titre, description, publication et mode d’expérience.',
+    empty2Title: 'Organise les blocs',
+    empty2Text: 'Planifie le parcours QR-only avant de détailler chaque épreuve.',
+    empty3Title: 'Valide et exporte',
+    empty3Text: 'Vérifie le JSON, l’audit et la publication depuis la barre supérieure.',
+    availabilityDraft: 'Brouillon',
+    availabilityBundled: 'Inclus dans l’app',
+    availabilityRemote: 'Publiable',
+    availabilitySoon: 'Bientôt disponible',
+    workflowCurrent: 'Travail en cours :',
+    workflowMetaCue: 'définition du pack',
+    workflowStartCue: 'définis les métadonnées et crée la première étape',
+    workflowBlocksCue: 'organise les blocs du parcours QR-only',
+    workflowSelectCue: 'sélectionne un élément du parcours ou passe à la validation',
+    workflowReviewCue: 'relis le pack avant export',
+    stageWord: 'Étape',
+    pointWord: 'Point',
+    subStageWord: 'Sous-étape',
+    narrationWord: 'Narrateur',
+    firstStageHint: 'Ajoute la première étape ↑',
+    subStageButton: '＋ Sous-étape à {ref}',
+    stageMeta: 'QR : {qr}{subs}',
+    subsMeta: ' · {count} sous-étapes',
+    subStageMeta: 'Sous-étape {ref}',
+    blockMeta: '{count} étapes · {id}',
+    editStageCue: 'édition de l’étape <em>{name}</em>',
+    editSubStageCue: 'édition de la sous-étape <em>{name}</em>',
+    editNarrationCue: 'édition de la narration <em>{name}</em>',
+  },
+};
+
+function t(key, vars = {}) {
+  const table = UI_I18N[editorLocale] || UI_I18N.ca;
+  let str = table[key] || UI_I18N.ca[key] || key;
+  Object.entries(vars).forEach(([k, v]) => {
+    str = str.replaceAll(`{${k}}`, String(v));
+  });
+  return str;
+}
+
+function setEditorLocale(locale) {
+  editorLocale = UI_I18N[locale] ? locale : 'ca';
+  localStorage.setItem(UI_LOCALE_KEY, editorLocale);
+  applyEditorLocale();
+  renderSidebar();
+  updatePreview();
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function setHtml(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = value;
+}
+
+function applyEditorLocale() {
+  document.documentElement.lang = editorLocale;
+  document.title = t('title');
+  const sel = document.getElementById('ui-lang-sel');
+  if (sel) sel.value = editorLocale;
+  setText('editor-brand-name', t('title'));
+  setText('editor-brand-subtitle', t('subtitle'));
+  setText('ui-lang-label', t('ui'));
+  setText('ui-ai-label', t('ai'));
+  setText('ui-model-label', t('model'));
+  setText('repo-btn', t('repo'));
+  setText('validate-btn', t('validate'));
+  setText('audit-btn', t('audit'));
+  setText('publish-btn', t('publish'));
+  setText('export-btn', t('export'));
+  setText('guildai-btn', t('guildai'));
+  setText('enc-btn', t('encounters'));
+  setText('kb-btn', t('knowledge'));
+  setText('qr-btn', t('qrs'));
+  setText('import-btn', t('import'));
+  setText('sidebar-title', t('sidebarTitle'));
+  setText('sb-mode-label', t('mode'));
+  setText('sb-blocks-label', t('blocks'));
+  setText('sb-status-label', t('status'));
+  setText('btn-add-narration', t('addNarration'));
+  setText('wf-meta-title', t('wfMeta'));
+  setText('wf-meta-subtitle', t('wfMetaSub'));
+  setText('wf-blocks-title', t('wfBlocks'));
+  setText('wf-blocks-subtitle', t('wfBlocksSub'));
+  setText('wf-edit-title', t('wfEdit'));
+  setText('wf-edit-subtitle', t('wfEditSub'));
+  setText('wf-review-title', t('wfReview'));
+  setText('wf-review-subtitle', t('wfReviewSub'));
+  setText('wf-add-narration-btn', t('addNarration'));
+  setText('wf-review-btn', t('reviewNow'));
+  setText('card-meta-title', t('cardMeta'));
+  setHtml('pack-type-label', t('packType'));
+  setText('pt-er-label', t('escapeRoom'));
+  setText('pt-gt-label', t('guidedTour'));
+  setText('pv-title', t('previewTitle'));
+  setText('pv-snapshot-title', t('previewSnapshot'));
+  setText('pv-snapshot-subtitle', t('previewSnapshotSub'));
+  setText('empty-title', t('emptyTitle'));
+  setText('empty-text', t('emptyText'));
+  setText('empty-step1-title', t('empty1Title'));
+  setText('empty-step1-text', t('empty1Text'));
+  setText('empty-step2-title', t('empty2Title'));
+  setText('empty-step2-text', t('empty2Text'));
+  setText('empty-step3-title', t('empty3Title'));
+  setText('empty-step3-text', t('empty3Text'));
+  updateAddStageButtons();
+  updateWorkspaceCue();
+}
+
+// ════════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════════
 let items    = [];
@@ -2445,12 +3295,18 @@ function setPackType(type) {
   packType = type;
   document.getElementById('pt-er').classList.toggle('active', type === 'escape_room');
   document.getElementById('pt-gt').classList.toggle('active', type === 'guided_tour');
-  // Actualitza text del botó del sidebar
-  const btn = document.getElementById('btn-add-stage');
-  if (btn) btn.textContent = type === 'guided_tour' ? '＋ Punt' : '＋ Etapa';
+  updateAddStageButtons();
   applyPackTypeUI();
   renderSidebar();
   updatePreview();
+}
+
+function updateAddStageButtons() {
+  const label = isTour() ? t('addPoint') : t('addStage');
+  const btn = document.getElementById('btn-add-stage');
+  if (btn) btn.textContent = label;
+  const wfBtn = document.getElementById('wf-add-stage-btn');
+  if (wfBtn) wfBtn.textContent = label;
 }
 
 function applyPackTypeUI() {
@@ -2526,7 +3382,7 @@ function renderBlocksList() {
   if (!ct) return;
   ct.innerHTML = '';
   if (!blocks.length) {
-    ct.innerHTML = '<div style="font-size:10px;color:var(--text-mute);padding:6px 8px;text-align:center;font-style:italic">Cap bloc — el pack exportarà un únic bloc per defecte</div>';
+    ct.innerHTML = `<div style="font-size:10px;color:var(--text-mute);padding:6px 8px;text-align:center;font-style:italic">${esc(t('blocks'))}: 0</div>`;
     return;
   }
   blocks.forEach((b, i) => {
@@ -2538,7 +3394,7 @@ function renderBlocksList() {
       <div class="b-icon">${BLOCK_ICON_EMOJI[b.icon] || '🔒'}</div>
       <div class="b-info">
         <div class="b-title">${esc(b.title?.ca || b.id)}</div>
-        <div class="b-meta">${assigned} etapa${assigned === 1 ? '' : 's'} · ${esc(b.id)}</div>
+        <div class="b-meta">${esc(t('blockMeta', { count: assigned, id: b.id }))}</div>
       </div>
       <button class="b-act" onclick="openBlockModal(${i})">✏️ Editar</button>
       <button class="b-act del" onclick="deleteBlock(${i})">🗑</button>
@@ -2612,15 +3468,16 @@ function renderSidebar() {
   const list = document.getElementById('item-list');
   list.innerHTML = '';
   if (!items.length) {
-    list.innerHTML = '<div style="padding:14px;color:var(--text-mute);font-size:10px;text-align:center">Afegeix la primera etapa ↑</div>';
+    list.innerHTML = `<div style="padding:14px;color:var(--text-mute);font-size:10px;text-align:center">${esc(t('firstStageHint'))}</div>`;
     updateStats(); return;
   }
   items.forEach((item, i) => {
     if (item.type === 'stage') {
-      const stageWord = isTour() ? 'Punt' : 'Etapa';
+      const stageWord = isTour() ? t('pointWord') : t('stageWord');
+      const subCount = item.substages?.length ? t('subsMeta', { count: item.substages.length }) : '';
       list.appendChild(mkRow({
         label: item.title?.ca || item.id || `${stageWord} ${item.order}`,
-        meta:  `QR: ${item.qrCode}${item.substages?.length ? ` · ${item.substages.length} sub-etapes` : ''}`,
+        meta:  t('stageMeta', { qr: item.qrCode, subs: subCount }),
         badge: item.order, bc:'badge-stage',
         active: sel?.itemIdx===i && sel?.subIdx==null, cc:'',
         onDel: e => { e.stopPropagation(); deleteItem(i); },
@@ -2629,7 +3486,7 @@ function renderSidebar() {
       (item.substages||[]).forEach((ss, si) => {
         list.appendChild(mkRow({
           label: ss.title?.ca || ss.id || `Sub ${item.order}.${ss.order}`,
-          meta:  `Sub-etapa ${item.order}.${ss.order}`,
+          meta:  t('subStageMeta', { ref: `${item.order}.${ss.order}` }),
           badge: `${item.order}.${si+1}`, bc:'badge-sub',
           active: sel?.itemIdx===i && sel?.subIdx===si, cc:'sub-item',
           onDel: e => { e.stopPropagation(); deleteSubAt(i,si); },
@@ -2638,14 +3495,14 @@ function renderSidebar() {
       });
       const btn = document.createElement('button');
       btn.className = 'sub-add';
-      btn.textContent = `＋ Sub-etapa a E${item.order}`;
+      btn.textContent = t('subStageButton', { ref: `${isTour() ? t('pointWord') : 'E'}${item.order}` });
       btn.onclick = () => { sel={itemIdx:i,subIdx:null}; addSubStage(); };
       list.appendChild(btn);
     } else {
       // narration
       list.appendChild(mkRow({
         label: (item.text?.ca||'').substring(0,36) || item.id,
-        meta:  '📖 Narrador',
+        meta:  `📖 ${t('narrationWord')}`,
         badge: '📖', bc:'badge-narr',
         active: sel?.itemIdx===i && sel?.subIdx==null, cc:'narr-item',
         onDel: e => { e.stopPropagation(); deleteItem(i); },
@@ -2669,9 +3526,18 @@ function updateStats() {
   const st=items.filter(i=>i.type==='stage');
   const na=items.filter(i=>i.type==='narration');
   const sb=st.reduce((a,s)=>a+(s.substages?.length||0),0);
-  document.getElementById('pv-stages').textContent=`${st.length} etapes`;
-  document.getElementById('pv-narrs').textContent=`${na.length} narracions`;
-  document.getElementById('pv-subs').textContent=`${sb} sub-etapes`;
+  document.getElementById('pv-stages').textContent=`${st.length} ${t(isTour() ? 'pointWord' : 'stageWord').toLowerCase()}${st.length === 1 ? '' : 's'}`;
+  document.getElementById('pv-narrs').textContent=`${na.length} ${t('narrationWord').toLowerCase()}${na.length === 1 ? '' : 's'}`;
+  document.getElementById('pv-subs').textContent=`${sb} ${t('subStageWord').toLowerCase()}${sb === 1 ? '' : 's'}`;
+  const modeLabel = packType === 'guided_tour' ? t('guidedTour').replace('🗺 ','') : t('escapeRoom').replace('🏰 ','');
+  const availabilityLabel = packAvailable()
+    ? (document.getElementById('pack-bundled')?.value === 'true' ? t('availabilityBundled') : t('availabilityRemote'))
+    : t('availabilitySoon');
+  document.getElementById('sb-flow').textContent = 'QR-only';
+  document.getElementById('sb-mode').textContent = modeLabel;
+  document.getElementById('sb-blocks').textContent = String(blocks.length);
+  document.getElementById('sb-availability').textContent = items.length ? availabilityLabel : t('availabilityDraft');
+  updateWorkspaceCue();
 }
 
 // ════════════════════════════════════════════════════════
@@ -2681,6 +3547,79 @@ function showPanel(id) {
   ['stage-panel','substage-panel','narration-panel','no-sel'].forEach(p =>
     document.getElementById(p).style.display = p===id ? 'block' : 'none');
   document.getElementById('editor').classList.toggle('editing', id !== 'no-sel');
+  setWorkflowStep(id);
+  updateWorkspaceCue();
+}
+
+function jumpToEditorSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function focusActiveEditorSection() {
+  if (!sel) {
+    jumpToEditorSection('no-sel');
+    return;
+  }
+  const item = items[sel.itemIdx];
+  if (!item) {
+    jumpToEditorSection('no-sel');
+    return;
+  }
+  if (sel.subIdx != null) jumpToEditorSection('substage-panel');
+  else if (item.type === 'stage') jumpToEditorSection('stage-panel');
+  else jumpToEditorSection('narration-panel');
+}
+
+function setWorkflowStep(panelId) {
+  const map = {
+    meta: panelId === 'no-sel',
+    blocks: false,
+    edit: ['stage-panel','substage-panel','narration-panel'].includes(panelId),
+    review: false,
+  };
+  if (sel?.itemIdx == null && blocks.length) map.blocks = true;
+  if (panelId === 'no-sel' && blocks.length && items.length) map.review = true;
+  document.getElementById('wf-meta')?.classList.toggle('active', map.meta);
+  document.getElementById('wf-blocks')?.classList.toggle('active', map.blocks);
+  document.getElementById('wf-edit')?.classList.toggle('active', map.edit);
+  document.getElementById('wf-review')?.classList.toggle('active', map.review);
+}
+
+function updateWorkspaceCue() {
+  const el = document.getElementById('workspace-cue');
+  if (!el) return;
+  if (!items.length) {
+    el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('workflowStartCue')}`;
+    setWorkflowStep('no-sel');
+    return;
+  }
+  if (!blocks.length) {
+    el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('workflowBlocksCue')}`;
+    document.getElementById('wf-meta')?.classList.remove('active');
+    document.getElementById('wf-blocks')?.classList.add('active');
+    return;
+  }
+  if (!sel) {
+    el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('workflowSelectCue')}`;
+    return;
+  }
+  const item = items[sel.itemIdx];
+  if (!item) {
+    el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('workflowReviewCue')}`;
+    return;
+  }
+  if (sel.subIdx != null) {
+    const ss = item.substages?.[sel.subIdx];
+    el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('editSubStageCue', { name: esc(ss?.title?.ca || ss?.id || '-') })}`;
+    return;
+  }
+  if (item.type === 'stage') {
+    el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('editStageCue', { name: esc(item.title?.ca || item.id || '-') })}`;
+    return;
+  }
+  el.innerHTML = `<strong>${t('workflowCurrent')}</strong> ${t('editNarrationCue', { name: esc(item.id || '-') })}`;
 }
 
 function selectItem(itemIdx, subIdx) {
@@ -2739,7 +3678,7 @@ function renderSsInline(stage) {
   const ct = document.getElementById('ss-inline-list');
   ct.innerHTML = '';
   if (!stage.substages?.length) {
-    ct.innerHTML = '<div style="font-size:10px;color:var(--text-mute);padding:6px 8px">Cap sub-etapa</div>';
+    ct.innerHTML = `<div style="font-size:10px;color:var(--text-mute);padding:6px 8px">${esc(t('subStageWord'))}: 0</div>`;
     return;
   }
   stage.substages.forEach((ss,si) => {
@@ -2751,7 +3690,7 @@ function renderSsInline(stage) {
   });
 }
 function populateSubStage(stage, ss) {
-  document.getElementById('ssp-title').textContent = `Sub-etapa ${stage.order}.${ss.order} — ${ss.title?.ca||ss.id}`;
+  document.getElementById('ssp-title').textContent = `${t('subStageWord')} ${stage.order}.${ss.order} — ${ss.title?.ca||ss.id}`;
   v('ssf-id',ss.id); v('ssf-order',ss.order); v('ssf-pts',ss.points);
   v('ssf-ans-type',ss.answerType); v('ssf-time',ss.maxTimeSeconds);
   ['ca','es','en','fr'].forEach(l => {
@@ -2800,7 +3739,7 @@ function sLang(field, lang) {
   if(!items[sel.itemIdx][field])items[sel.itemIdx][field]=ml();
   items[sel.itemIdx][field][lang]=val;
   if(field==='title'&&lang==='ca'){
-    const label = isTour() ? 'Punt' : 'Etapa';
+    const label = isTour() ? t('pointWord') : t('stageWord');
     document.getElementById('sp-title').textContent=`${label} ${items[sel.itemIdx].order} — ${val}`;
     renderSidebar();
   }
@@ -3119,18 +4058,18 @@ function updatePreview(){
   const pj=document.getElementById('preview-json');
   const pl=document.getElementById('pv-label');
   scheduleDraftSave();
-  if(!sel){pj.textContent='—';pl.textContent='— cap selecció';updateStats();return;}
+  if(!sel){pj.textContent='—';pl.textContent=t('previewNone');updateStats();return;}
   const item=items[sel.itemIdx];
-  if(!item){sel=null;pj.textContent='—';pl.textContent='— cap selecció';updateStats();return;}
+  if(!item){sel=null;pj.textContent='—';pl.textContent=t('previewNone');updateStats();return;}
   let obj,label;
   if(sel.subIdx!=null){
     obj=item.substages?.[sel.subIdx];
     if(!obj){sel={itemIdx:sel.itemIdx,subIdx:null};return updatePreview();}
-    label=`Sub-etapa ${item.order}.${obj.order}`;
+    label=`${t('subStageWord')} ${item.order}.${obj.order}`;
   } else if(item.type==='stage'){
-    obj=stageExport(item); label=`Etapa ${item.order} — ${item.title?.ca||item.id}`;
+    obj=stageExport(item); label=`${isTour() ? t('pointWord') : t('stageWord')} ${item.order} — ${item.title?.ca||item.id}`;
   } else {
-    obj=item; label='Narrador';
+    obj=item; label=t('narrationWord');
   }
   pl.textContent=label;
   // Replace base64 content_images with a human-readable summary for display
@@ -6016,6 +6955,7 @@ document.addEventListener('keydown', e => {
 // ════════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════════
+applyEditorLocale();
 renderSidebar();
 showPanel('no-sel');
 setProvider(iaState.provider);  // sincronitza topbar + badge al carregar
