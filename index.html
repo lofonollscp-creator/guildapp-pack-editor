@@ -88,22 +88,23 @@ body { background: var(--bg); color: var(--text); display: flex; flex-direction:
   min-height: 64px; flex-shrink: 0;
   background: var(--bg2); border-bottom: 1px solid var(--border);
   display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+  grid-template-columns: minmax(320px, 420px) minmax(520px, 1fr);
   grid-template-areas:
     "brand actions"
     "ai actions";
-  align-items: center; padding: 10px 16px; gap: 14px;
+  align-items: start; padding: 10px 16px; gap: 14px 18px;
   box-shadow: 0 2px 12px var(--shadow);
   transition: background .25s, border-color .25s;
 }
 .top-brand { grid-area: brand; display: flex; align-items: center; gap: 10px; min-width: 0; }
-.top-ai { grid-area: ai; display: flex; align-items: center; justify-content: flex-start; gap: 8px; min-width: 0; max-width: 100%; }
-.top-actions { grid-area: actions; display: flex; align-items: center; justify-content: flex-end; align-content: center; gap: 7px; min-width: 0; max-width: 100%; flex-wrap: wrap; }
+.top-ai { grid-area: ai; display: flex; align-items: center; justify-content: flex-start; gap: 8px; min-width: 0; max-width: 100%; flex-wrap: wrap; align-self: start; }
+.top-actions { grid-area: actions; display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); justify-content: end; align-items: start; align-content: start; gap: 8px; min-width: 0; max-width: 100%; }
 .top-crest { font-size: 22px; }
 .top-name  { font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: -.3px; }
 .top-ver   { font-size: 10px; color: var(--text-mute); background: var(--bg3); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); }
-.top-model { display: flex; align-items: center; gap: 6px; }
+.top-model { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 0 1 auto; }
 .top-model label { font-size: 10px; color: var(--text-mute); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; white-space: nowrap; }
+#or-model-wrap { flex: 1 1 240px; min-width: 220px; }
 select#model-sel {
   background: var(--bg3); border: 1px solid var(--border2);
   color: var(--gold); font-size: 11px; font-weight: 700;
@@ -728,6 +729,7 @@ body {
 .top-ver {
   border-radius: 999px;
   padding: 3px 8px;
+  flex-shrink: 0;
 }
 .top-ai {
   padding: 7px 10px;
@@ -788,12 +790,15 @@ html.day .tbtn-gold { color: #fff; }
 .action-group {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 7px;
   padding: 4px;
   border-radius: 10px;
   background: color-mix(in srgb, var(--bg) 74%, transparent);
   border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
   flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .action-group-main {
@@ -1344,7 +1349,7 @@ select:focus {
   background: var(--bg);
 }
 
-@media (max-width: 1220px) {
+@media (max-width: 1480px) {
   #topbar {
     grid-template-areas:
       "brand"
@@ -1356,8 +1361,24 @@ select:focus {
   .top-ai,
   .top-actions {
     justify-content: flex-start;
+  }
+  .top-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1220px) {
+  #topbar {
+    padding-inline: 14px;
+  }
+  .top-ai,
+  .top-actions {
+    justify-content: flex-start;
     overflow-x: auto;
     scrollbar-width: thin;
+  }
+  .top-actions {
+    grid-template-columns: 1fr;
   }
   .action-group {
     flex-wrap: nowrap;
