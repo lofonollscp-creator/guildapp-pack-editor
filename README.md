@@ -34,6 +34,7 @@ Amb aquest editor pots:
 - [Dreceres](#dreceres)
 - [Persistència local](#persistència-local)
 - [Publicació a GitHub](#publicació-a-github)
+- [Troubleshooting](#troubleshooting)
 - [Manteniment del lloc web](#manteniment-del-lloc-web)
 
 ## Mode web i mode localhost
@@ -686,6 +687,160 @@ S’usa per:
 - pujar paquets nous;
 - actualitzar paquets existents;
 - carregar el catàleg remot i preparar publicació.
+
+## Troubleshooting
+
+### Ollama Cloud no funciona a la web
+
+Símptomes habituals:
+
+- error de CORS;
+- `Load failed`;
+- proves de connexió fallides des del navegador.
+
+Causa habitual:
+
+- la web pública no té proxy local;
+- alguns endpoints d’Ollama Cloud no permeten la crida directa des del navegador.
+
+Què fer:
+
+- prova primer amb `OpenRouter`;
+- si necessites Ollama Cloud, obre l’editor en `localhost`;
+- si uses una instància pròpia, revisa que l’endpoint sigui correcte i accessible.
+
+### La publicació a GitHub falla
+
+Comprovacions bàsiques:
+
+- el token ha de tenir `Contents: Read and write`;
+- el paquet ha de ser extern si l’has de publicar remotament;
+- l’`ID del paquet` ha de ser vàlid i estable;
+- la validació no ha de tenir errors bloquejants.
+
+Revisa especialment:
+
+- `Bundled a l'app = No` si el paquet ha de viure fora de l’APK;
+- `Disponible al selector` coherent amb l’estat real del paquet;
+- `URL base de descàrrega` si l’has de definir manualment.
+
+### El paquet no surt bé a `Selecciona Aventura`
+
+Símptomes habituals:
+
+- no apareix;
+- surt sense descripció;
+- surt instal·lable quan havia de dir `Pròximament`;
+- surt com `Pròximament` quan ja hauria de ser descarregable.
+
+Comprovacions:
+
+- `Autor`, `Títol` i `Descripció` han d’estar omplerts;
+- `Disponible al selector = Sí` per a paquets instal·lables;
+- `Disponible al selector = No` per a paquets en espera;
+- `Etiqueta d'estat` omplerta si el paquet és `Pròximament`;
+- `URL base de descàrrega` i fitxers remots correctes si el paquet es descarrega.
+
+### El paquet marca `Pròximament` però no es veu bé
+
+Configuració recomanada:
+
+- `Disponible al selector = No`;
+- `Etiqueta d'estat` omplerta en `CA / ES / EN / FR`;
+- paquet coherent encara que no tingui tot el contingut final.
+
+Si no omples l’etiqueta, el validador et donarà avisos o errors segons el cas.
+
+### `Validar` o `Auditar` donen avisos que no entens
+
+Diferència:
+
+- `Validar` comprova l’estructura i coherència del paquet;
+- `Auditar` en web fa pràcticament el mateix;
+- `Auditar` en `localhost` pot afegir comprovacions extra del servidor local.
+
+Ordre recomanat:
+
+1. resol tots els errors;
+2. revisa després els avisos;
+3. si el paquet és remot, para especial atenció a:
+   - selector;
+   - disponibilitat;
+   - fitxers necessaris;
+   - etiquetes d’estat.
+
+### El catàleg remot no carrega
+
+Símptomes habituals:
+
+- la finestra `Repo` es queda buida;
+- error en carregar `catalog.json`;
+- paquets nous no apareixen.
+
+Què revisar:
+
+- connexió a internet;
+- que `guildapp-content` tingui un `catalog.json` vàlid;
+- que el paquet nou estigui realment afegit al catàleg;
+- que no hi hagi cache temporal del navegador.
+
+Accions útils:
+
+- prem `↻ Actualitzar catàleg`;
+- recarrega la pàgina;
+- torna a provar al cap d’uns segons si acabes de fer push.
+
+### El JSON s’importa però l’editor no queda bé
+
+Causes habituals:
+
+- JSON incomplet;
+- camps antics o amb noms que ja no toquen;
+- paquets d’autoría amb estructures parcials.
+
+Què fer:
+
+- importa el JSON;
+- passa `Validar`;
+- corregeix camps obligatoris des de l’editor;
+- torna a exportar per deixar-lo normalitzat.
+
+### GuildAI no proposa canvis útils
+
+Per millorar el resultat:
+
+- descriu el que vols de forma concreta;
+- indica si és `Escape Room` o `Visita Guiada`;
+- especifica nombre d’etapes, to i dificultat;
+- usa `📦 Estat` per donar context del paquet actual;
+- revisa les accions proposades abans d’aplicar-les.
+
+### Els QRs no serveixen o no coincideixen
+
+Revisa:
+
+- que cada etapa tingui `Codi QR`;
+- que no hi hagi codis duplicats;
+- que l’ordre i les pistes siguin coherents;
+- que no hagis canviat IDs o codis després d’imprimir.
+
+Recomanació:
+
+- genera els QRs al final del procés d’edició.
+
+### Una narració o sub-etapa no es comporta com esperaves a la app
+
+Compatibilitat real:
+
+- les sub-etapes es conserven com a autoría, però no són flux nadiu complet;
+- les narracions `before_stage` i `after_stage` són les més alineades amb la runtime;
+- les narracions `standalone` poden quedar com a material editorial o futur.
+
+Si busques compatibilitat màxima amb la app actual:
+
+- prioritza etapes normals;
+- usa narracions associades a etapa;
+- tracta sub-etapes i materials auxiliars com a capa d’autoría.
 
 ## Manteniment del lloc web
 
