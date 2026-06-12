@@ -97,10 +97,12 @@ body { background: var(--bg); color: var(--text); display: flex; flex-direction:
   transition: background .25s, border-color .25s;
 }
 .top-brand { grid-area: brand; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.top-brand-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .top-ai { grid-area: ai; display: flex; align-items: center; justify-content: flex-start; gap: 8px; min-width: 0; max-width: 100%; flex-wrap: wrap; align-self: start; }
-.top-actions { grid-area: actions; display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); justify-content: end; align-items: start; align-content: start; gap: 8px; min-width: 0; max-width: 100%; }
+.top-actions { grid-area: actions; display: flex; justify-content: end; align-items: start; align-content: start; gap: 10px; min-width: 0; max-width: 100%; flex-wrap: wrap; }
 .top-crest { font-size: 22px; }
 .top-name  { font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: -.3px; }
+.top-sub { font-size: 10px; color: var(--text-mute); margin-top: 2px; }
 .top-ver   { font-size: 10px; color: var(--text-mute); background: var(--bg3); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); }
 .top-model { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 0 1 auto; }
 .top-model label { font-size: 10px; color: var(--text-mute); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; white-space: nowrap; }
@@ -448,21 +450,89 @@ html.day #toast.ok { color: #FDFAF2; }
 .ia-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
 .ia-tab:hover:not(.active) { color:var(--text); }
 
-.key-list { display:flex; flex-direction:column; gap:5px; margin-bottom:10px; min-height:20px; min-width:0; }
-.key-row { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:var(--rsm); border:1px solid var(--border); background:var(--bg2); transition:border-color .15s, background .15s; min-width:0; flex-wrap:wrap; }
-.key-row.active-key { border-color:var(--gold-dim); background:var(--gold-glow); }
+.ia-helper-grid {
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:10px;
+  margin: 0 0 14px;
+}
+.ia-helper-card {
+  padding: 12px 13px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 74%, transparent);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+}
+.ia-helper-card strong {
+  display:block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: var(--text);
+}
+.ia-helper-card span {
+  display:block;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--text-mute);
+}
+.key-list { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; min-height:20px; min-width:0; }
+.key-row {
+  display:flex; align-items:center; gap:10px; padding:11px 12px;
+  border-radius:12px; border:1px solid color-mix(in srgb, var(--border) 74%, transparent);
+  background: color-mix(in srgb, var(--bg) 76%, transparent);
+  transition:border-color .15s, background .15s, box-shadow .15s, transform .15s;
+  min-width:0; flex-wrap:wrap;
+}
+.key-row:hover {
+  border-color: color-mix(in srgb, var(--border2) 78%, transparent);
+  transform: translateY(-1px);
+}
+.key-row.active-key {
+  border-color:var(--gold-dim);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--gold-glow) 82%, transparent), color-mix(in srgb, var(--bg) 76%, transparent));
+  box-shadow: 0 14px 24px rgba(0,0,0,.10);
+}
 .key-radio { accent-color:var(--gold); width:14px; height:14px; cursor:pointer; flex-shrink:0; }
-.key-name { flex:0 1 130px; min-width:82px; font-size:11px; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.key-val { flex:1 1 170px; min-width:0; font-size:10px; color:var(--text-mute); font-family:var(--mono); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.key-pill { flex-shrink:0; font-size:9px; font-weight:800; padding:2px 7px; border-radius:20px; }
+.key-name { flex:0 1 150px; min-width:96px; font-size:11px; font-weight:800; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.key-val { flex:1 1 220px; min-width:0; font-size:10px; color:var(--text-dim); font-family:var(--mono); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.key-pill { flex-shrink:0; font-size:9px; font-weight:800; padding:4px 8px; border-radius:999px; border:1px solid transparent; }
 .key-pill.active-pill { background:var(--ok-d); color:var(--ok); }
-.key-pill.backup-pill { background:var(--bg3); color:var(--text-mute); }
+.key-pill.backup-pill { background:var(--bg3); color:var(--text-mute); border-color:color-mix(in srgb, var(--border) 72%, transparent); }
 .key-del { background:none; border:none; color:var(--stone-dim); cursor:pointer; font-size:14px; flex-shrink:0; padding:2px 4px; border-radius:3px; transition:all .15s; }
 .key-del:hover { color:var(--err); background:var(--err-d); }
+.key-empty {
+  padding: 16px 14px;
+  border: 1px dashed color-mix(in srgb, var(--border2) 72%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  text-align: center;
+}
+.key-empty strong {
+  display:block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--text);
+}
+.key-empty span {
+  display:block;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-mute);
+}
 
 .key-add-form { display:flex; flex-direction:column; gap:8px; padding:11px; border:1px dashed var(--border2); border-radius:var(--rsm); background:var(--bg2); margin-top:6px; }
 .key-add-row { display:flex; gap:6px; }
 .key-add-row input { flex:1; }
+.test-result-pill {
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  border:1px solid color-mix(in srgb, var(--border) 74%, transparent);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  font-size:11px;
+  color:var(--text-dim);
+}
 
 /* ════════════════════════════════════════════════════════
    VIBE CODING CHAT
@@ -805,6 +875,18 @@ html.day .tbtn-gold { color: #fff; }
   background: color-mix(in srgb, var(--gold-glow) 52%, var(--bg) 48%);
   border-color: color-mix(in srgb, var(--gold-dim) 60%, var(--border) 40%);
 }
+.action-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.action-stack-label {
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-mute);
+}
 
 #workspace {
   background: var(--bg);
@@ -834,6 +916,14 @@ html.day .tbtn-gold { color: #fff; }
   top: 0;
   z-index: 4;
   backdrop-filter: blur(14px);
+}
+.sb-sub {
+  padding: 0 14px 10px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-mute);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg2) 78%, transparent);
 }
 .sb-actions {
   padding: 10px;
@@ -1044,6 +1134,25 @@ html.day .tbtn-gold { color: #fff; }
 .workflow-cue strong {
   color: var(--text);
 }
+.sidebar-empty {
+  padding: 18px 14px;
+  border: 1px dashed color-mix(in srgb, var(--border) 72%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg) 76%, transparent);
+  text-align: center;
+  color: var(--text-dim);
+}
+.sidebar-empty strong {
+  display: block;
+  color: var(--text);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.sidebar-empty span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.45;
+}
 #card-meta { order: 1; }
 #stage-panel,
 #substage-panel,
@@ -1061,6 +1170,13 @@ html.day .tbtn-gold { color: #fff; }
   border-radius: 16px;
   box-shadow: 0 20px 42px var(--shadow);
   border-color: color-mix(in srgb, var(--border) 82%, transparent);
+  transition: border-color .18s, box-shadow .18s, transform .18s;
+}
+.card.is-focus {
+  border-color: color-mix(in srgb, var(--gold-dim) 72%, var(--border) 28%);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--gold-glow) 84%, transparent),
+    0 24px 44px rgba(0,0,0,.18);
 }
 #no-sel {
   flex: 0 0 auto;
@@ -1117,6 +1233,81 @@ html.day .tbtn-gold { color: #fff; }
   color: var(--text);
   letter-spacing: .75px;
   font-size: 11px;
+}
+.sec-intro {
+  margin: -2px 0 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+  background: color-mix(in srgb, var(--bg) 74%, transparent);
+  color: var(--text-dim);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+.sec-intro strong {
+  color: var(--text);
+}
+.modal-intro {
+  display: grid;
+  gap: 5px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg3) 78%, white 22%), var(--bg2));
+}
+.modal-intro strong {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+}
+.modal-intro span {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-mute);
+}
+.modal-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.modal-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 32px 18px;
+  border: 1px dashed var(--border2);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg3) 60%, transparent 40%);
+  text-align: center;
+}
+.modal-empty-ico {
+  font-size: 28px;
+  line-height: 1;
+}
+.modal-empty strong {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+}
+.modal-empty span {
+  max-width: 420px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-mute);
+}
+.modal-note {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-mute);
+  margin-bottom: 10px;
+}
+.modal-note code {
+  background: var(--bg3);
+  padding: 1px 5px;
+  border-radius: 4px;
 }
 .g2,
 .g3 {
@@ -1220,6 +1411,18 @@ select:focus {
   color: var(--text);
   margin-bottom: 4px;
 }
+.pv-kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--gold-dim) 55%, var(--border) 45%);
+  background: color-mix(in srgb, var(--gold-glow) 42%, transparent);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+}
 .pv-pack-copy p {
   font-size: 11px;
   line-height: 1.5;
@@ -1233,6 +1436,16 @@ select:focus {
   font-size: 11.5px;
   padding: 18px;
   line-height: 1.6;
+  border-top: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+}
+#preview-json.is-empty {
+  display:grid;
+  place-items:center;
+  min-height: 240px;
+  color: var(--text-mute);
+  text-align: center;
+  font-family: inherit;
+  white-space: normal;
 }
 
 .empty {
@@ -1344,6 +1557,9 @@ select:focus {
   min-height: 52px;
   background: color-mix(in srgb, var(--bg2) 82%, var(--card) 18%);
 }
+.mhd h2 {
+  letter-spacing: 0;
+}
 .mft {
   justify-content: flex-end;
   background: var(--bg);
@@ -1395,6 +1611,10 @@ select:focus {
   }
   .empty-grid {
     grid-template-columns: 1fr;
+  }
+  .kb-layout,
+  .enc-layout {
+    grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
   }
 }
 
@@ -1471,6 +1691,32 @@ select:focus {
   }
   .mbox {
     width: calc(100vw - 20px) !important;
+  }
+  .kb-layout,
+  .enc-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .kb-list-col,
+  .enc-list-col {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-right: 0;
+    padding-bottom: 10px;
+    max-height: 240px;
+  }
+  .kb-edit-col,
+  .enc-edit-col {
+    padding-right: 0;
+  }
+  .modal-toolbar,
+  .mft {
+    align-items: stretch;
+  }
+  .modal-toolbar .tbtn,
+  .mft .tbtn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -1626,9 +1872,9 @@ select:focus {
 <div id="topbar">
   <div class="top-brand">
     <div class="top-crest">🏰</div>
-    <div>
+    <div class="top-brand-copy">
       <div class="top-name" id="editor-brand-name">GuildApp Pack Editor</div>
-      <div id="editor-brand-subtitle" style="font-size:10px;color:var(--text-mute);margin-top:2px">Paquets, narracions, coneixement i publicació</div>
+      <div class="top-sub" id="editor-brand-subtitle">Paquets, narracions, coneixement i publicació</div>
     </div>
     <div class="top-ver">v2.3</div>
   </div>
@@ -1664,19 +1910,25 @@ select:focus {
     <button id="theme-btn" onclick="toggleTheme()" title="Canviar mode dia/nit">🌙</button>
   </div>
   <div class="top-actions">
-    <div class="action-group action-group-main">
-      <button class="tbtn tbtn-ghost" id="repo-btn" onclick="openRepoModal()">↻ Repo</button>
-      <button class="tbtn tbtn-ghost" id="validate-btn" onclick="openValidationModal()">✓ Validar</button>
-      <button class="tbtn tbtn-ghost" id="audit-btn" onclick="runPackAudit()">🛡 Auditar</button>
-      <button class="tbtn tbtn-ghost" id="publish-btn" onclick="publishToRepo()">↑ Publicar</button>
-      <button class="tbtn tbtn-gold" id="export-btn" onclick="openExportModal()">⬇ Exportar</button>
+    <div class="action-stack">
+      <div class="action-stack-label" id="publish-stack-label">Sortida</div>
+      <div class="action-group action-group-main">
+        <button class="tbtn tbtn-ghost" id="repo-btn" onclick="openRepoModal()">↻ Repo</button>
+        <button class="tbtn tbtn-ghost" id="validate-btn" onclick="openValidationModal()">✓ Validar</button>
+        <button class="tbtn tbtn-ghost" id="audit-btn" onclick="runPackAudit()">🛡 Auditar</button>
+        <button class="tbtn tbtn-ghost" id="publish-btn" onclick="publishToRepo()">↑ Publicar</button>
+        <button class="tbtn tbtn-gold" id="export-btn" onclick="openExportModal()">⬇ Exportar</button>
+      </div>
     </div>
-    <div class="action-group">
-      <button class="tbtn tbtn-ghost" id="guildai-btn" onclick="openVibeModal()" style="background:var(--narr-d);color:var(--narr);border-color:var(--narr)">💬 GuildAI</button>
-      <button class="tbtn tbtn-ghost" id="enc-btn" onclick="openEncModal()" title="Material de autoría; se conserva en editor_state.json">🎲 Encontres</button>
-      <button class="tbtn tbtn-ghost" id="kb-btn" onclick="openKbModal()">📚 Coneixement</button>
-      <button class="tbtn tbtn-ghost" id="qr-btn" onclick="openQrPrintModal()">🖨 QRs</button>
-      <button class="tbtn tbtn-ghost" id="import-btn" onclick="importJSON()">📂 Importar</button>
+    <div class="action-stack">
+      <div class="action-stack-label" id="tools-stack-label">Eines</div>
+      <div class="action-group">
+        <button class="tbtn tbtn-ghost" id="guildai-btn" onclick="openVibeModal()" style="background:var(--narr-d);color:var(--narr);border-color:var(--narr)">💬 GuildAI</button>
+        <button class="tbtn tbtn-ghost" id="enc-btn" onclick="openEncModal()" title="Material de autoría; se conserva en editor_state.json">🎲 Encontres</button>
+        <button class="tbtn tbtn-ghost" id="kb-btn" onclick="openKbModal()">📚 Coneixement</button>
+        <button class="tbtn tbtn-ghost" id="qr-btn" onclick="openQrPrintModal()">🖨 QRs</button>
+        <button class="tbtn tbtn-ghost" id="import-btn" onclick="importJSON()">📂 Importar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1687,6 +1939,7 @@ select:focus {
   <!-- ─ SIDEBAR ─ -->
   <div id="sidebar">
     <div class="sb-title" id="sidebar-title">Contingut del paquet</div>
+    <div class="sb-sub" id="sidebar-subtitle">Flux QR, estructura del recorregut i ordre de treball.</div>
     <div class="sb-summary">
       <div class="sb-summary-card">
         <span class="sb-summary-label">Flux</span>
@@ -1816,6 +2069,7 @@ select:focus {
 
       <div class="sec" id="pack-publishing-sec">
         <div class="sec-label">Publicació i selector de l'app <span class="meta-new-badge">NOU</span></div>
+        <div class="sec-intro" id="pack-publishing-intro">Defineix com apareixerà el paquet al selector de l’app i si s’ha de descarregar sota demanda.</div>
         <div class="g2">
           <div class="f"><label>Autor</label><input type="text" id="pack-author" value="Guilda Assessors Històrics" oninput="updatePreview()"></div>
           <div class="f"><label>Disponible al selector</label>
@@ -1839,6 +2093,7 @@ select:focus {
       <!-- ─ Puntuació (només Escape Room) ─ -->
       <div class="sec sf-er-only" id="pack-scoring-sec" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
         <div class="sec-label">Puntuació</div>
+        <div class="sec-intro" id="pack-scoring-intro">Aquests valors controlen el banc inicial de punts i les penalitzacions bàsiques del recorregut.</div>
         <div class="g2">
           <div class="f"><label>Puntuació inicial</label><input type="number" id="sc-initial" value="1000" min="0" oninput="updatePreview()"></div>
           <div class="f"><label>Penalització per saltar etapa</label><input type="number" id="sc-skip" value="100" min="0" oninput="updatePreview()"></div>
@@ -1854,7 +2109,7 @@ select:focus {
         <div class="sec-label">Blocs del paquet
           <span style="color:var(--text-mute);font-weight:normal">— agrupen etapes per al flux QR-only</span>
         </div>
-        <div style="font-size:11px;color:var(--text-mute);margin-bottom:10px">A la app, els blocs es mostren com a estat del recorregut. L'entrada real a l'aventura es fa escanejant QR físics, no tocant el menú.</div>
+        <div class="sec-intro" id="pack-blocks-intro">A la app, els blocs es mostren com a estat del recorregut. L'entrada real a l'aventura es fa escanejant QR físics, no tocant el menú.</div>
         <div id="blocks-list"></div>
         <button class="arr-add" onclick="addBlock()" style="margin-top:6px">＋ Afegir bloc</button>
       </div>
@@ -1882,6 +2137,7 @@ select:focus {
 
       <div class="sec">
         <div class="sec-label">Identificació</div>
+        <div class="sec-intro" id="stage-ident-intro">Configura la peça física del recorregut: identificador intern, QR real, ordre i comportament de validació.</div>
         <div class="g3">
           <div class="f"><label>ID <span class="req">*</span></label><input type="text" id="sf-id" oninput="sSync('id')"></div>
           <div class="f"><label>Codi QR <span class="req">*</span></label>
@@ -1917,6 +2173,7 @@ select:focus {
       </div>
       <div class="sec">
         <div class="sec-label" id="sf-content-label">Contingut multilingüe</div>
+        <div class="sec-intro" id="stage-content-intro">Escriu el que veu l’equip quan arriba al punt: títol, orientació, context i, si toca, nota educativa.</div>
         <div class="lang-row"><div class="ltabs" id="slang-tabs">
           <div class="ltab active" onclick="switchLang('s','ca',this)">CA</div>
           <div class="ltab" onclick="switchLang('s','es',this)">ES</div>
@@ -1952,6 +2209,7 @@ select:focus {
       </div>
       <div class="sec sf-er-only" id="sf-sec-answers">
         <div class="sec-label">Respostes correctes</div>
+        <div class="sec-intro" id="stage-answers-intro">Afegeix variants vàlides reals. Si una resposta és massa sensible, deixa-la fora i gestiona-la amb regles anti-spoiler.</div>
         <div class="arr" id="sf-answers"></div>
         <button class="arr-add" onclick="arrAdd('answers')">＋ Resposta</button>
       </div>
@@ -1962,6 +2220,7 @@ select:focus {
       </div>
       <div class="sec sf-er-only" id="sf-sec-validation">
         <div class="sec-label">Verificació IA La Padrina / El Meco</div>
+        <div class="sec-intro" id="stage-validation-intro">Aquesta capa orienta la verificació assistida quan la resposta no és exacta o quan cal criteri contextual.</div>
         <textarea id="sf-validation" rows="2" oninput="sSync('validationCriteria')"></textarea>
         <div class="g3" style="margin-top:10px">
           <div class="f"><label>Keywords de validació</label><input type="text" id="sf-val-keywords" placeholder="pedra, sal, frontera" oninput="sSync('validationKeywords')"></div>
@@ -1976,6 +2235,7 @@ select:focus {
       </div>
       <div class="sec sf-er-only" id="sf-sec-ai-rules">
         <div class="sec-label">Regles IA anti-spoiler</div>
+        <div class="sec-intro" id="stage-guardrails-intro">Defineix què pot explicar la IA, què no pot revelar i quines pistes es poden donar sense trencar la lògica de la prova.</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
           <button class="tbtn tbtn-ghost" onclick="generateGuardrailsForSelectedStage()">⚙ Generar guardrails</button>
           <button class="tbtn tbtn-ghost" onclick="simulateSelectedStageGuardrails()">🧪 Simular guardrails</button>
@@ -2000,6 +2260,7 @@ select:focus {
       </div>
       <div class="sec">
         <div class="sec-label">Funcions avançades de la app</div>
+        <div class="sec-intro" id="stage-advanced-intro">Paràmetres opcionals per enriquir una etapa: recompenses, requisits, pista anti-bloqueig, AR i suport visual.</div>
         <div class="g2">
           <div class="f"><label>Pista de camp anti-bloqueig</label><input type="text" id="sf-field-clue" oninput="sSync('fieldClue')"></div>
           <div class="f"><label>Prompt de foto</label><input type="text" id="sf-photo-prompt" oninput="sSync('photoPrompt')"></div>
@@ -2050,6 +2311,7 @@ select:focus {
       <div class="compat-note"><strong>Compatibilidad:</strong> las subetapas se conservan al exportar/publicar para edición futura, pero la app actual no las ejecuta como flujo independiente.</div>
       <div class="sec">
         <div class="sec-label">Identificació</div>
+        <div class="sec-intro" id="substage-ident-intro">Les sub-etapes serveixen per preparar contingut futur o desglossar proves complexes sense perdre estructura d’autoria.</div>
         <div class="g3">
           <div class="f"><label>ID <span class="req">*</span></label><input type="text" id="ssf-id" oninput="ssSync('id')"></div>
           <div class="f"><label>Ordre dins l'etapa</label><input type="number" id="ssf-order" min="1" oninput="ssSync('order',true)"></div>
@@ -2071,6 +2333,7 @@ select:focus {
       </div>
       <div class="sec">
         <div class="sec-label">Contingut multilingüe</div>
+        <div class="sec-intro" id="substage-content-intro">Mantén el text curt i funcional: aquesta capa ha de ser fàcil de reconvertir o integrar més endavant.</div>
         <div class="lang-row"><div class="ltabs" id="sslang-tabs">
           <div class="ltab active" onclick="switchLang('ss','ca',this)">CA</div>
           <div class="ltab" onclick="switchLang('ss','es',this)">ES</div>
@@ -2141,6 +2404,7 @@ select:focus {
 
       <div class="sec">
         <div class="sec-label">Configuració</div>
+        <div class="sec-intro" id="narration-config-intro">Defineix quan entra la narració y a quina etapa acompanya. El personatge es decideix segons mode online o offline.</div>
         <div class="g2">
           <div class="f"><label>ID <span class="req">*</span></label><input type="text" id="nf-id" oninput="nSync('id')"></div>
           <div class="f"><label>Moment d'aparició</label>
@@ -2159,6 +2423,7 @@ select:focus {
       </div>
       <div class="sec">
         <div class="sec-label">Text de la narració</div>
+        <div class="sec-intro" id="narration-text-intro">Escriu una peça breu, clara i amb ritme. La mateixa narració pot servir tant per La Padrina com per El Meco.</div>
         <div class="lang-row"><div class="ltabs" id="nlang-tabs">
           <div class="ltab active" onclick="switchLang('n','ca',this)">CA</div>
           <div class="ltab" onclick="switchLang('n','es',this)">ES</div>
@@ -2221,6 +2486,7 @@ select:focus {
     </div>
     <div class="pv-pack-hd">
       <div class="pv-pack-copy">
+        <span class="pv-kicker" id="pv-kicker">Control de sortida</span>
         <h3 id="pv-snapshot-title">Snapshot exportable</h3>
         <p id="pv-snapshot-subtitle">Previsualització estructural del que sortirà cap a la app o al repositori.</p>
       </div>
@@ -2269,7 +2535,11 @@ select:focus {
   <div class="mbox">
     <div class="mhd"><h2>📦 Exportar paquet complet</h2><button class="mcls" onclick="closeModal('exp-modal')">✕</button></div>
     <div class="mbd">
-      <div style="display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap">
+      <div class="modal-intro">
+        <strong>Sortida de paquet llesta per distribuir</strong>
+        <span>Copia, descarrega o prepara l'entrada de manifest segons si el paquet s'inclou dins l'app o s'ofereix sota demanda des del repositori.</span>
+      </div>
+      <div class="modal-toolbar">
         <button class="tbtn tbtn-gold"  onclick="copyJSON()">📋 Copiar</button>
         <button class="tbtn tbtn-ghost" onclick="downloadJSON()">⬇ Descarregar .json</button>
         <button class="tbtn tbtn-ghost" onclick="downloadManifest()">⬇ Entrada manifest</button>
@@ -2285,12 +2555,22 @@ select:focus {
   <div class="mbox">
     <div class="mhd"><h2>↻ Paquets del repositori</h2><button class="mcls" onclick="closeModal('repo-modal')">✕</button></div>
     <div class="mbd">
-      <div style="display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap">
+      <div class="modal-intro">
+        <strong>Catàleg remot de GuildApp Content</strong>
+        <span>Des d'aquí pots revisar el catàleg publicat, refrescar-lo, gestionar el token i preparar la capa IA abans de pujar o importar paquets.</span>
+      </div>
+      <div class="modal-toolbar">
         <button class="tbtn tbtn-gold"  onclick="loadRepoCatalog()">↻ Actualitzar catàleg</button>
         <button class="tbtn tbtn-ghost" onclick="forgetGithubToken()">Esborrar token GitHub</button>
         <button class="tbtn tbtn-ghost" onclick="openIaConfigModal()">⚙ Configuració IA</button>
       </div>
-      <div id="repo-list" style="display:grid;gap:10px"></div>
+      <div id="repo-list" style="display:grid;gap:10px">
+        <div class="modal-empty">
+          <div class="modal-empty-ico">🗂</div>
+          <strong>Catàleg pendent de carregar</strong>
+          <span>Actualitza el catàleg remot per veure paquets publicats, estats de disponibilitat i accions d'importació.</span>
+        </div>
+      </div>
     </div>
     <div class="mft"><button class="tbtn tbtn-ghost" onclick="closeModal('repo-modal')">Tancar</button></div>
   </div>
@@ -2301,6 +2581,10 @@ select:focus {
   <div class="mbox">
     <div class="mhd"><h2>📂 Importar JSON</h2><button class="mcls" onclick="closeModal('imp-modal')">✕</button></div>
     <div class="mbd">
+      <div class="modal-intro">
+        <strong>Reincorpora un paquet existent al flux d'autoria</strong>
+        <span>Enganxa el JSON complet exportat des de l'editor, des del repositori o des d'una còpia de treball per continuar-lo editant.</span>
+      </div>
       <div class="f"><label>Enganxa el JSON del paquet</label>
         <textarea id="imp-text" style="min-height:260px;font-family:var(--mono);font-size:11px" placeholder='{"id":"hortoneda_...","stages":[...]}'></textarea>
       </div>
@@ -2320,6 +2604,10 @@ select:focus {
       <button class="mcls" onclick="closeModal('ia-cfg-modal')">✕</button>
     </div>
     <div class="mbd">
+      <div class="modal-intro">
+        <strong>Configura les fonts IA del editor</strong>
+        <span>OpenRouter serveix com a capa remota principal i Ollama permet perfils cloud o self-hosted. El servidor local pot injectar claus sense deixar-les exposades al HTML.</span>
+      </div>
 
       <!-- Tabs -->
       <div class="ia-tabs">
@@ -2329,6 +2617,16 @@ select:focus {
 
       <!-- ── OpenRouter panel ─────────────────────────────────────────────── -->
       <div id="iacfg-or">
+        <div class="ia-helper-grid">
+          <div class="ia-helper-card">
+            <strong>Ordre de fallback</strong>
+            <span>La primera clau activa s'utilitza com a principal. Si falla per límit o error remot, l'editor prova les de respaldo en ordre.</span>
+          </div>
+          <div class="ia-helper-card">
+            <strong>Clau local segura</strong>
+            <span>Quan el proxy local injecta la credencial, la llista la mostra com a servei local i evita deixar-la exposada al fitxer de l'editor.</span>
+          </div>
+        </div>
         <p style="font-size:11px;color:var(--text-mute);margin-bottom:14px;line-height:1.6">
           Afegeix una o més claus API d'OpenRouter. Si la <strong>clau activa</strong> retorna
           error 429 o 5xx, s'utilitza automàticament la de <strong>respaldo</strong> (en ordre de llista).
@@ -2352,6 +2650,16 @@ select:focus {
 
       <!-- ── Ollama panel ─────────────────────────────────────────────────── -->
       <div id="iacfg-ol" style="display:none">
+        <div class="ia-helper-grid">
+          <div class="ia-helper-card">
+            <strong>Cloud o self-hosted</strong>
+            <span>El mateix editor admet serveis OpenAI compatibles o endpoints natius d'Ollama sense canviar el flux d'autoria.</span>
+          </div>
+          <div class="ia-helper-card">
+            <strong>Prova operativa</strong>
+            <span>El botó de comprovació valida el perfil actiu per evitar publicar o generar contingut contra un endpoint trencat.</span>
+          </div>
+        </div>
         <p style="font-size:11px;color:var(--text-mute);margin-bottom:14px;line-height:1.6">
           Perfils per a instàncies <strong>Ollama Cloud</strong> o auto-hostatjades.
           Tria el format: <em>OpenAI Compatible</em> per a serveis cloud (usa <code style="background:var(--bg3);padding:1px 4px;border-radius:3px">/v1/chat/completions</code>)
@@ -2396,7 +2704,7 @@ select:focus {
         <button class="arr-add" id="ol-add-btn" onclick="olProfileShowAdd()" style="margin-top:6px">＋ Afegir perfil Ollama</button>
         <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px">
           <button class="tbtn tbtn-ghost" onclick="olTestActive()">🔌 Provar connexió activa</button>
-          <span id="ol-test-result" style="font-size:11px"></span>
+          <span id="ol-test-result" class="test-result-pill"></span>
         </div>
       </div>
 
@@ -2428,8 +2736,11 @@ select:focus {
 
           <!-- Estat buit -->
           <div class="enc-no-sel" id="enc-no-sel">
-            <div class="enc-ico">🎲</div>
-            <p>Selecciona un encontre a l'esquerra<br>o afegeix-ne un de nou</p>
+            <div class="modal-empty">
+              <div class="modal-empty-ico">🎲</div>
+              <strong>Cap encontre seleccionat</strong>
+              <span>Escull un encontre del panell esquerre per editar-lo o crea'n un de nou per començar la col·lecció.</span>
+            </div>
           </div>
 
           <!-- Formulari d'edició -->
@@ -2508,13 +2819,17 @@ select:focus {
       <button class="mcls" onclick="closeModal('enc-exp-modal')">✕</button>
     </div>
     <div class="mbd">
-      <div style="display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap">
+      <div class="modal-intro">
+        <strong>Sortida d'autoría per integrar al runtime</strong>
+        <span>Genera el fragment Dart o el JSON perquè l'equip tècnic pugui sincronitzar aquests encontres amb el servei de joc de la app.</span>
+      </div>
+      <div class="modal-toolbar">
         <button class="tbtn tbtn-gold"  onclick="encCopyDart()">📋 Copiar codi Dart</button>
         <button class="tbtn tbtn-ghost" onclick="encDownloadDart()">⬇ Descarregar snippet .dart</button>
         <button class="tbtn tbtn-ghost" onclick="encCopyJson()">📋 Copiar JSON</button>
       </div>
-      <p style="font-size:10px;color:var(--text-mute);margin-bottom:8px">
-        Substitueix el bloc <code style="background:var(--bg3);padding:1px 5px;border-radius:3px">const _encounters = …</code>
+      <p class="modal-note">
+        Substitueix el bloc <code>const _encounters = …</code>
         a <strong>random_encounter_service.dart</strong> amb aquest codi.
       </p>
       <pre id="enc-exp-out"></pre>
@@ -2533,6 +2848,10 @@ select:focus {
       <button class="mcls" onclick="closeModal('enc-imp-modal')">✕</button>
     </div>
     <div class="mbd">
+      <div class="modal-intro">
+        <strong>Recupera una biblioteca d'encontres</strong>
+        <span>Importa un array JSON sencer per reprendre una base existent o fusionar treball editorial generat fora d'aquest entorn.</span>
+      </div>
       <div class="f">
         <label>Enganxa un array JSON d'encontres</label>
         <textarea id="enc-imp-text" rows="12"
@@ -2579,8 +2898,10 @@ select:focus {
             <button class="tbtn tbtn-ghost" onclick="vibeApplyAll()" id="vibe-apply-all-btn" style="display:none">Aplicar totes</button>
           </div>
           <div id="vibe-actions-list" class="vibe-actions-list">
-            <div style="font-size:11px;color:var(--text-mute);font-style:italic;padding:20px;text-align:center">
-              Quan l'IA proposi canvis, els veuràs aquí. Revisa'ls i aplica-los un a un o tots de cop.
+            <div class="modal-empty" style="margin:12px">
+              <div class="modal-empty-ico">🧠</div>
+              <strong>Encara no hi ha propostes</strong>
+              <span>Quan GuildAI generi canvis sobre el pack, els veuràs aquí per revisar-los i aplicar-los de forma controlada.</span>
             </div>
           </div>
         </div>
@@ -2597,11 +2918,10 @@ select:focus {
       <button class="mclose" onclick="closeModal('qr-print-modal')">✕</button>
     </div>
     <div class="mbd">
-      <p style="font-size:11px;color:var(--text-mute);margin-bottom:14px;line-height:1.6">
-        Imprimeix (Cmd+P / Ctrl+P) per generar els QRs físics. Cada targeta inclou el número d'etapa,
-        títol, codi QR, pista de localització i instruccions d'escaneig. Útil per al
-        <strong>mode sense GPS</strong>: col·loca cada targeta al punt físic corresponent.
-      </p>
+      <div class="modal-intro">
+        <strong>Producció física de codis QR</strong>
+        <span>Imprimeix o exporta les targetes per al recorregut QR-only. Cada peça inclou identificació, codi, pista de localització i instruccions d'escaneig.</span>
+      </div>
       <div id="qr-grid" class="qr-grid"></div>
     </div>
     <div class="mft">
@@ -2654,15 +2974,17 @@ select:focus {
           </div>
 
           <div id="kb-edit-glossary" style="display:none">
-            <p style="font-size:11px;color:var(--text-mute);margin-bottom:10px">
+            <p class="modal-note">
               Termes clau amb traduccions. La Padrina els usa per contextualitzar respostes.
             </p>
             <div id="kb-glossary-list"></div>
             <button class="arr-add" onclick="kbGlossaryAdd()" style="margin-top:6px">＋ Nou terme</button>
           </div>
 
-          <div id="kb-empty" style="text-align:center;padding:80px 20px;color:var(--text-mute);font-style:italic">
-            Selecciona un fitxer o crea'n un de nou
+          <div id="kb-empty" class="modal-empty" style="margin:54px 12px 0">
+            <div class="modal-empty-ico">📚</div>
+            <strong>Cap fitxer obert</strong>
+            <span>Selecciona un document del panell esquerre o crea'n un de nou per ampliar la base de coneixement de La Padrina.</span>
           </div>
         </div>
       </div>
@@ -2937,7 +3259,23 @@ const UI_I18N = {
     knowledge: '📚 Coneixement',
     qrs: '🖨 QRs',
     import: '📂 Importar',
+    publishStack: 'Sortida',
+    toolsStack: 'Eines',
     sidebarTitle: 'Contingut del paquet',
+    sidebarSubtitle: 'Flux QR, estructura del recorregut i ordre de treball.',
+    packPublishingIntro: 'Defineix com apareixerà el paquet al selector de l’app i si s’ha de descarregar sota demanda.',
+    packScoringIntro: 'Aquests valors controlen el banc inicial de punts i les penalitzacions bàsiques del recorregut.',
+    packBlocksIntro: 'A la app, els blocs es mostren com a estat del recorregut. L\'entrada real a l\'aventura es fa escanejant QR físics, no tocant el menú.',
+    stageIdentIntro: 'Configura la peça física del recorregut: identificador intern, QR real, ordre i comportament de validació.',
+    stageContentIntro: 'Escriu el que veu l’equip quan arriba al punt: títol, orientació, context i, si toca, nota educativa.',
+    stageAnswersIntro: 'Afegeix variants vàlides reals. Si una resposta és massa sensible, deixa-la fora i gestiona-la amb regles anti-spoiler.',
+    stageValidationIntro: 'Aquesta capa orienta la verificació assistida quan la resposta no és exacta o quan cal criteri contextual.',
+    stageGuardrailsIntro: 'Defineix què pot explicar la IA, què no pot revelar i quines pistes es poden donar sense trencar la lògica de la prova.',
+    stageAdvancedIntro: 'Paràmetres opcionals per enriquir una etapa: recompenses, requisits, pista anti-bloqueig, AR i suport visual.',
+    substageIdentIntro: 'Les sub-etapes serveixen per preparar contingut futur o desglossar proves complexes sense perdre estructura d’autoria.',
+    substageContentIntro: 'Mantén el text curt i funcional: aquesta capa ha de ser fàcil de reconvertir o integrar més endavant.',
+    narrationConfigIntro: 'Defineix quan entra la narració i a quina etapa acompanya. El personatge es decideix segons mode online o offline.',
+    narrationTextIntro: 'Escriu una peça breu, clara i amb ritme. La mateixa narració pot servir tant per La Padrina com per El Meco.',
     mode: 'Mode',
     blocks: 'Blocs',
     status: 'Estat',
@@ -2960,6 +3298,7 @@ const UI_I18N = {
     guidedTour: '🗺 Visita Guiada',
     previewTitle: 'Vista prèvia JSON',
     previewNone: '— cap selecció',
+    previewKicker: 'Control de sortida',
     previewSnapshot: 'Snapshot exportable',
     previewSnapshotSub: 'Previsualització estructural del que sortirà cap a la app o al repositori.',
     emptyTitle: 'Editor llest per construir el paquet',
@@ -2985,6 +3324,8 @@ const UI_I18N = {
     subStageWord: 'Sub-etapa',
     narrationWord: 'Narrador',
     firstStageHint: 'Afegeix la primera etapa ↑',
+    sidebarEmptyTitle: 'Encara no hi ha recorregut',
+    sidebarEmptyText: 'Crea la primera etapa i després ordena el flux QR-only.',
     subStageButton: '＋ Sub-etapa a {ref}',
     stageMeta: 'QR: {qr}{subs}',
     subsMeta: ' · {count} sub-etapes',
@@ -3010,7 +3351,23 @@ const UI_I18N = {
     knowledge: '📚 Conocimiento',
     qrs: '🖨 QRs',
     import: '📂 Importar',
+    publishStack: 'Salida',
+    toolsStack: 'Herramientas',
     sidebarTitle: 'Contenido del paquete',
+    sidebarSubtitle: 'Flujo QR, estructura del recorrido y orden de trabajo.',
+    packPublishingIntro: 'Define cómo aparecerá el paquete en el selector de la app y si debe descargarse bajo demanda.',
+    packScoringIntro: 'Estos valores controlan el banco inicial de puntos y las penalizaciones básicas del recorrido.',
+    packBlocksIntro: 'En la app, los bloques se muestran como estado del recorrido. La entrada real a la aventura se hace escaneando QRs físicos, no tocando el menú.',
+    stageIdentIntro: 'Configura la pieza física del recorrido: identificador interno, QR real, orden y comportamiento de validación.',
+    stageContentIntro: 'Escribe lo que ve el equipo al llegar al punto: título, orientación, contexto y, si toca, nota educativa.',
+    stageAnswersIntro: 'Añade variantes válidas reales. Si una respuesta es demasiado sensible, déjala fuera y gestiónala con reglas anti-spoiler.',
+    stageValidationIntro: 'Esta capa orienta la verificación asistida cuando la respuesta no es exacta o cuando hace falta criterio contextual.',
+    stageGuardrailsIntro: 'Define qué puede explicar la IA, qué no puede revelar y qué pistas se pueden dar sin romper la lógica de la prueba.',
+    stageAdvancedIntro: 'Parámetros opcionales para enriquecer una etapa: recompensas, requisitos, pista anti-bloqueo, AR y apoyo visual.',
+    substageIdentIntro: 'Las subetapas sirven para preparar contenido futuro o desglosar pruebas complejas sin perder estructura de autoría.',
+    substageContentIntro: 'Mantén el texto corto y funcional: esta capa debe ser fácil de reconvertir o integrar más adelante.',
+    narrationConfigIntro: 'Define cuándo entra la narración y a qué etapa acompaña. El personaje se decide según modo online u offline.',
+    narrationTextIntro: 'Escribe una pieza breve, clara y con ritmo. La misma narración puede servir tanto para La Padrina como para El Meco.',
     mode: 'Modo',
     blocks: 'Bloques',
     status: 'Estado',
@@ -3033,6 +3390,7 @@ const UI_I18N = {
     guidedTour: '🗺 Visita guiada',
     previewTitle: 'Vista previa JSON',
     previewNone: '— sin selección',
+    previewKicker: 'Control de salida',
     previewSnapshot: 'Snapshot exportable',
     previewSnapshotSub: 'Previsualización estructural de lo que saldrá hacia la app o al repositorio.',
     emptyTitle: 'Editor listo para construir el paquete',
@@ -3058,6 +3416,8 @@ const UI_I18N = {
     subStageWord: 'Subetapa',
     narrationWord: 'Narrador',
     firstStageHint: 'Añade la primera etapa ↑',
+    sidebarEmptyTitle: 'Todavía no hay recorrido',
+    sidebarEmptyText: 'Crea la primera etapa y después ordena el flujo QR-only.',
     subStageButton: '＋ Subetapa a {ref}',
     stageMeta: 'QR: {qr}{subs}',
     subsMeta: ' · {count} subetapas',
@@ -3083,7 +3443,23 @@ const UI_I18N = {
     knowledge: '📚 Knowledge',
     qrs: '🖨 QRs',
     import: '📂 Import',
+    publishStack: 'Output',
+    toolsStack: 'Tools',
     sidebarTitle: 'Pack content',
+    sidebarSubtitle: 'QR flow, route structure, and working order.',
+    packPublishingIntro: 'Define how the pack appears in the app selector and whether it should download on demand.',
+    packScoringIntro: 'These values control the starting score bank and the basic route penalties.',
+    packBlocksIntro: 'In the app, blocks are shown as route state. Actual entry into the adventure happens by scanning physical QRs, not by tapping menus.',
+    stageIdentIntro: 'Configure the physical route piece: internal identifier, real QR, order, and validation behavior.',
+    stageContentIntro: 'Write what the team sees on arrival: title, orientation, context, and, when needed, an educational note.',
+    stageAnswersIntro: 'Add real valid answer variants. If an answer is too sensitive, leave it out and manage it with anti-spoiler rules.',
+    stageValidationIntro: 'This layer guides assisted validation when the answer is not exact or when contextual judgement is needed.',
+    stageGuardrailsIntro: 'Define what the AI may explain, what it must not reveal, and what hints can be given without breaking the puzzle logic.',
+    stageAdvancedIntro: 'Optional parameters to enrich a stage: rewards, requirements, anti-stall clue, AR, and visual support.',
+    substageIdentIntro: 'Sub-stages help prepare future content or break down complex challenges without losing authoring structure.',
+    substageContentIntro: 'Keep the text short and functional: this layer should be easy to repurpose or integrate later.',
+    narrationConfigIntro: 'Define when the narration enters and which stage it supports. The character is decided by online or offline mode.',
+    narrationTextIntro: 'Write a short, clear piece with rhythm. The same narration can serve both La Padrina and El Meco.',
     mode: 'Mode',
     blocks: 'Blocks',
     status: 'Status',
@@ -3106,6 +3482,7 @@ const UI_I18N = {
     guidedTour: '🗺 Guided Tour',
     previewTitle: 'JSON preview',
     previewNone: '— no selection',
+    previewKicker: 'Output control',
     previewSnapshot: 'Exportable snapshot',
     previewSnapshotSub: 'Structural preview of what will go to the app or repository.',
     emptyTitle: 'Editor ready to build the pack',
@@ -3131,6 +3508,8 @@ const UI_I18N = {
     subStageWord: 'Sub-stage',
     narrationWord: 'Narrator',
     firstStageHint: 'Add the first stage ↑',
+    sidebarEmptyTitle: 'There is no route yet',
+    sidebarEmptyText: 'Create the first stage and then order the QR-only flow.',
     subStageButton: '＋ Sub-stage to {ref}',
     stageMeta: 'QR: {qr}{subs}',
     subsMeta: ' · {count} sub-stages',
@@ -3156,7 +3535,23 @@ const UI_I18N = {
     knowledge: '📚 Connaissance',
     qrs: '🖨 QRs',
     import: '📂 Importer',
+    publishStack: 'Sortie',
+    toolsStack: 'Outils',
     sidebarTitle: 'Contenu du pack',
+    sidebarSubtitle: 'Flux QR, structure du parcours et ordre de travail.',
+    packPublishingIntro: 'Définis comment le pack apparaîtra dans le sélecteur de l’app et s’il doit être téléchargé à la demande.',
+    packScoringIntro: 'Ces valeurs pilotent le capital initial de points et les pénalités de base du parcours.',
+    packBlocksIntro: 'Dans l’app, les blocs apparaissent comme état du parcours. L’entrée réelle dans l’aventure se fait en scannant des QR physiques, pas via les menus.',
+    stageIdentIntro: 'Configure la pièce physique du parcours : identifiant interne, QR réel, ordre et comportement de validation.',
+    stageContentIntro: 'Écris ce que l’équipe voit en arrivant : titre, orientation, contexte et, si besoin, note éducative.',
+    stageAnswersIntro: 'Ajoute de vraies variantes de réponses valides. Si une réponse est trop sensible, laisse-la de côté et gère-la avec des règles anti-spoiler.',
+    stageValidationIntro: 'Cette couche oriente la vérification assistée lorsque la réponse n’est pas exacte ou lorsqu’un jugement contextuel est nécessaire.',
+    stageGuardrailsIntro: 'Définis ce que l’IA peut expliquer, ce qu’elle ne doit pas révéler et quels indices peuvent être donnés sans casser la logique de l’épreuve.',
+    stageAdvancedIntro: 'Paramètres optionnels pour enrichir une étape : récompenses, prérequis, indice anti-blocage, AR et support visuel.',
+    substageIdentIntro: 'Les sous-étapes servent à préparer du contenu futur ou à décomposer des épreuves complexes sans perdre la structure d’édition.',
+    substageContentIntro: 'Garde un texte court et fonctionnel : cette couche doit être facile à reconvertir ou à intégrer plus tard.',
+    narrationConfigIntro: 'Définis quand la narration intervient et quelle étape elle accompagne. Le personnage dépend du mode online ou offline.',
+    narrationTextIntro: 'Écris un texte bref, clair et rythmé. La même narration peut servir à La Padrina comme à El Meco.',
     mode: 'Mode',
     blocks: 'Blocs',
     status: 'Statut',
@@ -3179,6 +3574,7 @@ const UI_I18N = {
     guidedTour: '🗺 Visite guidée',
     previewTitle: 'Aperçu JSON',
     previewNone: '— aucune sélection',
+    previewKicker: 'Contrôle de sortie',
     previewSnapshot: 'Snapshot exportable',
     previewSnapshotSub: 'Prévisualisation structurelle de ce qui partira vers l’app ou le dépôt.',
     emptyTitle: 'Éditeur prêt à construire le pack',
@@ -3204,6 +3600,8 @@ const UI_I18N = {
     subStageWord: 'Sous-étape',
     narrationWord: 'Narrateur',
     firstStageHint: 'Ajoute la première étape ↑',
+    sidebarEmptyTitle: 'Le parcours est encore vide',
+    sidebarEmptyText: 'Crée la première étape puis organise le flux QR-only.',
     subStageButton: '＋ Sous-étape à {ref}',
     stageMeta: 'QR : {qr}{subs}',
     subsMeta: ' · {count} sous-étapes',
@@ -3257,12 +3655,28 @@ function applyEditorLocale() {
   setText('audit-btn', t('audit'));
   setText('publish-btn', t('publish'));
   setText('export-btn', t('export'));
+  setText('publish-stack-label', t('publishStack'));
+  setText('tools-stack-label', t('toolsStack'));
   setText('guildai-btn', t('guildai'));
   setText('enc-btn', t('encounters'));
   setText('kb-btn', t('knowledge'));
   setText('qr-btn', t('qrs'));
   setText('import-btn', t('import'));
   setText('sidebar-title', t('sidebarTitle'));
+  setText('sidebar-subtitle', t('sidebarSubtitle'));
+  setText('pack-publishing-intro', t('packPublishingIntro'));
+  setText('pack-scoring-intro', t('packScoringIntro'));
+  setText('pack-blocks-intro', t('packBlocksIntro'));
+  setText('stage-ident-intro', t('stageIdentIntro'));
+  setText('stage-content-intro', t('stageContentIntro'));
+  setText('stage-answers-intro', t('stageAnswersIntro'));
+  setText('stage-validation-intro', t('stageValidationIntro'));
+  setText('stage-guardrails-intro', t('stageGuardrailsIntro'));
+  setText('stage-advanced-intro', t('stageAdvancedIntro'));
+  setText('substage-ident-intro', t('substageIdentIntro'));
+  setText('substage-content-intro', t('substageContentIntro'));
+  setText('narration-config-intro', t('narrationConfigIntro'));
+  setText('narration-text-intro', t('narrationTextIntro'));
   setText('sb-mode-label', t('mode'));
   setText('sb-blocks-label', t('blocks'));
   setText('sb-status-label', t('status'));
@@ -3282,6 +3696,7 @@ function applyEditorLocale() {
   setText('pt-er-label', t('escapeRoom'));
   setText('pt-gt-label', t('guidedTour'));
   setText('pv-title', t('previewTitle'));
+  setText('pv-kicker', t('previewKicker'));
   setText('pv-snapshot-title', t('previewSnapshot'));
   setText('pv-snapshot-subtitle', t('previewSnapshotSub'));
   setText('empty-title', t('emptyTitle'));
@@ -3489,7 +3904,7 @@ function renderSidebar() {
   const list = document.getElementById('item-list');
   list.innerHTML = '';
   if (!items.length) {
-    list.innerHTML = `<div style="padding:14px;color:var(--text-mute);font-size:10px;text-align:center">${esc(t('firstStageHint'))}</div>`;
+    list.innerHTML = `<div class="sidebar-empty"><strong>${esc(t('sidebarEmptyTitle'))}</strong><span>${esc(t('sidebarEmptyText'))}</span></div>`;
     updateStats(); return;
   }
   items.forEach((item, i) => {
@@ -3561,6 +3976,13 @@ function updateStats() {
   updateWorkspaceCue();
 }
 
+function setPanelFocus(id) {
+  ['card-meta','stage-panel','substage-panel','narration-panel','no-sel'].forEach(pid => {
+    document.getElementById(pid)?.classList.remove('is-focus');
+  });
+  document.getElementById(id)?.classList.add('is-focus');
+}
+
 // ════════════════════════════════════════════════════════
 // SELECTION
 // ════════════════════════════════════════════════════════
@@ -3568,6 +3990,7 @@ function showPanel(id) {
   ['stage-panel','substage-panel','narration-panel','no-sel'].forEach(p =>
     document.getElementById(p).style.display = p===id ? 'block' : 'none');
   document.getElementById('editor').classList.toggle('editing', id !== 'no-sel');
+  setPanelFocus(id === 'no-sel' ? 'card-meta' : id);
   setWorkflowStep(id);
   updateWorkspaceCue();
 }
@@ -4079,9 +4502,22 @@ function updatePreview(){
   const pj=document.getElementById('preview-json');
   const pl=document.getElementById('pv-label');
   scheduleDraftSave();
-  if(!sel){pj.textContent='—';pl.textContent=t('previewNone');updateStats();return;}
+  if(!sel){
+    pj.classList.add('is-empty');
+    pj.innerHTML='<div><strong style="display:block;margin-bottom:8px;color:var(--text)">Sense selecció activa</strong><span style="display:block;max-width:320px;line-height:1.6">Selecciona metadades, una etapa, una sub-etapa o una narració per veure el fragment exportable corresponent.</span></div>';
+    pl.textContent=t('previewNone');
+    updateStats();
+    return;
+  }
   const item=items[sel.itemIdx];
-  if(!item){sel=null;pj.textContent='—';pl.textContent=t('previewNone');updateStats();return;}
+  if(!item){
+    sel=null;
+    pj.classList.add('is-empty');
+    pj.innerHTML='<div><strong style="display:block;margin-bottom:8px;color:var(--text)">Sense selecció activa</strong><span style="display:block;max-width:320px;line-height:1.6">Selecciona un element del panell esquerre per inspeccionar el JSON que sortirà cap a la app o al repositori.</span></div>';
+    pl.textContent=t('previewNone');
+    updateStats();
+    return;
+  }
   let obj,label;
   if(sel.subIdx!=null){
     obj=item.substages?.[sel.subIdx];
@@ -4098,6 +4534,7 @@ function updatePreview(){
     ? { ...obj, content_images: (obj.content_images||[]).map((s,i)=>
         s.startsWith('data:') ? `[imatge ${i+1} • ~${Math.round(s.length*0.75/1024)}kB base64]` : s) }
     : obj;
+  pj.classList.remove('is-empty');
   pj.textContent=JSON.stringify(displayObj,null,2);
   updateStats();
 }
@@ -5840,7 +6277,7 @@ function renderOrKeys() {
   if (!list) return;
   list.innerHTML = '';
   if (!iaState.orKeys.length) {
-    list.innerHTML = '<div style="font-size:11px;color:var(--text-mute);padding:4px 2px">Cap clau afegida. Usa ＋ per afegir-ne una.</div>';
+    list.innerHTML = '<div class="key-empty"><strong>Cap clau configurada</strong><span>Afegeix una clau principal o de respaldo per activar la capa remota d\\'OpenRouter dins l\\'editor.</span></div>';
     return;
   }
   iaState.orKeys.forEach((k, idx) => {
@@ -5906,7 +6343,7 @@ function renderOlProfiles() {
   if (!list) return;
   list.innerHTML = '';
   if (!iaState.olProfiles.length) {
-    list.innerHTML = '<div style="font-size:11px;color:var(--text-mute);padding:4px 2px">Cap perfil afegit. Usa ＋ per afegir-ne un.</div>';
+    list.innerHTML = '<div class="key-empty"><strong>Cap perfil configurat</strong><span>Defineix un endpoint actiu per provar xat, traducció o generació assistida amb Ollama Cloud o autoallotjat.</span></div>';
     _syncOlLabel(); return;
   }
   iaState.olProfiles.forEach(p => {
