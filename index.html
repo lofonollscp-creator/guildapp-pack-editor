@@ -331,7 +331,10 @@ html.day .ltab.active { color: #FDFAF2; }
 ════════════════════════════════════════════════════════ */
 #preview-col {
   background: var(--bg2); border-left: 1px solid var(--border);
-  display: flex; flex-direction: column; overflow: hidden;
+  display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
   transition: background .25s;
 }
 .pv-hd { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 10px; color: var(--text-mute); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
@@ -341,6 +344,352 @@ html.day .ltab.active { color: #FDFAF2; }
 .pv-stat { display: flex; gap: 6px; flex-wrap: wrap; }
 .pv-chip { padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; background: var(--bg3); color: var(--stone); border: 1px solid var(--border); }
 .pv-chip.gold { background: var(--gold-glow); color: var(--gold); border-color: var(--gold-dim); }
+.pv-health {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.pv-health-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 0;
+}
+.pv-health-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-mute);
+  font-weight: 800;
+}
+.pv-health-value {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+.pv-health-meta {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+#preview-col[data-health="ok"] .pv-health-card.is-key {
+  border-color: var(--ok);
+  background: color-mix(in srgb, var(--ok-d) 62%, var(--bg3));
+}
+#preview-col[data-health="warn"] .pv-health-card.is-key {
+  border-color: var(--gold-dim);
+  background: color-mix(in srgb, var(--gold-glow) 70%, var(--bg3));
+}
+#preview-col[data-health="error"] .pv-health-card.is-key {
+  border-color: rgba(208,80,80,.42);
+  background: color-mix(in srgb, var(--err-d) 72%, var(--bg3));
+}
+.pv-section {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.pv-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.pv-section-head strong {
+  font-size: 11px;
+  color: var(--text);
+}
+.pv-section-head span {
+  font-size: 10px;
+  color: var(--text-mute);
+}
+.compat-grid {
+  display: grid;
+  gap: 8px;
+}
+.compat-row {
+  display: grid;
+  grid-template-columns: 122px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+}
+.compat-row-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  font-weight: 800;
+  color: var(--text-mute);
+}
+.compat-row-body {
+  display: grid;
+  gap: 4px;
+}
+.compat-row-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text);
+}
+.compat-row-copy {
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--text-dim);
+}
+.compat-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  border: 1px solid transparent;
+}
+.compat-state.native {
+  color: var(--ok);
+  background: var(--ok-d);
+  border-color: color-mix(in srgb, var(--ok) 42%, transparent);
+}
+.compat-state.partial {
+  color: var(--gold);
+  background: var(--gold-glow);
+  border-color: color-mix(in srgb, var(--gold) 35%, transparent);
+}
+.compat-state.authoring {
+  color: var(--stone);
+  background: var(--bg2);
+  border-color: var(--border);
+}
+.selector-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 84%, white 16%), var(--card));
+  box-shadow: 0 14px 28px rgba(0,0,0,.10);
+  overflow: hidden;
+}
+.selector-preview-controls {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.selector-control-row {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.selector-control-row label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--text-mute);
+}
+.selector-control-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.selector-control-inline input[type=range] {
+  flex: 1 1 150px;
+}
+.selector-progress {
+  margin-top: 10px;
+}
+.selector-progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg3) 78%, black 22%);
+  overflow: hidden;
+}
+.selector-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #D1A13D, #E0C060);
+}
+.selector-card.is-soon {
+  opacity: .82;
+}
+.selector-card-top {
+  display: grid;
+  grid-template-columns: 52px 1fr 28px;
+  gap: 12px;
+  align-items: start;
+}
+.selector-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  background: color-mix(in srgb, var(--gold-glow) 78%, var(--bg3));
+  color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+}
+.selector-copy {
+  min-width: 0;
+}
+.selector-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+}
+.selector-desc {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-dim);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.selector-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  white-space: nowrap;
+}
+.selector-status.ready {
+  color: var(--ok);
+  background: var(--ok-d);
+}
+.selector-status.remote {
+  color: var(--gold);
+  background: var(--gold-glow);
+}
+.selector-status.soon {
+  color: var(--stone);
+  background: var(--bg3);
+}
+.selector-status.paused {
+  color: var(--stone);
+  background: color-mix(in srgb, var(--bg3) 88%, black 12%);
+}
+.selector-status.downloading {
+  color: var(--gold);
+  background: var(--gold-glow);
+}
+.selector-trailing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  min-width: 32px;
+  border-radius: 999px;
+  font-size: 18px;
+  color: var(--stone);
+  background: color-mix(in srgb, var(--bg3) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+.selector-trailing.active {
+  color: var(--gold);
+  background: color-mix(in srgb, var(--gold-glow) 82%, transparent);
+  border-color: color-mix(in srgb, var(--gold-dim) 72%, transparent);
+}
+.selector-line {
+  margin-top: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+.selector-line-icon {
+  font-size: 13px;
+  line-height: 1.2;
+}
+.selector-line-copy {
+  font-size: 11px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+.selector-line-copy.ready { color: var(--ok); }
+.selector-line-copy.remote { color: var(--gold); }
+.selector-line-copy.soon { color: var(--stone); }
+.selector-line-copy.paused { color: var(--stone); }
+.selector-line-copy.downloading { color: var(--gold); }
+.selector-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+.selector-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--bg3);
+  color: var(--stone);
+  border: 1px solid var(--border);
+}
+.selector-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.selector-source {
+  font-size: 10px;
+  color: var(--text-mute);
+  line-height: 1.4;
+}
+.selector-cta {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
+  color: var(--bg);
+}
+.selector-cta.ready {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ok) 82%, white 18%), var(--ok));
+  color: #06140d;
+}
+.selector-cta.remote,
+.selector-cta.downloading {
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
+}
+.selector-cta.paused {
+  background: color-mix(in srgb, var(--bg3) 84%, transparent);
+  color: var(--text);
+  border-color: var(--border);
+}
+.selector-cta.soon {
+  background: var(--bg3);
+  color: var(--text-mute);
+  border-color: var(--border);
+}
 #preview-json { flex: 1; overflow-y: auto; overflow-x: auto; padding: 14px; font-family: var(--mono); font-size: 10.5px; color: var(--json-c); white-space: pre; line-height: 1.5; background: var(--json-bg); transition: color .25s, background .25s; }
 
 /* ════════════════════════════════════════════════════════
@@ -428,6 +777,62 @@ html.day #toast.ok { color: #FDFAF2; }
   border-radius: 8px; padding: 9px 11px; margin-bottom: 12px; font-size: 11px; line-height: 1.45;
 }
 .compat-note strong { color: var(--gold); }
+.image-inline-card {
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  border-radius: 10px;
+  padding: 10px;
+}
+.image-inline-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.image-inline-head strong {
+  font-size: 11px;
+  color: var(--text);
+}
+.image-inline-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mini-link {
+  border: none;
+  background: none;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+.mini-link.danger { color: var(--err); }
+.image-inline-preview {
+  min-height: 120px;
+  border-radius: 8px;
+  border: 1px dashed var(--border2);
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.image-inline-preview img {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+}
+.image-inline-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-mute);
+  font-size: 10px;
+  line-height: 1.5;
+}
 
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -1192,6 +1597,22 @@ html.day .tbtn-gold { color: #fff; }
   font-size: 16px;
   letter-spacing: 0;
 }
+.card-scrollable {
+  max-height: calc(100dvh - 186px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.card-body-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding-bottom: 12px;
+}
 .card-icon {
   width: 38px;
   height: 38px;
@@ -1208,18 +1629,33 @@ html.day .tbtn-gold { color: #fff; }
 .card > .acts,
 .card > .compat-note,
 .card > .narr-info-chip,
+.card > .card-body-scroll > .sec,
+.card > .card-body-scroll > .g2,
+.card > .card-body-scroll > .g3,
+.card > .card-body-scroll > .lang-row,
+.card > .card-body-scroll > .lpanels,
+.card > .card-body-scroll > .pt-toggle,
+.card > .card-body-scroll > .f,
+.card > .card-body-scroll > .acts,
+.card > .card-body-scroll > .compat-note,
+.card > .card-body-scroll > .narr-info-chip,
+.card > .card-body-scroll > .tour-info-chip,
 .card > .tour-info-chip {
   margin-left: 18px;
   margin-right: 18px;
 }
 .card > .g2,
-.card > .g3 {
+.card > .g3,
+.card > .card-body-scroll > .g2,
+.card > .card-body-scroll > .g3 {
   margin-top: 16px;
 }
-.card > .acts {
+.card > .acts,
+.card > .card-body-scroll > .acts {
   margin-bottom: 16px;
 }
-.card > :last-child {
+.card > :last-child,
+.card > .card-body-scroll > :last-child {
   margin-bottom: 16px;
 }
 .sec {
@@ -1642,6 +2078,12 @@ select:focus {
     padding: 14px 0 90px;
     max-width: none;
   }
+  .card-scrollable {
+    max-height: none;
+  }
+  .card-body-scroll {
+    overflow: visible;
+  }
   .g2,
   .g3 {
     grid-template-columns: 1fr;
@@ -2010,11 +2452,12 @@ select:focus {
     </div>
 
     <!-- Pack meta -->
-    <div class="card" id="card-meta">
+    <div class="card card-scrollable" id="card-meta">
       <div class="card-hd">
         <div class="card-icon ci-stone">🗂</div>
         <h2 class="gold" id="card-meta-title">Metadades del paquet</h2>
       </div>
+      <div class="card-body-scroll">
 
       <!-- Pack-type selector -->
       <div class="f" style="margin-bottom:6px"><label id="pack-type-label">Tipus d'experiència <span class="req">*</span></label></div>
@@ -2113,10 +2556,11 @@ select:focus {
         <div id="blocks-list"></div>
         <button class="arr-add" onclick="addBlock()" style="margin-top:6px">＋ Afegir bloc</button>
       </div>
+      </div>
     </div>
 
     <!-- ─ STAGE PANEL ─ -->
-    <div class="card" id="stage-panel" style="display:none">
+    <div class="card card-scrollable" id="stage-panel" style="display:none">
       <div class="card-hd">
         <div class="card-icon ci-gold">📍</div>
         <h2 class="gold" id="sp-title">Punt</h2>
@@ -2125,6 +2569,7 @@ select:focus {
           <button class="ai-btn ai-tr" onclick="aiTranslate('stage')">🌐 Traduir</button>
         </div>
       </div>
+      <div class="card-body-scroll">
 
       <!-- Chip informatiu — visible només en mode Visita Guiada -->
       <div class="tour-info-chip" id="tour-stage-chip" style="display:none">
@@ -2285,6 +2730,27 @@ select:focus {
           <input type="file" id="sf-img-upload" accept="image/*" multiple style="display:none" onchange="addContentImages(this)">
         </label>
       </div>
+      <div class="sec sf-er-only" id="sf-answer-image-sec">
+        <div class="sec-label">Imatge de resposta / salt <span class="compat-chip">Nativo</span></div>
+        <div style="font-size:11px;color:var(--text-mute);margin-bottom:10px">La app la mostra quan l’equip salta la prova o necessita veure com era la resposta correcta. Pot ser una URL, una ruta del pack o una imatge incrustada.</div>
+        <div class="f"><label>Ruta o URL</label><input type="text" id="sf-answer-image" placeholder="images/resposta.jpg o https://..." oninput="sSync('answerImage')"></div>
+        <div class="image-inline-card">
+          <div class="image-inline-head">
+            <strong>Previsualització</strong>
+            <div class="image-inline-actions">
+              <label class="mini-link" style="cursor:pointer">
+                Carregar fitxer
+                <input type="file" id="sf-answer-image-upload" accept="image/*" style="display:none" onchange="setAnswerImageFromUpload(this)">
+              </label>
+              <button class="mini-link" type="button" onclick="previewAnswerImage()">Obrir</button>
+              <button class="mini-link danger" type="button" onclick="clearAnswerImage()">Esborrar</button>
+            </div>
+          </div>
+          <div class="image-inline-preview" id="sf-answer-image-preview">
+            <div class="image-inline-empty">Sense imatge configurada encara.</div>
+          </div>
+        </div>
+      </div>
       <div class="sec">
         <div class="sec-label" id="sf-substage-label">Sub-etapes d'aquest punt <span class="compat-chip">Autoría</span></div>
         <div class="ss-inline" id="ss-inline-list"></div>
@@ -2296,10 +2762,11 @@ select:focus {
         <button class="act act-ghost" onclick="moveItem(-1)">↑ Pujar</button>
         <button class="act act-ghost" onclick="moveItem(1)">↓ Baixar</button>
       </div>
+      </div>
     </div>
 
     <!-- ─ SUB-STAGE PANEL ─ -->
-    <div class="card" id="substage-panel" style="display:none">
+    <div class="card card-scrollable" id="substage-panel" style="display:none">
       <div class="card-hd">
         <div class="card-icon ci-sub">🔸</div>
         <h2 class="sub" id="ssp-title">Sub-etapa</h2><span class="compat-chip">No nativo</span>
@@ -2308,6 +2775,7 @@ select:focus {
           <button class="ai-btn ai-tr" onclick="aiTranslate('substage')">🌐 Traduir</button>
         </div>
       </div>
+      <div class="card-body-scroll">
       <div class="compat-note"><strong>Compatibilidad:</strong> las subetapas se conservan al exportar/publicar para edición futura, pero la app actual no las ejecuta como flujo independiente.</div>
       <div class="sec">
         <div class="sec-label">Identificació</div>
@@ -2379,10 +2847,11 @@ select:focus {
         <button class="act act-ghost" onclick="moveSubStage(1)">↓</button>
         <button class="act act-ghost" onclick="backToStage()">← Tornar a l'etapa</button>
       </div>
+      </div>
     </div>
 
     <!-- ─ NARRATION PANEL ─ -->
-    <div class="card" id="narration-panel" style="display:none">
+    <div class="card card-scrollable" id="narration-panel" style="display:none">
       <div class="card-hd">
         <div class="card-icon ci-narr">📖</div>
         <h2 class="narr">Narrador</h2><span class="compat-chip">Nativo parcial</span>
@@ -2391,6 +2860,7 @@ select:focus {
           <button class="ai-btn ai-tr" onclick="aiTranslate('narration')">🌐 Traduir</button>
         </div>
       </div>
+      <div class="card-body-scroll">
       <div class="compat-note"><strong>Compatibilidad:</strong> la app muestra las narraciones <code>before_stage</code> y <code>after_stage</code> asociadas a una etapa. Las narraciones <code>standalone</code> se conservan para autoría.</div>
 
       <!-- Informational chip — no selector needed -->
@@ -2441,6 +2911,7 @@ select:focus {
         <button class="act act-del" onclick="deleteCurrentItem()">🗑 Eliminar</button>
         <button class="act act-ghost" onclick="moveItem(-1)">↑ Pujar</button>
         <button class="act act-ghost" onclick="moveItem(1)">↓ Baixar</button>
+      </div>
       </div>
     </div>
 
@@ -2495,6 +2966,63 @@ select:focus {
         <div class="pv-chip" id="pv-narrs">0 narracions</div>
         <div class="pv-chip" id="pv-subs">0 sub-etapes</div>
       </div>
+    </div>
+    <div class="pv-health">
+      <div class="pv-health-card is-key">
+        <span class="pv-health-label" id="pv-health-publish-label">Publicació</span>
+        <strong class="pv-health-value" id="pv-health-publish-value">Esborrany local</strong>
+        <span class="pv-health-meta" id="pv-health-publish-meta">Defineix disponibilitat, bundling i base remota.</span>
+      </div>
+      <div class="pv-health-card">
+        <span class="pv-health-label" id="pv-health-route-label">Recorregut</span>
+        <strong class="pv-health-value" id="pv-health-route-value">0 blocs · 0 etapes</strong>
+        <span class="pv-health-meta" id="pv-health-route-meta">Encara no hi ha estructura QR-only.</span>
+      </div>
+      <div class="pv-health-card">
+        <span class="pv-health-label" id="pv-health-native-label">Compatibilitat app</span>
+        <strong class="pv-health-value" id="pv-health-native-value">Sense revisar</strong>
+        <span class="pv-health-meta" id="pv-health-native-meta">Narracions i capes d’autoría.</span>
+      </div>
+      <div class="pv-health-card">
+        <span class="pv-health-label" id="pv-health-ai-label">Verificació IA</span>
+        <strong class="pv-health-value" id="pv-health-ai-value">0 proves assistides</strong>
+        <span class="pv-health-meta" id="pv-health-ai-meta">Open, foto i guardrails del pack.</span>
+      </div>
+    </div>
+    <div class="pv-section">
+      <div class="pv-section-head">
+        <strong id="pv-compat-title">Compatibilitat per peça</strong>
+        <span id="pv-compat-subtitle">runtime vs autoría</span>
+      </div>
+      <div class="compat-grid" id="pv-compat-grid"></div>
+    </div>
+    <div class="pv-section">
+      <div class="pv-section-head">
+        <strong id="pv-selector-title">Vista selector aventura</strong>
+        <span id="pv-selector-subtitle">tal com es veuria a GuildApp</span>
+      </div>
+      <div class="selector-preview-controls">
+        <div class="selector-control-row">
+          <label for="pv-sim-state" id="pv-sim-state-label">Estat</label>
+          <select class="field-sel" id="pv-sim-state" onchange="updatePreview()">
+            <option value="auto">Auto</option>
+            <option value="bundled_ready">Inclòs / llest</option>
+            <option value="installed_ready">Instal·lat / llest</option>
+            <option value="remote_idle">Remot / pendent</option>
+            <option value="downloading">Descarregant</option>
+            <option value="paused">Pausat</option>
+            <option value="coming_soon">Pròximament</option>
+          </select>
+        </div>
+        <div class="selector-control-row">
+          <label for="pv-sim-progress" id="pv-sim-progress-label">Progrés</label>
+          <div class="selector-control-inline">
+            <input type="range" id="pv-sim-progress" min="0" max="100" value="42" oninput="updatePreview()">
+            <span id="pv-sim-progress-value">42%</span>
+          </div>
+        </div>
+      </div>
+      <div id="pv-selector-card"></div>
     </div>
     <pre id="preview-json">—</pre>
   </div>
@@ -3068,19 +3596,53 @@ select:focus {
 <div id="toast"></div>
 
 <script>
+window.__guildappBootErrors = [];
+window.addEventListener('error', event => {
+  try {
+    const msg = String(event?.message || event?.error || 'unknown error');
+    window.__guildappBootErrors.push(msg);
+    document.documentElement.setAttribute('data-boot-error', msg.slice(0, 220));
+  } catch (_) {}
+});
+window.addEventListener('unhandledrejection', event => {
+  try {
+    const msg = String(event?.reason?.message || event?.reason || 'unhandled rejection');
+    window.__guildappBootErrors.push(msg);
+    document.documentElement.setAttribute('data-boot-error', msg.slice(0, 220));
+  } catch (_) {}
+});
+</script>
+<script>
 // ════════════════════════════════════════════════════════
 // CONFIG
 // ════════════════════════════════════════════════════════
 const OR_SITE  = 'https://guilda.cat';
 const OR_TITLE = 'GuildApp Pack Editor';
 const DRAFT_KEY = 'guildapp_pack_editor_draft_v1';
+const storage = (() => {
+  const mem = new Map();
+  try {
+    if (typeof localStorage !== 'undefined' && localStorage) {
+      return {
+        getItem(key) { return localStorage.getItem(key); },
+        setItem(key, value) { localStorage.setItem(key, value); },
+        removeItem(key) { localStorage.removeItem(key); },
+      };
+    }
+  } catch (_) {}
+  return {
+    getItem(key) { return mem.has(key) ? mem.get(key) : null; },
+    setItem(key, value) { mem.set(key, String(value)); },
+    removeItem(key) { mem.delete(key); },
+  };
+})();
 
 // ── Estado IA unificat ────────────────────────────────────────────────────────
 const IA_STATE_KEY = 'ia_config_v2';
 
 function _loadIaState() {
   try {
-    const saved = localStorage.getItem(IA_STATE_KEY);
+    const saved = storage.getItem(IA_STATE_KEY);
     if (saved) return JSON.parse(saved);
   } catch(_) {}
   return { provider: 'openrouter', orKeys: [], olProfiles: [] };
@@ -3089,7 +3651,7 @@ let iaState = _loadIaState();
 
 // ── Credenciales opcionales de arranque ──────────────────────────────────────
 // Mantener vacío en repositorios o copias compartidas. Cada usuario debe añadir
-// sus claves desde ⚙ Configuración IA; se guardan solo en localStorage.
+// sus claves desde ⚙ Configuración IA; se guardan solo en almacenamiento local seguro.
 const APP_OR_KEY  = '';
 const APP_OL = {
   label:     'Ollama Cloud',
@@ -3106,10 +3668,10 @@ const LOCAL_SERVICE_OL_KEY = '__GUILDAPP_LOCAL_SERVICE_OLLAMA__';
 
   // ── OpenRouter ──────────────────────────────────────────────────────────────
   // 1) Migra la clau única del format antic (localStorage simple)
-  const old = localStorage.getItem('openrouter_api_key');
+  const old = storage.getItem('openrouter_api_key');
   if (old && !iaState.orKeys.length) {
     iaState.orKeys.push({ id: _uid(), label: 'Principal (migrada)', key: old, active: true });
-    localStorage.removeItem('openrouter_api_key');
+    storage.removeItem('openrouter_api_key');
     dirty = true;
   }
   // 2) Pre-carga la clave opcional si el propietario la ha configurado localmente
@@ -3147,7 +3709,7 @@ const LOCAL_SERVICE_OL_KEY = '__GUILDAPP_LOCAL_SERVICE_OLLAMA__';
 })();
 
 function _saveIaState() {
-  localStorage.setItem(IA_STATE_KEY, JSON.stringify(iaState));
+  storage.setItem(IA_STATE_KEY, JSON.stringify(iaState));
 }
 function _uid() { return Math.random().toString(36).slice(2, 10); }
 
@@ -3226,10 +3788,10 @@ function toggleTheme() {
   const isDay = document.documentElement.classList.toggle('day');
   document.documentElement.classList.toggle('night', !isDay);
   document.getElementById('theme-btn').textContent = isDay ? '☀️' : '🌙';
-  localStorage.setItem('theme', isDay ? 'day' : 'night');
+  storage.setItem('theme', isDay ? 'day' : 'night');
 }
 (function initTheme() {
-  const saved = localStorage.getItem('theme');
+  const saved = storage.getItem('theme');
   if (saved === 'day') {
     document.documentElement.classList.add('day');
     document.documentElement.classList.remove('night');
@@ -3241,7 +3803,8 @@ function toggleTheme() {
 // UI LOCALE
 // ════════════════════════════════════════════════════════
 const UI_LOCALE_KEY = 'guildapp_editor_ui_locale';
-let editorLocale = localStorage.getItem(UI_LOCALE_KEY) || 'ca';
+const SELECTOR_PREVIEW_KEY = 'guildapp_editor_selector_preview';
+let editorLocale = storage.getItem(UI_LOCALE_KEY) || 'ca';
 const UI_I18N = {
   ca: {
     title: 'GuildApp Pack Editor',
@@ -3301,6 +3864,16 @@ const UI_I18N = {
     previewKicker: 'Control de sortida',
     previewSnapshot: 'Snapshot exportable',
     previewSnapshotSub: 'Previsualització estructural del que sortirà cap a la app o al repositori.',
+    previewHealthPublish: 'Publicació',
+    previewHealthRoute: 'Recorregut',
+    previewHealthNative: 'Compatibilitat app',
+    previewHealthAi: 'Verificació IA',
+    previewCompatTitle: 'Compatibilitat per peça',
+    previewCompatSub: 'runtime vs autoría',
+    previewSelectorTitle: 'Vista selector aventura',
+    previewSelectorSub: 'tal com es veuria a GuildApp',
+    previewSimState: 'Estat',
+    previewSimProgress: 'Progrés',
     emptyTitle: 'Editor llest per construir el paquet',
     emptyText: 'Comença per les metadades del paquet o selecciona una etapa del panell esquerre.',
     empty1Title: 'Defineix el paquet',
@@ -3393,6 +3966,16 @@ const UI_I18N = {
     previewKicker: 'Control de salida',
     previewSnapshot: 'Snapshot exportable',
     previewSnapshotSub: 'Previsualización estructural de lo que saldrá hacia la app o al repositorio.',
+    previewHealthPublish: 'Publicación',
+    previewHealthRoute: 'Recorrido',
+    previewHealthNative: 'Compatibilidad app',
+    previewHealthAi: 'Verificación IA',
+    previewCompatTitle: 'Compatibilidad por pieza',
+    previewCompatSub: 'runtime vs autoría',
+    previewSelectorTitle: 'Vista selector aventura',
+    previewSelectorSub: 'tal como se vería en GuildApp',
+    previewSimState: 'Estado',
+    previewSimProgress: 'Progreso',
     emptyTitle: 'Editor listo para construir el paquete',
     emptyText: 'Empieza por los metadatos del paquete o selecciona una etapa del panel izquierdo.',
     empty1Title: 'Define el paquete',
@@ -3485,6 +4068,16 @@ const UI_I18N = {
     previewKicker: 'Output control',
     previewSnapshot: 'Exportable snapshot',
     previewSnapshotSub: 'Structural preview of what will go to the app or repository.',
+    previewHealthPublish: 'Publishing',
+    previewHealthRoute: 'Route',
+    previewHealthNative: 'App compatibility',
+    previewHealthAi: 'AI validation',
+    previewCompatTitle: 'Per-piece compatibility',
+    previewCompatSub: 'runtime vs authoring',
+    previewSelectorTitle: 'Adventure selector preview',
+    previewSelectorSub: 'how GuildApp will show it',
+    previewSimState: 'State',
+    previewSimProgress: 'Progress',
     emptyTitle: 'Editor ready to build the pack',
     emptyText: 'Start with pack metadata or select a stage from the left panel.',
     empty1Title: 'Define the pack',
@@ -3577,6 +4170,16 @@ const UI_I18N = {
     previewKicker: 'Contrôle de sortie',
     previewSnapshot: 'Snapshot exportable',
     previewSnapshotSub: 'Prévisualisation structurelle de ce qui partira vers l’app ou le dépôt.',
+    previewHealthPublish: 'Publication',
+    previewHealthRoute: 'Parcours',
+    previewHealthNative: 'Compatibilité app',
+    previewHealthAi: 'Validation IA',
+    previewCompatTitle: 'Compatibilité par élément',
+    previewCompatSub: 'runtime vs édition',
+    previewSelectorTitle: 'Aperçu du sélecteur',
+    previewSelectorSub: 'tel qu’il apparaîtra dans GuildApp',
+    previewSimState: 'État',
+    previewSimProgress: 'Progression',
     emptyTitle: 'Éditeur prêt à construire le pack',
     emptyText: 'Commence par les métadonnées du pack ou sélectionne une étape dans le panneau de gauche.',
     empty1Title: 'Définis le pack',
@@ -3622,9 +4225,35 @@ function t(key, vars = {}) {
   return str;
 }
 
+function uiText(ca, es, en, fr) {
+  return ({ ca, es, en, fr }[editorLocale] || ca);
+}
+
+function saveSelectorPreviewState() {
+  try {
+    storage.setItem(SELECTOR_PREVIEW_KEY, JSON.stringify(selectorPreviewState));
+  } catch (_) {}
+}
+
+function setSelectOptions(selectId, entries) {
+  const el = document.getElementById(selectId);
+  if (!el) return;
+  const current = el.value;
+  el.innerHTML = entries.map(entry => `<option value="${esc(entry.value)}">${esc(entry.label)}</option>`).join('');
+  if (entries.some(entry => entry.value === current)) el.value = current;
+}
+
+function setSelectOptions(selectId, entries) {
+  const el = document.getElementById(selectId);
+  if (!el) return;
+  const current = el.value;
+  el.innerHTML = entries.map(entry => `<option value="${esc(entry.value)}">${esc(entry.label)}</option>`).join('');
+  if (entries.some(entry => entry.value === current)) el.value = current;
+}
+
 function setEditorLocale(locale) {
   editorLocale = UI_I18N[locale] ? locale : 'ca';
-  localStorage.setItem(UI_LOCALE_KEY, editorLocale);
+  storage.setItem(UI_LOCALE_KEY, editorLocale);
   applyEditorLocale();
   renderSidebar();
   updatePreview();
@@ -3699,6 +4328,25 @@ function applyEditorLocale() {
   setText('pv-kicker', t('previewKicker'));
   setText('pv-snapshot-title', t('previewSnapshot'));
   setText('pv-snapshot-subtitle', t('previewSnapshotSub'));
+  setText('pv-health-publish-label', t('previewHealthPublish'));
+  setText('pv-health-route-label', t('previewHealthRoute'));
+  setText('pv-health-native-label', t('previewHealthNative'));
+  setText('pv-health-ai-label', t('previewHealthAi'));
+  setText('pv-compat-title', t('previewCompatTitle'));
+  setText('pv-compat-subtitle', t('previewCompatSub'));
+  setText('pv-selector-title', t('previewSelectorTitle'));
+  setText('pv-selector-subtitle', t('previewSelectorSub'));
+  setText('pv-sim-state-label', t('previewSimState'));
+  setText('pv-sim-progress-label', t('previewSimProgress'));
+  setSelectOptions('pv-sim-state', [
+    { value: 'auto', label: uiText('Auto', 'Auto', 'Auto', 'Auto') },
+    { value: 'bundled_ready', label: uiText('Inclòs / llest', 'Incluido / listo', 'Bundled / ready', 'Inclus / prêt') },
+    { value: 'installed_ready', label: uiText('Instal·lat / llest', 'Instalado / listo', 'Installed / ready', 'Installé / prêt') },
+    { value: 'remote_idle', label: uiText('Remot / pendent', 'Remoto / pendiente', 'Remote / idle', 'Distant / en attente') },
+    { value: 'downloading', label: uiText('Descarregant', 'Descargando', 'Downloading', 'Téléchargement') },
+    { value: 'paused', label: uiText('Pausat', 'Pausado', 'Paused', 'En pause') },
+    { value: 'coming_soon', label: uiText('Pròximament', 'Próximamente', 'Coming soon', 'Prochainement') },
+  ]);
   setText('empty-title', t('emptyTitle'));
   setText('empty-text', t('emptyText'));
   setText('empty-step1-title', t('empty1Title'));
@@ -3721,6 +4369,17 @@ let remoteCatalog = null;
 let draftReady = false;
 let draftTimer = null;
 let pendingPublish = null;
+let selectorPreviewState = (() => {
+  try {
+    return {
+      mode: 'auto',
+      progress: 42,
+      ...(JSON.parse(storage.getItem(SELECTOR_PREVIEW_KEY) || '{}') || {}),
+    };
+  } catch (_) {
+    return { mode: 'auto', progress: 42 };
+  }
+})();
 
 const ml  = () => ({ca:'',es:'',en:'',fr:''});
 const pad = n => String(n).padStart(2,'0');
@@ -3768,7 +4427,7 @@ function newStage(order) {
     aiSolutionKeywords:'', aiSpoilerPhrases:'', aiSensitiveLocations:'',
     aiMaxHintLevel:'', aiStrictMode:'false', aiNoRevealCoordinates:'false',
     fieldClue:'', photoPrompt:'', ralsAward:5, awardsItem:'',
-    requiresItems:'', requiresRole:'', ghostQuote:'', contentImages:[],
+    requiresItems:'', requiresRole:'', ghostQuote:'', contentImages:[], answerImage:'',
     latitude:null, longitude:null, blockId:'',
     title:ml(), locationHint:ml(), storyIntro:ml(), educationalNote:ml(), substages:[] };
 }
@@ -3958,6 +4617,426 @@ function mkRow({label,meta,badge,bc,active,cc,onDel,onClick}) {
   return d;
 }
 
+function stageIsAiAssisted(stage) {
+  const type = normalizeAnswerType(stage.answerType);
+  return type === 'open' || type === 'photo' || !!String(stage.validationCriteria || '').trim() || csv(stage.validationKeywords).length > 0;
+}
+
+function routeCoverageStats(stages) {
+  const assigned = stages.filter(s => String(s.blockId || '').trim()).length;
+  return { assigned, unassigned: Math.max(0, stages.length - assigned) };
+}
+
+function nativeNarrationStats(stages, narrations) {
+  const stageIds = new Set(stages.map(s => s.id).filter(Boolean));
+  let nativeCount = 0;
+  let authoringOnly = 0;
+  let unsupported = 0;
+  narrations.forEach(n => {
+    const trigger = String(n.trigger || 'standalone');
+    if (trigger === 'before_stage' || trigger === 'after_stage') {
+      if (stageIds.has(String(n.refStageId || '').trim())) nativeCount += 1;
+      else unsupported += 1;
+      return;
+    }
+    if (trigger === 'standalone') {
+      authoringOnly += 1;
+      return;
+    }
+    unsupported += 1;
+  });
+  return { nativeCount, authoringOnly, unsupported };
+}
+
+function _compatStatePill(type, label) {
+  return `<span class="compat-state ${type}">${esc(label)}</span>`;
+}
+
+function renderCompatibilityPanel(stages, narrations) {
+  const ct = document.getElementById('pv-compat-grid');
+  if (!ct) return;
+  const activeItem = sel ? items[sel.itemIdx] : null;
+  const activeSub = sel?.subIdx != null && activeItem?.type === 'stage'
+    ? activeItem.substages?.[sel.subIdx]
+    : null;
+
+  const rows = [];
+  rows.push({
+    label: uiText('Etapes', 'Etapas', 'Stages', 'Étapes'),
+    title: uiText(
+      `${stages.length} principals al runtime`,
+      `${stages.length} principales en runtime`,
+      `${stages.length} main runtime stages`,
+      `${stages.length} principales au runtime`,
+    ),
+    copy: blocks.length
+      ? uiText(
+          'Les etapes principals alimenten el flux QR-only, el mapa, la validació, les pistes i la progressió real.',
+          'Las etapas principales alimentan el flujo QR-only, el mapa, la validación, las pistas y la progresión real.',
+          'Main stages feed the QR-only flow, the map, validation, hints, and real progression.',
+          'Les étapes principales alimentent le flux QR-only, la carte, la validation, les indices et la progression réelle.',
+        )
+      : uiText(
+          'Falten blocs; sense això la progressió QR-only no quedarà ben definida.',
+          'Faltan bloques; sin eso la progresión QR-only no quedará bien definida.',
+          'Blocks are missing; without them the QR-only progression will remain incomplete.',
+          'Il manque des blocs ; sans eux la progression QR-only restera incomplète.',
+        ),
+    pill: _compatStatePill('native', uiText('Natiu', 'Nativo', 'Native', 'Natif')),
+  });
+
+  const narrationStats = nativeNarrationStats(stages, narrations);
+  rows.push({
+    label: uiText('Narracions', 'Narraciones', 'Narrations', 'Narrations'),
+    title: narrationStats.nativeCount
+      ? uiText(
+          `${narrationStats.nativeCount} narracions natives`,
+          `${narrationStats.nativeCount} narraciones nativas`,
+          `${narrationStats.nativeCount} native narrations`,
+          `${narrationStats.nativeCount} narrations natives`,
+        )
+      : uiText(
+          'Cap narració nativa encara',
+          'Todavía no hay narraciones nativas',
+          'No native narrations yet',
+          'Aucune narration native pour le moment',
+        ),
+    copy: narrationStats.unsupported
+      ? uiText(
+          `${narrationStats.unsupported} triggers o referències no es reproduiran com a runtime de la app.`,
+          `${narrationStats.unsupported} triggers o referencias no se reproducirán como runtime de la app.`,
+          `${narrationStats.unsupported} triggers or references will not play as app runtime.`,
+          `${narrationStats.unsupported} déclencheurs ou références ne seront pas lus par le runtime de l’app.`,
+        )
+      : uiText(
+          `${narrationStats.authoringOnly} queden només com a autoria si són standalone.`,
+          `${narrationStats.authoringOnly} quedan solo como autoría si son standalone.`,
+          `${narrationStats.authoringOnly} remain authoring-only when they are standalone.`,
+          `${narrationStats.authoringOnly} restent seulement en édition lorsqu’elles sont standalone.`,
+        ),
+    pill: _compatStatePill(
+      narrationStats.nativeCount && !narrationStats.unsupported ? 'partial' : 'authoring',
+      narrationStats.nativeCount
+        ? uiText('Parcial', 'Parcial', 'Partial', 'Partiel')
+        : uiText('Autoría', 'Autoría', 'Authoring', 'Édition')
+    ),
+  });
+
+  rows.push({
+    label: uiText('Sub-etapes', 'Subetapas', 'Sub-stages', 'Sous-étapes'),
+    title: uiText(
+      `${stages.reduce((a, s) => a + (s.substages?.length || 0), 0)} definides`,
+      `${stages.reduce((a, s) => a + (s.substages?.length || 0), 0)} definidas`,
+      `${stages.reduce((a, s) => a + (s.substages?.length || 0), 0)} defined`,
+      `${stages.reduce((a, s) => a + (s.substages?.length || 0), 0)} définies`,
+    ),
+    copy: uiText(
+      'Es guarden al bundle i tornen a aparèixer a l’editor, però la app actual no les executa com a flux independent.',
+      'Se guardan en el bundle y reaparecen en el editor, pero la app actual no las ejecuta como flujo independiente.',
+      'They are stored in the bundle and come back into the editor, but the current app does not execute them as an independent flow.',
+      'Elles sont conservées dans le bundle et reviennent dans l’éditeur, mais l’app actuelle ne les exécute pas comme flux indépendant.',
+    ),
+    pill: _compatStatePill('authoring', uiText('Autoría', 'Autoría', 'Authoring', 'Édition')),
+  });
+
+  const aided = stages.filter(stageIsAiAssisted).length;
+  rows.push({
+    label: uiText('IA', 'IA', 'AI', 'IA'),
+    title: aided
+      ? uiText(
+          `${aided} proves amb assistència`,
+          `${aided} pruebas con asistencia`,
+          `${aided} assisted challenges`,
+          `${aided} épreuves assistées`,
+        )
+      : uiText(
+          'Sense dependència forta d’IA',
+          'Sin dependencia fuerte de IA',
+          'No strong AI dependency',
+          'Sans dépendance forte à l’IA',
+        ),
+    copy: aided
+      ? uiText(
+          'Les respostes obertes, fotos i guardrails sí formen part del comportament real de l’activitat.',
+          'Las respuestas abiertas, fotos y guardrails sí forman parte del comportamiento real de la actividad.',
+          'Open answers, photo checks, and guardrails are part of the real activity behavior.',
+          'Les réponses ouvertes, les photos et les guardrails font bien partie du comportement réel de l’activité.',
+        )
+      : uiText(
+          'El pack pot funcionar només amb navegació, lectura i validacions exactes.',
+          'El pack puede funcionar solo con navegación, lectura y validaciones exactas.',
+          'The pack can work with only navigation, reading, and exact validations.',
+          'Le pack peut fonctionner uniquement avec navigation, lecture et validations exactes.',
+        ),
+    pill: _compatStatePill('native', uiText('Natiu', 'Nativo', 'Native', 'Natif')),
+  });
+
+  if (activeItem?.type === 'narration') {
+    rows.unshift({
+      label: uiText('Selecció', 'Selección', 'Selection', 'Sélection'),
+      title: uiText(
+        `Narració activa · ${activeItem.id || 'sense id'}`,
+        `Narración activa · ${activeItem.id || 'sin id'}`,
+        `Active narration · ${activeItem.id || 'no id'}`,
+        `Narration active · ${activeItem.id || 'sans id'}`,
+      ),
+      copy: ['before_stage', 'after_stage'].includes(String(activeItem.trigger || ''))
+        ? uiText(
+            'Aquesta narració té forma nativa si la referència d’etapa és vàlida.',
+            'Esta narración tiene forma nativa si la referencia de etapa es válida.',
+            'This narration is natively compatible if the stage reference is valid.',
+            'Cette narration est nativement compatible si la référence d’étape est valide.',
+          )
+        : uiText(
+            'Aquesta narració es conserva per autoria; no es mostrarà dins del flux d’etapa actual.',
+            'Esta narración se conserva para autoría; no se mostrará dentro del flujo de etapa actual.',
+            'This narration is kept for authoring; it will not appear inside the current stage flow.',
+            'Cette narration est conservée pour l’édition ; elle n’apparaîtra pas dans le flux d’étape actuel.',
+          ),
+      pill: _compatStatePill(
+        ['before_stage', 'after_stage'].includes(String(activeItem.trigger || '')) ? 'partial' : 'authoring',
+        ['before_stage', 'after_stage'].includes(String(activeItem.trigger || ''))
+          ? uiText('Parcial', 'Parcial', 'Partial', 'Partiel')
+          : uiText('Autoría', 'Autoría', 'Authoring', 'Édition')
+      ),
+    });
+  } else if (activeItem?.type === 'stage') {
+    rows.unshift({
+      label: uiText('Selecció', 'Selección', 'Selection', 'Sélection'),
+      title: `${isTour() ? uiText('Punt', 'Punto', 'Point', 'Point') : uiText('Etapa', 'Etapa', 'Stage', 'Étape')} · ${activeItem.id || uiText('sense id', 'sin id', 'no id', 'sans id')}`,
+      copy: activeSub
+        ? uiText(
+            'La selecció actual és una sub-etapa i queda com a estructura d’autoría.',
+            'La selección actual es una subetapa y queda como estructura de autoría.',
+            'The current selection is a sub-stage and remains authoring structure.',
+            'La sélection actuelle est une sous-étape et reste une structure d’édition.',
+          )
+        : uiText(
+            'La peça activa forma part directa del runtime, sempre que estigui dins d’un bloc i amb QR vàlid.',
+            'La pieza activa forma parte directa del runtime, siempre que esté dentro de un bloque y con QR válido.',
+            'The active item is part of the real runtime as long as it belongs to a block and has a valid QR.',
+            'L’élément actif fait partie du runtime réel tant qu’il appartient à un bloc et possède un QR valide.',
+          ),
+      pill: _compatStatePill(
+        activeSub ? 'authoring' : 'native',
+        activeSub
+          ? uiText('Autoría', 'Autoría', 'Authoring', 'Édition')
+          : uiText('Natiu', 'Nativo', 'Native', 'Natif')
+      ),
+    });
+  }
+
+  ct.innerHTML = rows.map(row => `
+    <div class="compat-row">
+      <div class="compat-row-label">${esc(row.label)}</div>
+      <div class="compat-row-body">
+        ${row.pill}
+        <div class="compat-row-title">${esc(row.title)}</div>
+        <div class="compat-row-copy">${esc(row.copy)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSelectorPreview(stages) {
+  const ct = document.getElementById('pv-selector-card');
+  if (!ct) return;
+  const modeEl = document.getElementById('pv-sim-state');
+  const progressEl = document.getElementById('pv-sim-progress');
+  if (modeEl) modeEl.value = selectorPreviewState.mode || 'auto';
+  if (progressEl) progressEl.value = String(selectorPreviewState.progress ?? 42);
+  const progressValueEl = document.getElementById('pv-sim-progress-value');
+  if (progressValueEl) progressValueEl.textContent = `${selectorPreviewState.progress ?? 42}%`;
+
+  const title = gv(`pt-${editorLocale}`) || gv('pt-ca') || gv('pack-id') || 'Pack';
+  const description = gv(`pd-${editorLocale}`) || gv('pd-ca') || 'Sense descripció encara.';
+  const duration = Number(gv('pack-duration')) || 120;
+  const available = packAvailable();
+  const bundled = document.getElementById('pack-bundled')?.value === 'true';
+  const mode = selectorPreviewState.mode || 'auto';
+  const resolvedMode = mode === 'auto'
+    ? (!available ? 'coming_soon' : (bundled ? 'bundled_ready' : 'remote_idle'))
+    : mode;
+  const progress = Math.max(0, Math.min(100, Number(selectorPreviewState.progress ?? 42)));
+
+  let status = 'remote';
+  let statusLabel = '';
+  let sourceLabel = '';
+  let cta = '';
+  let ctaClass = 'remote';
+  let lineIcon = '☁️';
+  let lineText = '';
+  let trailingIcon = '⬇️';
+  let trailingClass = '';
+  let extraChips = '';
+
+  if (resolvedMode === 'bundled_ready') {
+    status = 'ready';
+    statusLabel = uiText('Llest offline', 'Listo offline', 'Offline ready', 'Prêt hors ligne');
+    sourceLabel = uiText('Inclòs a l’app', 'Incluido en la app', 'Bundled in app', 'Inclus dans l’app');
+    cta = uiText('Obrir', 'Abrir', 'Open', 'Ouvrir');
+    ctaClass = 'ready';
+    lineIcon = '📍';
+    lineText = uiText('Llest per jugar sense connexió', 'Listo para jugar sin conexión', 'Ready to play offline', 'Prêt à jouer hors ligne');
+    trailingIcon = '›';
+    extraChips = `<div class="selector-chip">${esc(uiText('inclòs', 'incluido', 'bundled', 'inclus'))}</div>`;
+  } else if (resolvedMode === 'installed_ready') {
+    status = 'ready';
+    statusLabel = uiText('Instal·lat', 'Instalado', 'Installed', 'Installé');
+    sourceLabel = uiText('Instal·lat al dispositiu', 'Instalado en el dispositivo', 'Installed on device', 'Installé sur l’appareil');
+    cta = uiText('Obrir', 'Abrir', 'Open', 'Ouvrir');
+    ctaClass = 'ready';
+    lineIcon = '📍';
+    lineText = uiText('Llest per jugar sense connexió', 'Listo para jugar sin conexión', 'Ready to play offline', 'Prêt à jouer hors ligne');
+    trailingIcon = '🗑️';
+    extraChips = `<div class="selector-chip">${esc(uiText('instal·lat', 'instalado', 'installed', 'installé'))}</div>`;
+  } else if (resolvedMode === 'downloading') {
+    status = 'downloading';
+    statusLabel = uiText('Descarregant', 'Descargando', 'Downloading', 'Téléchargement');
+    sourceLabel = uiText('Contingut remot', 'Contenido remoto', 'Remote content', 'Contenu distant');
+    cta = uiText('Instal·lant', 'Instalando', 'Installing', 'Installation');
+    ctaClass = 'downloading';
+    lineIcon = '⬇️';
+    lineText = uiText(
+      `Descarregant paquet · ${progress}%`,
+      `Descargando paquete · ${progress}%`,
+      `Downloading pack · ${progress}%`,
+      `Téléchargement du pack · ${progress}%`,
+    );
+    trailingIcon = '⬇️';
+    trailingClass = 'active';
+    extraChips = `<div class="selector-chip">${esc(uiText('descarregable', 'descargable', 'downloadable', 'téléchargeable'))}</div>`;
+  } else if (resolvedMode === 'paused') {
+    status = 'paused';
+    statusLabel = uiText('Pausat', 'Pausado', 'Paused', 'En pause');
+    sourceLabel = uiText('Contingut remot', 'Contenido remoto', 'Remote content', 'Contenu distant');
+    cta = uiText('Reprendre', 'Reanudar', 'Resume', 'Reprendre');
+    ctaClass = 'paused';
+    lineIcon = '⏸️';
+    lineText = uiText('Descàrrega pausada', 'Descarga pausada', 'Download paused', 'Téléchargement en pause');
+    trailingIcon = '▶';
+    extraChips = `<div class="selector-chip">${esc(uiText('descarregable', 'descargable', 'downloadable', 'téléchargeable'))}</div>`;
+  } else if (resolvedMode === 'coming_soon') {
+    status = 'soon';
+    statusLabel = firstLang(localizedStatusLabel()) || uiText('Pròximament', 'Próximamente', 'Coming soon', 'Prochainement');
+    sourceLabel = uiText('Publicació pendent', 'Publicación pendiente', 'Pending release', 'Publication en attente');
+    cta = uiText('Pròximament', 'Próximamente', 'Coming soon', 'Prochainement');
+    ctaClass = 'soon';
+    lineIcon = '🕒';
+    lineText = uiText('Encara no disponible', 'Todavía no disponible', 'Not available yet', 'Pas encore disponible');
+    trailingIcon = '•';
+  } else {
+    status = 'remote';
+    statusLabel = uiText('Descarregable', 'Descargable', 'Downloadable', 'Téléchargeable');
+    sourceLabel = uiText('Contingut remot', 'Contenido remoto', 'Remote content', 'Contenu distant');
+    cta = uiText('Instal·lar', 'Instalar', 'Install', 'Installer');
+    ctaClass = 'remote';
+    lineIcon = '☁️';
+    lineText = uiText('Cal descarregar-lo abans de jugar', 'Hay que descargarlo antes de jugar', 'Download required before playing', 'Téléchargement requis avant de jouer');
+    trailingIcon = '⬇️';
+    extraChips = `<div class="selector-chip">${esc(uiText('descarregable', 'descargable', 'downloadable', 'téléchargeable'))}</div>`;
+  }
+
+  const typeLabel = packType === 'guided_tour'
+    ? uiText('visita guiada', 'visita guiada', 'guided tour', 'visite guidée')
+    : 'Escape Room';
+  const typeIcon = packType === 'guided_tour' ? '🗺️' : '🏰';
+  const fileCount = Math.max(0, Object.keys(buildPack().files || {}).filter(name => name !== 'content_packs_entry.json').length);
+  ct.innerHTML = `
+    <div class="selector-card ${resolvedMode === 'coming_soon' ? 'is-soon' : ''}">
+      <div class="selector-card-top">
+        <div class="selector-icon">${typeIcon}</div>
+        <div class="selector-copy">
+          <div class="selector-title">${esc(title)}</div>
+          <div class="selector-desc">${esc(description)}</div>
+        </div>
+        <div class="selector-trailing ${trailingClass}">${trailingIcon}</div>
+      </div>
+      <div class="selector-line">
+        <div class="selector-line-icon">${lineIcon}</div>
+        <div class="selector-line-copy ${status}">${esc(lineText)}</div>
+      </div>
+      ${resolvedMode === 'downloading' ? `
+        <div class="selector-progress">
+          <div class="selector-progress-track"><div class="selector-progress-fill" style="width:${progress}%"></div></div>
+        </div>
+      ` : ''}
+      <div class="selector-meta">
+        <div class="selector-chip">${esc(typeLabel)}</div>
+        <div class="selector-chip">${stages.length} ${esc(packType === 'guided_tour' ? uiText('punts', 'puntos', 'stops', 'points') : uiText('etapes', 'etapas', 'stages', 'étapes'))}</div>
+        <div class="selector-chip">~${duration} min</div>
+        <div class="selector-status ${status}">${esc(statusLabel)}</div>
+        ${extraChips}
+        <div class="selector-chip">${esc(sourceLabel)}</div>
+        ${fileCount ? `<div class="selector-chip">${fileCount} ${esc(uiText('arxius', 'archivos', 'files', 'fichiers'))}</div>` : ''}
+      </div>
+      <div class="selector-actions">
+        <div class="selector-source">${esc(sourceLabel)} · ${esc(gv('pack-author') || uiText('Sense autor', 'Sin autor', 'No author', 'Sans auteur'))}</div>
+        <button class="selector-cta ${ctaClass}" type="button">${esc(cta)}</button>
+      </div>
+    </div>
+  `;
+}
+
+function pullSelectorPreviewControls() {
+  selectorPreviewState.mode = document.getElementById('pv-sim-state')?.value || 'auto';
+  selectorPreviewState.progress = Number(document.getElementById('pv-sim-progress')?.value || 42);
+  saveSelectorPreviewState();
+  const progressValueEl = document.getElementById('pv-sim-progress-value');
+  if (progressValueEl) progressValueEl.textContent = `${selectorPreviewState.progress}%`;
+}
+
+function updatePreviewHealth(stages, narrations) {
+  const preview = document.getElementById('preview-col');
+  if (!preview) return;
+  const coverage = routeCoverageStats(stages);
+  const aiStages = stages.filter(stageIsAiAssisted);
+  const photoStages = stages.filter(s => normalizeAnswerType(s.answerType) === 'photo').length;
+  const openStages = stages.filter(s => normalizeAnswerType(s.answerType) === 'open').length;
+  const narrationStats = nativeNarrationStats(stages, narrations);
+  const bundled = document.getElementById('pack-bundled')?.value === 'true';
+  const available = packAvailable();
+  const base = gv('pack-download-base').trim();
+  const publishIssues = [];
+  if (!bundled && available && !base) publishIssues.push('base remota');
+  if (!available && !localizedHasAnyValue(localizedStatusLabel())) publishIssues.push('etiqueta d’estat');
+  if (!blocks.length) publishIssues.push('blocs');
+  if (coverage.unassigned > 0) publishIssues.push('etapes fora de bloc');
+  if (narrationStats.unsupported > 0) publishIssues.push('narracions no compatibles');
+  const health = publishIssues.length ? (publishIssues.length >= 3 ? 'error' : 'warn') : 'ok';
+  preview.dataset.health = health;
+
+  const publishValue = !available
+    ? t('availabilitySoon')
+    : (bundled ? t('availabilityBundled') : t('availabilityRemote'));
+  const publishMeta = !available
+    ? `${t('status').toLowerCase()}: ${firstLang(localizedStatusLabel()) || '—'}`
+    : (bundled ? 'El paquet viatja dins l’app.' : (base || defaultDownloadBase(gv('pack-id'))));
+  document.getElementById('pv-health-publish-value').textContent = publishValue;
+  document.getElementById('pv-health-publish-meta').textContent = publishMeta;
+
+  document.getElementById('pv-health-route-value').textContent = `${blocks.length} ${t('blocks').toLowerCase()} · ${stages.length} ${t(isTour() ? 'pointWord' : 'stageWord').toLowerCase()}${stages.length === 1 ? '' : 's'}`;
+  document.getElementById('pv-health-route-meta').textContent = coverage.unassigned
+    ? `${coverage.unassigned} etapa/es sense bloc. La progressió QR-only quedarà incompleta.`
+    : (blocks.length ? 'Totes les etapes principals queden cobertes pels blocs.' : 'Cal definir els blocs del recorregut.');
+
+  const nativeBits = [];
+  if (narrationStats.nativeCount) nativeBits.push(`${narrationStats.nativeCount} nativa/es`);
+  if (narrationStats.authoringOnly) nativeBits.push(`${narrationStats.authoringOnly} només autoria`);
+  if (narrationStats.unsupported) nativeBits.push(`${narrationStats.unsupported} a revisar`);
+  document.getElementById('pv-health-native-value').textContent = nativeBits.length ? nativeBits.join(' · ') : 'Sense narracions';
+  document.getElementById('pv-health-native-meta').textContent = narrationStats.unsupported
+    ? 'Hi ha triggers o referències d’etapa que la app no podrà reproduir tal com estan.'
+    : 'La columna distingeix entre el que la app executa i el que només conserva per editor.';
+
+  document.getElementById('pv-health-ai-value').textContent = `${aiStages.length} prova/es assistides · ${photoStages} foto · ${openStages} oberta/es`;
+  document.getElementById('pv-health-ai-meta').textContent = aiStages.length
+    ? `${stages.filter(s => String(s.aiStrictMode) === 'true' || s.aiStrictMode === true).length} en mode estricte; ${stages.filter(s => String(s.aiNoRevealCoordinates) === 'true' || s.aiNoRevealCoordinates === true).length} amb protecció GPS.`
+    : 'No hi ha proves que depenguin d’IA contextual o validació fotogràfica.';
+  renderCompatibilityPanel(stages, narrations);
+  renderSelectorPreview(stages);
+}
+
 function updateStats() {
   const st=items.filter(i=>i.type==='stage');
   const na=items.filter(i=>i.type==='narration');
@@ -3973,6 +5052,7 @@ function updateStats() {
   document.getElementById('sb-mode').textContent = modeLabel;
   document.getElementById('sb-blocks').textContent = String(blocks.length);
   document.getElementById('sb-availability').textContent = items.length ? availabilityLabel : t('availabilityDraft');
+  updatePreviewHealth(st, na);
   updateWorkspaceCue();
 }
 
@@ -4104,6 +5184,7 @@ function populateStage(s) {
   v('sf-rals',s.ralsAward ?? 5); v('sf-awards-item',s.awardsItem);
   v('sf-requires-items',s.requiresItems); v('sf-requires-role',s.requiresRole);
   v('sf-ghost-quote',s.ghostQuote);
+  v('sf-answer-image', s.answerImage || '');
   v('sf-gps', s.latitude!=null ? `${s.latitude}, ${s.longitude}` : '');
   refreshBlockSelector();
   v('sf-block', s.blockId || '');
@@ -4115,6 +5196,7 @@ function populateStage(s) {
   renderArr('sf-answers',s.correctAnswers,'answers');
   renderArr('sf-hints',s.hints,'hints');
   renderContentImages(s.contentImages||[]);
+  renderAnswerImagePreview(s.answerImage || '');
   renderSsInline(s);
   applyPackTypeUI();
 }
@@ -4167,7 +5249,7 @@ function sSync(key, num=false) {
     aiNoRevealCoordinates:'sf-ai-no-coords',
     photoPrompt:'sf-photo-prompt',ralsAward:'sf-rals',awardsItem:'sf-awards-item',
     requiresItems:'sf-requires-items',requiresRole:'sf-requires-role',
-    ghostQuote:'sf-ghost-quote', blockId:'sf-block'
+    ghostQuote:'sf-ghost-quote', answerImage:'sf-answer-image', blockId:'sf-block'
   };
   let val=document.getElementById(ids[key]||`sf-${key}`)?.value;
   if(num)val=Number(val);
@@ -4219,6 +5301,24 @@ function renderContentImages(imgs) {
     wrap.appendChild(del);
     ct.appendChild(wrap);
   });
+}
+
+function renderAnswerImagePreview(src) {
+  const ct = document.getElementById('sf-answer-image-preview');
+  if (!ct) return;
+  const clean = String(src || '').trim();
+  if (!clean) {
+    ct.innerHTML = '<div class="image-inline-empty">Sense imatge configurada encara.</div>';
+    return;
+  }
+  ct.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = clean;
+  img.alt = 'Preview answer image';
+  img.onerror = () => {
+    ct.innerHTML = `<div class="image-inline-empty">No s'ha pogut previsualitzar aquesta ruta.<br><code>${esc(clean)}</code></div>`;
+  };
+  ct.appendChild(img);
 }
 
 // Comprimeix una imatge (data-URL) a JPEG mantenint una mida màxima i qualitat
@@ -4277,6 +5377,45 @@ function finalizeImages(stage) {
   updatePreview();
   saveDraftNow();
   toast(`${stage.contentImages.length} imatge${stage.contentImages.length===1?'':'s'} adjuntada${stage.contentImages.length===1?'':'s'}`);
+}
+
+async function setAnswerImageFromUpload(input) {
+  if(!sel || sel.subIdx!=null) return;
+  const file = input.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e => {
+    const original = e.target.result;
+    const compressed = await compressImage(original, { maxPx: 1800, quality: 0.82 });
+    const stage = items[sel.itemIdx];
+    stage.answerImage = compressed;
+    v('sf-answer-image', compressed);
+    renderAnswerImagePreview(compressed);
+    updatePreview();
+    saveDraftNow();
+    toast('Imatge de resposta actualitzada');
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+function clearAnswerImage() {
+  if(!sel || sel.subIdx!=null) return;
+  const stage = items[sel.itemIdx];
+  stage.answerImage = '';
+  v('sf-answer-image', '');
+  renderAnswerImagePreview('');
+  updatePreview();
+  saveDraftNow();
+}
+
+function previewAnswerImage() {
+  const src = gv('sf-answer-image').trim();
+  if(!src) {
+    toast('No hi ha cap imatge configurada', 'e');
+    return;
+  }
+  previewContentImage(src);
 }
 
 function removeContentImage(idx) {
@@ -4501,6 +5640,7 @@ function switchLang(pfx,lang,el){
 function updatePreview(){
   const pj=document.getElementById('preview-json');
   const pl=document.getElementById('pv-label');
+  pullSelectorPreviewControls();
   scheduleDraftSave();
   if(!sel){
     pj.classList.add('is-empty');
@@ -4530,9 +5670,17 @@ function updatePreview(){
   }
   pl.textContent=label;
   // Replace base64 content_images with a human-readable summary for display
-  const displayObj = obj && obj.content_images
-    ? { ...obj, content_images: (obj.content_images||[]).map((s,i)=>
-        s.startsWith('data:') ? `[imatge ${i+1} • ~${Math.round(s.length*0.75/1024)}kB base64]` : s) }
+  const displayObj = obj
+    ? {
+        ...obj,
+        ...(obj.content_images ? {
+          content_images: (obj.content_images||[]).map((s,i)=>
+            typeof s === 'string' && s.startsWith('data:') ? `[imatge ${i+1} • ~${Math.round(s.length*0.75/1024)}kB base64]` : s)
+        } : {}),
+        ...(typeof obj.answer_image === 'string' && obj.answer_image.startsWith('data:')
+          ? { answer_image: `[imatge resposta • ~${Math.round(obj.answer_image.length*0.75/1024)}kB base64]` }
+          : {}),
+      }
     : obj;
   pj.classList.remove('is-empty');
   pj.textContent=JSON.stringify(displayObj,null,2);
@@ -4580,7 +5728,22 @@ function scheduleDraftSave(){
 
 function saveDraftNow(){
   if(!draftReady) return;
-  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(collectDraft())); } catch(_) {}
+  try { storage.setItem(DRAFT_KEY, JSON.stringify(collectDraft())); } catch(_) {}
+}
+
+function draftHasMeaningfulContent(draft){
+  if(!draft || typeof draft !== 'object') return false;
+  const f = draft.fields || {};
+  const hasMeta =
+    ['id','version','duration','author','downloadBaseUrl'].some(k => String(f[k] || '').trim()) ||
+    ['ca','es','en','fr'].some(l => String(f.title?.[l] || '').trim() || String(f.description?.[l] || '').trim() || String(f.statusLabel?.[l] || '').trim());
+  const hasStructure =
+    (Array.isArray(draft.items) && draft.items.length > 0) ||
+    (Array.isArray(draft.blocks) && draft.blocks.length > 0) ||
+    (Array.isArray(draft.kbFiles) && draft.kbFiles.length > 0) ||
+    (draft.kbGlossary && Object.keys(draft.kbGlossary).length > 0) ||
+    (Array.isArray(draft.encounters) && draft.encounters.length > 0);
+  return hasMeta || hasStructure;
 }
 
 function restoreDraft(draft){
@@ -4625,24 +5788,26 @@ function restoreDraft(draft){
 
 function maybeRestoreDraft(){
   let raw = null;
-  try { raw = localStorage.getItem(DRAFT_KEY); } catch(_) {}
+  try { raw = storage.getItem(DRAFT_KEY); } catch(_) {}
   if(!raw){ draftReady = true; return; }
   try{
     const draft = JSON.parse(raw);
-    const when = draft.savedAt ? new Date(draft.savedAt).toLocaleString() : 'sense data';
-    const title = draft.fields?.title?.ca || draft.fields?.id || 'borrador';
-    if(confirm(`S'ha trobat un borrador automàtic (${title}) guardat el ${when}. Vols recuperar-lo?`)){
-      if(restoreDraft(draft)) {
-        toast('Borrador recuperat', 'i');
-        return;
-      }
+    if(!draftHasMeaningfulContent(draft)){
+      clearDraft();
+      draftReady = true;
+      return;
+    }
+    if(restoreDraft(draft)) {
+      const when = draft.savedAt ? new Date(draft.savedAt).toLocaleString() : 'sense data';
+      toast(`Borrador recuperat (${when})`, 'i');
+      return;
     }
   }catch(_) {}
   draftReady = true;
 }
 
 function clearDraft(){
-  localStorage.removeItem(DRAFT_KEY);
+  storage.removeItem(DRAFT_KEY);
   toast('Borrador automàtic esborrat');
 }
 
@@ -4805,6 +5970,7 @@ function stageExport(s){
   if(String(s.requiresRole||'').trim())o.requires_role=slug(s.requiresRole);
   if(String(s.ghostQuote||'').trim())o.ghost_quote=localizedFromTextOrMap(s.ghostQuote);
   if(Array.isArray(s.contentImages)&&s.contentImages.length)o.content_images=s.contentImages;
+  if(String(s.answerImage||'').trim())o.answer_image=String(s.answerImage).trim();
   return o;
 }
 function manifestEntry(){
@@ -5060,6 +6226,9 @@ function validatePack({ forPublish = false } = {}) {
     if (answerType === 'photo' && !String(s.photoPrompt || '').trim()) {
       error('Las etapas de foto necesitan un prompt de foto.', ref);
     }
+    if (String(s.answerImage || '').trim() && !/^data:image\/|^https?:\/\/|^[A-Za-z0-9_./-]+$/.test(String(s.answerImage || '').trim())) {
+      warn('La imagen de respuesta no parece una ruta relativa, URL o data-URI válida.', ref);
+    }
     if (answerType === 'open') {
       const hasCriteria = String(s.validationCriteria || '').trim() ||
         (Array.isArray(s.validationKeywords) ? s.validationKeywords.length : String(s.validationKeywords || '').trim());
@@ -5133,8 +6302,13 @@ function validatePack({ forPublish = false } = {}) {
     if (n.refStageId && !stages.some(s => s.id === n.refStageId)) {
       warn(`La narración referencia una etapa inexistente: ${n.refStageId}.`, ref);
     }
+    if ((n.trigger === 'before_stage' || n.trigger === 'after_stage') && !String(n.refStageId || '').trim()) {
+      error('Las narraciones before_stage/after_stage necesitan una etapa de referencia.', ref);
+    }
     if (n.trigger === 'standalone') {
       warn('La narración standalone se conserva para autoría, pero sólo before_stage y after_stage se muestran dentro de una etapa.', ref);
+    } else if (!['before_stage', 'after_stage', 'standalone'].includes(String(n.trigger || ''))) {
+      warn(`El trigger "${n.trigger}" no es nativo en la app actual; se conservará sólo como material de autoría.`, ref);
     }
   });
 
@@ -5544,15 +6718,15 @@ async function getGithubFile(path, token){
   return r.json();
 }
 function getGithubToken(){
-  let token=localStorage.getItem('github_content_token')||'';
+  let token=storage.getItem('github_content_token')||'';
   if(!token){
     token=prompt('Token GitHub amb permís Contents: Read and write per guildapp-content')||'';
-    if(token) localStorage.setItem('github_content_token',token);
+    if(token) storage.setItem('github_content_token',token);
   }
   return token;
 }
 function forgetGithubToken(){
-  localStorage.removeItem('github_content_token');
+  storage.removeItem('github_content_token');
   toast('Token esborrat');
 }
 function encodeURIComponentPath(path){return path.split('/').map(encodeURIComponent).join('/');}
@@ -5636,6 +6810,7 @@ function doImport(){
         awardsItem:s.awardsItem||'',requiresItems:Array.isArray(s.requiresItems)?s.requiresItems.join(', '):(s.requiresItems||''),
         requiresRole:s.requiresRole||'',ghostQuote:s.ghostQuote||'',
         contentImages:Array.isArray(s.contentImages)?s.contentImages:[],
+        answerImage:s.answerImage||'',
         latitude:s.latitude??null,longitude:s.longitude??null,
         title:s.title||ml(),locationHint:s.locationHint||ml(),storyIntro:s.storyIntro||ml(),
         educationalNote:s.educationalNote||ml(),substages:s.substages||[], blockId:s.blockId||''})),
@@ -5766,6 +6941,7 @@ function structuredStageToEditor(s){
     requiresRole:s.requires_role||'',
     ghostQuote:firstLang(s.ghost_quote),
     contentImages:Array.isArray(s.content_images)?s.content_images:[],
+    answerImage:s.answer_image||'',
     substages:s.substages||[]
   };
 }
@@ -6277,7 +7453,7 @@ function renderOrKeys() {
   if (!list) return;
   list.innerHTML = '';
   if (!iaState.orKeys.length) {
-    list.innerHTML = '<div class="key-empty"><strong>Cap clau configurada</strong><span>Afegeix una clau principal o de respaldo per activar la capa remota d\\'OpenRouter dins l\\'editor.</span></div>';
+    list.innerHTML = '<div class="key-empty"><strong>Cap clau configurada</strong><span>Afegeix una clau principal o de respaldo per activar la capa remota d\'OpenRouter dins l\'editor.</span></div>';
     return;
   }
   iaState.orKeys.forEach((k, idx) => {
@@ -6527,10 +7703,10 @@ const ENC_DEFAULTS = [
 ];
 
 // ── Estat ──────────────────────────────────────────────────────────────────────
-let encounters = JSON.parse(localStorage.getItem('enc_data') || 'null') || JSON.parse(JSON.stringify(ENC_DEFAULTS));
+let encounters = JSON.parse(storage.getItem('enc_data') || 'null') || JSON.parse(JSON.stringify(ENC_DEFAULTS));
 let encSel = null;
 
-function encPersist() { try { localStorage.setItem('enc_data', JSON.stringify(encounters)); } catch(_){} }
+function encPersist() { try { storage.setItem('enc_data', JSON.stringify(encounters)); } catch(_){} }
 
 // ── Obre modal ────────────────────────────────────────────────────────────────
 function openEncModal() {
@@ -7013,12 +8189,12 @@ let vibePending  = [];   // [{id, type, data, applied}]
 
 function _vibeLoad() {
   try {
-    const s = localStorage.getItem(VIBE_KEY);
+    const s = storage.getItem(VIBE_KEY);
     if (s) vibeMessages = JSON.parse(s);
   } catch(_) {}
 }
 function _vibeSave() {
-  try { localStorage.setItem(VIBE_KEY, JSON.stringify(vibeMessages.slice(-30))); } catch(_) {}
+  try { storage.setItem(VIBE_KEY, JSON.stringify(vibeMessages.slice(-30))); } catch(_) {}
 }
 
 function openVibeModal() {
